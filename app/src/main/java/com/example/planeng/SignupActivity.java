@@ -2,6 +2,7 @@ package com.example.planeng;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 public class SignupActivity extends AppCompatActivity {
@@ -16,4 +17,5 @@ public class SignupActivity extends AppCompatActivity {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
 
     }
+
 }
