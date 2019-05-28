@@ -19,7 +19,7 @@
 
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/login_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
@@ -35,7 +35,7 @@
         app:layout_constraintTop_toTopOf="@+id/login_bg" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/login_passwd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
@@ -44,11 +44,11 @@
         android:hint="Password"
         android:inputType="textPassword"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/editText"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintStart_toStartOf="@+id/login_username"
+        app:layout_constraintTop_toBottomOf="@+id/login_username" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/login_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="144dp"
@@ -71,7 +71,7 @@
         app:srcCompat="@drawable/login_signup" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/login_ask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="72dp"
@@ -82,7 +82,7 @@
         app:srcCompat="@drawable/login_ask" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/login_signin_bt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="232dp"
@@ -91,7 +91,11 @@
         android:background="#00FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/login_signinbt" />
+        app:srcCompat="@drawable/login_signinbt"
+        android:onClick="login"
+
+
+        />
 
 
 </android.support.constraint.ConstraintLayout>

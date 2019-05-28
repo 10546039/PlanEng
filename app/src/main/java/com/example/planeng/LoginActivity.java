@@ -1,11 +1,15 @@
 package com.example.planeng;
 
 import android.content.Intent;
+import android.print.PrintAttributes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -31,9 +35,27 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
+    public void login(View v){
+        EditText edUserid = (EditText) findViewById(R.id.login_username);
+        EditText edPasswd = (EditText) findViewById(R.id.login_passwd);
+        String uid = edUserid.getText().toString();
+        String pw = edPasswd.getText().toString();
+
+        //設定帳號驗證，jack帳密為假設
+
+        if (uid.equals("jack") && pw.equals("1234")){ //登入成功
+            Toast.makeText(this, "登入成功", Toast.LENGTH_LONG).show();
+            finish();
+        }else{ //登入失敗
+            Toast toastfailed = Toast.makeText(this, "登入失敗，輸入的帳號或密碼錯誤", Toast.LENGTH_LONG);
+            toastfailed.show();
+            toastfailed.setGravity(Gravity.TOP,0,550);
+            edUserid.setText("");
+            edPasswd.setText("");
+        }
+    }
+
 
 
 }

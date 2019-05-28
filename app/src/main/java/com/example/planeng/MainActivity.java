@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //判斷是否登入
         if (!logon) {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
