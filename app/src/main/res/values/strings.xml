@@ -17,4 +17,5 @@
     <string name="signup_icon" />
     <string name="signup_bt" />
     <string name="Name" />
+    <string name="title_activity_news_activty">NewsActivty</string>
 </resources>
