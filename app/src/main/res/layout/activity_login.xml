@@ -9,13 +9,14 @@
 
     <ImageView
         android:id="@+id/login_bg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="474dp"
+        android:layout_height="710dp"
+        android:scaleType="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/login_bg" />
-
-
 
 
     <EditText
@@ -24,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
         android:layout_marginLeft="100dp"
-        android:layout_marginTop="376dp"
+        android:layout_marginTop="400dp"
         android:background="@null"
         android:ems="10"
         android:hint="Name"
@@ -62,21 +63,20 @@
         android:id="@+id/login_signupbt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="268dp"
-        android:layout_marginLeft="268dp"
-        android:layout_marginTop="620dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:background="#00FFFFFF"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/login_bg"
+        app:layout_constraintStart_toEndOf="@+id/login_ask"
+        app:layout_constraintTop_toTopOf="@+id/login_ask"
         app:srcCompat="@drawable/login_signup" />
 
     <ImageView
         android:id="@+id/login_ask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginLeft="72dp"
-        android:layout_marginTop="620dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginLeft="68dp"
+        android:layout_marginTop="628dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/login_ask" />
@@ -89,10 +89,10 @@
         android:layout_marginLeft="152dp"
         android:layout_marginTop="520dp"
         android:background="#00FFFFFF"
+        android:onClick="login"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/login_signinbt"
-        android:onClick="login"
 
 
         />
