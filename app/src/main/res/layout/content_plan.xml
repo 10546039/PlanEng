@@ -17,14 +17,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/plan_bg" />
 
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/plan_title"
-        tools:layout_editor_absoluteX="34dp"
-        tools:layout_editor_absoluteY="16dp" />
+    <CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="412dp"
+        android:layout_height="328dp"
+        android:background="#FFFFFF"
+        android:showWeekNumber="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
