@@ -18,4 +18,5 @@
     <string name="signup_bt" />
     <string name="Name" />
     <string name="title_activity_news_activty">NewsActivty</string>
+    <string name="title_activity_plan">PlanActivity</string>
 </resources>
