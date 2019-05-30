@@ -19,7 +19,8 @@ import android.widget.ImageButton;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     //判斷是否登入
-    boolean logon = true;
+    boolean logon = false;
+    //boolean logon = true;
 
 
     @Override
