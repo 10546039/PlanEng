@@ -10,6 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ReviewActivity"
+            android:label="@string/title_activity_review"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".NewsActivity"
             android:label="NewsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
