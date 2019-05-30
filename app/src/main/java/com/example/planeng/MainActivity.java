@@ -67,6 +67,16 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        ImageButton reviewPageBtn = (ImageButton)findViewById(R.id.b4);
+        reviewPageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this , ReviewActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
 
     }

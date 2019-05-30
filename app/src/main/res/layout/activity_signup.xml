@@ -8,16 +8,14 @@
 
     <ImageView
         android:id="@+id/signup_bg"
-        android:layout_width="464dp"
-        android:layout_height="742dp"
+        android:layout_width="498dp"
+        android:layout_height="707dp"
         android:contentDescription="signup_bg"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.31"
-        app:srcCompat="@drawable/signup_bg" />
+        app:srcCompat="@drawable/signup_bg"
+        tools:layout_editor_absoluteY="-33dp" />
 
     <ImageView
         android:id="@+id/signup_bg_logo"
@@ -68,7 +66,7 @@
         app:srcCompat="@drawable/signup_icon" />
 
     <ImageButton
-        android:id="@+id/signup_bt"
+        android:id="@+id/bSignup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="562dp"
@@ -83,10 +81,10 @@
         app:srcCompat="@drawable/singup_bt" />
 
     <EditText
-        android:id="@+id/name"
+        android:id="@+id/etName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="384dp"
+        android:layout_marginTop="371dp"
         android:background="@null"
         android:ems="9"
         android:hint="Name"
@@ -95,11 +93,11 @@
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/email"
+        app:layout_constraintStart_toStartOf="@+id/etEmail"
         app:layout_constraintTop_toTopOf="@+id/signup_bg" />
 
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/etEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="140dp"
@@ -114,13 +112,13 @@
         android:textColorHint="#FFFFFF"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
+        app:layout_constraintTop_toBottomOf="@+id/etName" />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/etPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="36dp"
         android:background="@null"
         android:ems="9"
         android:hint="Password"
@@ -129,7 +127,7 @@
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/email"
-        app:layout_constraintTop_toBottomOf="@+id/email" />
+        app:layout_constraintStart_toStartOf="@+id/etEmail"
+        app:layout_constraintTop_toBottomOf="@+id/etEmail" />
 
 </android.support.constraint.ConstraintLayout>
