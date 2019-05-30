@@ -37,10 +37,10 @@ public class LoginActivity extends AppCompatActivity {
 
     }
     public void login(View v){
-        EditText edUserid = (EditText) findViewById(R.id.login_username);
-        EditText edPasswd = (EditText) findViewById(R.id.login_passwd);
-        String uid = edUserid.getText().toString();
-        String pw = edPasswd.getText().toString();
+        EditText login_username = (EditText) findViewById(R.id.login_username);
+        EditText login_passwd = (EditText) findViewById(R.id.login_passwd);
+        String uid = login_username.getText().toString();
+        String pw = login_passwd.getText().toString();
 
         //設定帳號驗證，jack帳密為假設
 
@@ -55,8 +55,8 @@ public class LoginActivity extends AppCompatActivity {
             Toast toastfailed = Toast.makeText(this, "登入失敗，輸入的帳號或密碼錯誤", Toast.LENGTH_LONG);
             toastfailed.show();
             toastfailed.setGravity(Gravity.TOP,0,550);
-            edUserid.setText("");
-            edPasswd.setText("");
+            login_username.setText("");
+            login_passwd.setText("");
         }
     }
 
