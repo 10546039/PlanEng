@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.util.Log;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
