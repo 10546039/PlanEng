@@ -45,8 +45,12 @@ public class LoginActivity extends AppCompatActivity {
         //設定帳號驗證，jack帳密為假設
 
         if (uid.equals("jack") && pw.equals("1234")){ //登入成功
+
             Toast.makeText(this, "登入成功", Toast.LENGTH_LONG).show();
+
             finish();
+
+
         }else{ //登入失敗
             Toast toastfailed = Toast.makeText(this, "登入失敗，輸入的帳號或密碼錯誤", Toast.LENGTH_LONG);
             toastfailed.show();

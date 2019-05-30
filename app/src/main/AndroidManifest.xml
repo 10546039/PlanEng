@@ -10,11 +10,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ReviewActivity"
+            android:label="@string/title_activity_review"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".NewsActivity"
+            android:label="NewsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PlanActivity"
+            android:label="@string/title_activity_plan"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".SplashScreen"
             android:theme="@style/AppTheme.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -23,8 +36,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
