@@ -11,6 +11,16 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+
+
+import android.app.AlertDialog;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+
 public class LoginActivity extends AppCompatActivity {
 
     @Override
@@ -18,48 +28,59 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        getSupportActionBar().hide();
-        //設定隱藏狀態
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
+        final EditText etName = (EditText) findViewById(R.id.etName);
+        final EditText etPassword = (EditText) findViewById(R.id.etPassword);
+        final ImageButton bSignup = (ImageButton) findViewById(R.id.bSignup);
+        final ImageButton bLogin = (ImageButton) findViewById(R.id.bLogin);
 
-
-        ImageButton login_signupbt = (ImageButton)findViewById(R.id.login_signupbt);
-
-        ImageButton nextPageBtn = (ImageButton)findViewById(R.id.login_signupbt);
-        nextPageBtn.setOnClickListener(new View.OnClickListener() {
+        bSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(LoginActivity.this , SignupActivity.class);
-                startActivity(intent);
+                Intent registerIntent = new Intent(LoginActivity.this, SignupActivity.class);
+                LoginActivity.this.startActivity(registerIntent);
             }
         });
 
+        bLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String name = etName.getText().toString();
+                final String password = etPassword.getText().toString();
+
+                // Response received from the server
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonResponse = new JSONObject(response);
+                            boolean success = jsonResponse.getBoolean("success");
+
+                            if (success) {
+                                String name = jsonResponse.getString("name");
+                                String email = jsonResponse.getString("email");
+
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                intent.putExtra("name", name);
+                                intent.putExtra("email", email);
+                                LoginActivity.this.startActivity(intent);
+                            } else {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                                builder.setMessage("登入失敗，輸入的帳號或密碼錯誤")
+                                        .setNegativeButton("Retry", null)
+                                        .create()
+                                        .show();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+
+                LoginRequest loginRequest = new LoginRequest(name, password, responseListener);
+                RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
+                queue.add(loginRequest);
+            }
+        });
     }
-    public void login(View v){
-        EditText login_username = (EditText) findViewById(R.id.login_username);
-        EditText login_passwd = (EditText) findViewById(R.id.login_passwd);
-        String uid = login_username.getText().toString();
-        String pw = login_passwd.getText().toString();
-
-        //設定帳號驗證，jack帳密為假設
-
-        if (uid.equals("jack") && pw.equals("1234")){ //登入成功
-
-            Toast.makeText(this, "登入成功", Toast.LENGTH_LONG).show();
-
-            finish();
-
-
-        }else{ //登入失敗
-            Toast toastfailed = Toast.makeText(this, "登入失敗，輸入的帳號或密碼錯誤", Toast.LENGTH_LONG);
-            toastfailed.show();
-            toastfailed.setGravity(Gravity.TOP,0,550);
-            login_username.setText("");
-            login_passwd.setText("");
-        }
-    }
-
-
-
 }
