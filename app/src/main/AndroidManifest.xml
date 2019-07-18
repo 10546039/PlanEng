@@ -15,9 +15,17 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Review_add_Activity"
+            android:label="@string/title_activity_review_add_"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Note_add_Activity"
+            android:label="@string/title_activity_note_add_"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".ReviewActivity"
             android:label="@string/title_activity_review"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".NewsActivity"
             android:label="NewsActivity"
