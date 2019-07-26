@@ -68,7 +68,15 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
-
+        ImageButton notePageBtn = (ImageButton)findViewById(R.id.b2);
+        notePageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this , NoteActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
     }

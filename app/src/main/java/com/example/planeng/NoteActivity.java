@@ -1,9 +1,13 @@
 package com.example.planeng;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,19 +18,30 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
-public class Note_add_Activity extends AppCompatActivity
+import android.widget.EditText;
+import android.widget.TextView;
+
+
+public class NoteActivity extends AppCompatActivity
+
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    private LinearLayout parentLinearLayout;
+    private EditText textView1;
+    private EditText textView2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_note_add_);
+        setContentView(R.layout.activity_note);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        
+
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -35,21 +50,41 @@ public class Note_add_Activity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        //LinearLayout ll = (LinearLayout)findViewById(R.id.linearLayout);
-        //ImageButton noteaddBtn = (ImageButton)findViewById(R.id.imageButton9);
-        //noteaddBtn.setOnClickListener(new View.OnClickListener() {
-           // @Override
-           // public void onClick(View v) {
-              //  Intent intent = new Intent();
-              //  intent.setClass(Note_add_Activity.this , NoteActivity.class);
-              //  startActivity(intent);
-//                NoteActivity.linearLayout.addView(tv);
-         //   }
+        ImageButton noteWBtn = (ImageButton)findViewById(R.id.imageButton7);
+        ImageButton noteaddPageBtn = (ImageButton)findViewById(R.id.imageButton11);
+        parentLinearLayout = (LinearLayout)findViewById(R.id.parentLinearLayout);
+        noteaddPageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ImageView imageview= new ImageView(getApplicationContext());
+                imageview.setImageResource(R.drawable.news_content_bg); //图片资源
+                ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                imageview.setLayoutParams(layoutParams);
 
 
+                ImageButton button = new ImageButton(getApplicationContext());
+                button.setImageResource(R.drawable.news_more_bt);
+                button.setBackgroundColor(Color.parseColor("#00FFFFFF"));
+                ViewGroup.LayoutParams layoutBB = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
+                button.setLayoutParams(layoutBB);
+                parentLinearLayout.addView(imageview);
+                parentLinearLayout.addView(button);
+                //LayoutInflater inflater  = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                //View rowView = inflater.inflate(R.layout.content_note,null);
+                //parentLinearLayout.addView(rowView, parentLinearLayout.getChildCount()-1);
 
-        //});
+            }
+        });
+        noteWBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(NoteActivity.this , Note_add_Activity.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 
@@ -66,7 +101,7 @@ public class Note_add_Activity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.note_add_, menu);
+        getMenuInflater().inflate(R.menu.note, menu);
         return true;
     }
 
