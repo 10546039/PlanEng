@@ -19,8 +19,8 @@ import android.widget.ImageButton;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     //判斷是否登入
-    boolean logon = false;
-    //boolean logon = true;
+    //boolean logon = false;
+    boolean logon = true;
 
 
     @Override
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
-        //判斷是否登入
+        //判斷是否登入?
         if (!logon) {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);

@@ -20,4 +20,5 @@
     <string name="title_activity_news_activty">NewsActivty</string>
     <string name="title_activity_plan">PlanActivity</string>
     <string name="title_activity_review">ReviewActivity</string>
+    <string name="hello_world" />
 </resources>
