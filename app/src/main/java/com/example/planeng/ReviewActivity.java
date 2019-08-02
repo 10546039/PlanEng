@@ -1,5 +1,7 @@
 package com.example.planeng;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,10 +15,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class ReviewActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    private LinearLayout parentLinearLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +36,38 @@ public class ReviewActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-    }
+
+        ImageButton reWBtn = (ImageButton)findViewById(R.id.imageButton12);
+        ImageButton noteaddPageBtn = (ImageButton)findViewById(R.id.imageButton13);
+        parentLinearLayout = (LinearLayout)findViewById(R.id.parentLinearLayout);
+        noteaddPageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //ImageView imageview= new ImageView(getApplicationContext());
+                // imageview.setImageResource(R.drawable.news_content_bg); //图片资源
+                // ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                // imageview.setLayoutParams(layoutParams);
+
+
+                ImageButton button = new ImageButton(getApplicationContext());
+                button.setImageResource(R.drawable.review_more);
+                button.setBackgroundColor(Color.parseColor("#00FFFFFF"));
+                ViewGroup.LayoutParams layoutBB = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                button.setLayoutParams(layoutBB);
+                // parentLinearLayout.addView(imageview);
+                parentLinearLayout.addView(button);
+            }
+        });
+        reWBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(ReviewActivity.this , Review_add_Activity.class);
+                startActivity(intent);
+            }
+        });
+            }
 
     @Override
     public void onBackPressed() {

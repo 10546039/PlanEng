@@ -28,12 +28,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
+
 public class NoteActivity extends AppCompatActivity
 
         implements NavigationView.OnNavigationItemSelectedListener {
     private LinearLayout parentLinearLayout;
     private EditText textView1;
     private EditText textView2;
+    int x = 1;
+    int i = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,26 +59,27 @@ public class NoteActivity extends AppCompatActivity
         noteaddPageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImageView imageview= new ImageView(getApplicationContext());
-                imageview.setImageResource(R.drawable.news_content_bg); //图片资源
-                ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                imageview.setLayoutParams(layoutParams);
-
+                //ImageView imageview= new ImageView(getApplicationContext());
+                // imageview.setImageResource(R.drawable.news_content_bg); //图片资源
+                // ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                // imageview.setLayoutParams(layoutParams);
 
                 ImageButton button = new ImageButton(getApplicationContext());
-                button.setImageResource(R.drawable.news_more_bt);
+                button.setImageResource(R.drawable.note_more);
+                button.setId(x);
+                x = x+1;
                 button.setBackgroundColor(Color.parseColor("#00FFFFFF"));
                 ViewGroup.LayoutParams layoutBB = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
                 button.setLayoutParams(layoutBB);
-                parentLinearLayout.addView(imageview);
+               // parentLinearLayout.addView(imageview);
+                button.setOnClickListener(this);
                 parentLinearLayout.addView(button);
-                //LayoutInflater inflater  = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                //View rowView = inflater.inflate(R.layout.content_note,null);
-                //parentLinearLayout.addView(rowView, parentLinearLayout.getChildCount()-1);
+
 
             }
         });
+        ImageButton button = findViewById(x);
         noteWBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,4 +148,5 @@ public class NoteActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }
