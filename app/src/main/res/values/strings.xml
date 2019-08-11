@@ -21,5 +21,4 @@
     <string name="title_activity_plan">PlanActivity</string>
     <string name="title_activity_review">ReviewActivity</string>
     <string name="hello_world" />
-    <string name="title_activity_book_edit">BookEditActivity</string>
 </resources>

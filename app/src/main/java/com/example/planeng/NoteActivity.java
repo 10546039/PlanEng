@@ -1,7 +1,13 @@
 package com.example.planeng;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.media.Image;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,27 +18,31 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
-public class MainActivity extends AppCompatActivity
+import android.widget.EditText;
+import android.widget.TextView;
+
+
+
+public class NoteActivity extends AppCompatActivity
+
         implements NavigationView.OnNavigationItemSelectedListener {
-    //判斷是否登入
-    boolean logon = false;
-    //boolean logon = true;
-
-
+    private LinearLayout parentLinearLayout;
+    private EditText textView1;
+    private EditText textView2;
+    int x = 1;
+    int i = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar2);
+        setContentView(R.layout.activity_note);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //判斷是否登入
-        if (!logon) {
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-        }
-
 
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -43,43 +53,38 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-
-
-        ImageButton planPageBtn = (ImageButton)findViewById(R.id.b1);
-        planPageBtn.setOnClickListener(new View.OnClickListener() {
+        ImageButton noteWBtn = (ImageButton)findViewById(R.id.imageButton7);
+        ImageButton noteaddPageBtn = (ImageButton)findViewById(R.id.imageButton11);
+        parentLinearLayout = (LinearLayout)findViewById(R.id.parentLinearLayout);
+        noteaddPageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this , PlanActivity.class);
-                startActivity(intent);
+                //ImageView imageview= new ImageView(getApplicationContext());
+                // imageview.setImageResource(R.drawable.news_content_bg); //图片资源
+                // ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                // imageview.setLayoutParams(layoutParams);
+
+                ImageButton button = new ImageButton(getApplicationContext());
+                button.setImageResource(R.drawable.note_more);
+                button.setId(x);
+                x = x+1;
+                button.setBackgroundColor(Color.parseColor("#00FFFFFF"));
+                ViewGroup.LayoutParams layoutBB = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                button.setLayoutParams(layoutBB);
+               // parentLinearLayout.addView(imageview);
+                button.setOnClickListener(this);
+                parentLinearLayout.addView(button);
+
+
             }
         });
-
-        ImageButton newsPageBtn = (ImageButton)findViewById(R.id.b3);
-        newsPageBtn.setOnClickListener(new View.OnClickListener() {
+        ImageButton button = findViewById(x);
+        noteWBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(MainActivity.this , NewsActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        ImageButton reviewPageBtn = (ImageButton)findViewById(R.id.b4);
-        reviewPageBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this , ReviewActivity.class);
-                startActivity(intent);
-            }
-        });
-        ImageButton notePageBtn = (ImageButton)findViewById(R.id.b2);
-        notePageBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this , NoteActivity.class);
+                intent.setClass(NoteActivity.this , Note_add_Activity.class);
                 startActivity(intent);
             }
         });
@@ -100,7 +105,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.note, menu);
         return true;
     }
 
@@ -126,16 +131,16 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_book) {
+            // Handle the camera action
+        } else if (id == R.id.nav_gallery) {
 
+        } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_note) {
+        } else if (id == R.id.nav_tools) {
 
-        } else if (id == R.id.nav_review) {
+        } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_plan) {
+        } else if (id == R.id.nav_send) {
 
         }
 
@@ -143,4 +148,5 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }

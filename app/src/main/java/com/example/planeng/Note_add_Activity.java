@@ -2,6 +2,8 @@ package com.example.planeng;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,28 +15,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
-public class MainActivity extends AppCompatActivity
+public class Note_add_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    //判斷是否登入
-    boolean logon = false;
-    //boolean logon = true;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar2);
+        setContentView(R.layout.activity_note_add_);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //判斷是否登入
-        if (!logon) {
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-        }
-
-
-
+        
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -43,47 +35,21 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
+        //LinearLayout ll = (LinearLayout)findViewById(R.id.linearLayout);
+        //ImageButton noteaddBtn = (ImageButton)findViewById(R.id.imageButton9);
+        //noteaddBtn.setOnClickListener(new View.OnClickListener() {
+           // @Override
+           // public void onClick(View v) {
+              //  Intent intent = new Intent();
+              //  intent.setClass(Note_add_Activity.this , NoteActivity.class);
+              //  startActivity(intent);
+//                NoteActivity.linearLayout.addView(tv);
+         //   }
 
 
-        ImageButton planPageBtn = (ImageButton)findViewById(R.id.b1);
-        planPageBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this , PlanActivity.class);
-                startActivity(intent);
-            }
-        });
 
-        ImageButton newsPageBtn = (ImageButton)findViewById(R.id.b3);
-        newsPageBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this , NewsActivity.class);
-                startActivity(intent);
-            }
-        });
 
-        ImageButton reviewPageBtn = (ImageButton)findViewById(R.id.b4);
-        reviewPageBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this , ReviewActivity.class);
-                startActivity(intent);
-            }
-        });
-        ImageButton notePageBtn = (ImageButton)findViewById(R.id.b2);
-        notePageBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this , NoteActivity.class);
-                startActivity(intent);
-            }
-        });
-
+        //});
 
     }
 
@@ -100,7 +66,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.note_add_, menu);
         return true;
     }
 
@@ -126,16 +92,16 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_book) {
+            // Handle the camera action
+        } else if (id == R.id.nav_gallery) {
 
+        } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_note) {
+        } else if (id == R.id.nav_tools) {
 
-        } else if (id == R.id.nav_review) {
+        } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_plan) {
+        } else if (id == R.id.nav_send) {
 
         }
 
