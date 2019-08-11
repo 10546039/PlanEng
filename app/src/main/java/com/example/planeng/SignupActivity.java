@@ -62,6 +62,8 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
+
+
         getSupportActionBar().hide();
         //設定隱藏狀態
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);

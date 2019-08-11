@@ -1,9 +1,6 @@
 package com.example.planeng;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
@@ -72,15 +69,13 @@ public class ReviewActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_book) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_note) {
 
-        } else if (id == R.id.nav_tools) {
+        } else if (id == R.id.nav_review) {
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_plan) {
 
         }
 
