@@ -1,21 +1,19 @@
 package com.example.planeng;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.view.GravityCompat;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 public class ReviewActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -37,6 +35,8 @@ public class ReviewActivity extends AppCompatActivity
         ImageButton reWBtn = (ImageButton)findViewById(R.id.imageButton12);
         ImageButton noteaddPageBtn = (ImageButton)findViewById(R.id.imageButton13);
         parentLinearLayout = (LinearLayout)findViewById(R.id.parentLinearLayout);
+
+
         noteaddPageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,14 +56,7 @@ public class ReviewActivity extends AppCompatActivity
                 parentLinearLayout.addView(button);
             }
         });
-        reWBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(ReviewActivity.this , Review_add_Activity.class);
-                startActivity(intent);
-            }
-        });
+
             }
 
     @Override

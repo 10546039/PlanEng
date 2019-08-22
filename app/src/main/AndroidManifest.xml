@@ -17,26 +17,17 @@
         <activity
             android:name=".BookEditActivity"
             android:label="@string/title_activity_book_edit"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        <activity
-            android:name=".NoteActivity"
-            android:label="@string/title_activity_note"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Review_add_Activity"
-            android:label="@string/title_activity_review_add_"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Note_add_Activity"
-            android:label="@string/title_activity_note_add_"
-            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".ReviewActivity"
             android:label="@string/title_activity_review"
@@ -55,7 +46,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

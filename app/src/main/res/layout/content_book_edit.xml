@@ -17,7 +17,7 @@
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
@@ -34,57 +34,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/bookedit_planday" />
 
-    <ImageView
-        android:id="@+id/chapter_bg"
-        android:layout_width="396dp"
-        android:layout_height="63dp"
-        android:layout_marginTop="230dp"
-        app:layout_constraintEnd_toStartOf="@+id/bookedit_bg"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/bookedit_bg"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bookedit_chapbg" />
 
-    <TextView
-        android:id="@+id/ch_day"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="44dp"
-        android:layout_marginRight="44dp"
-        android:hint="10"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/chapter_bg"
-        app:layout_constraintEnd_toEndOf="@+id/chapter_bg"
-        app:layout_constraintTop_toTopOf="@+id/chapter_bg" />
-
-    <TextView
-        android:id="@+id/chapter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginLeft="2dp"
-        android:hint="10"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/chapter_bg"
-        app:layout_constraintStart_toEndOf="@+id/ch"
-        app:layout_constraintTop_toTopOf="@+id/chapter_bg" />
-
-    <TextView
-        android:id="@+id/ch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:text="Ch."
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/chapter_bg"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/chapter_bg" />
 
     <TextView
         android:id="@+id/booktitle"
@@ -106,34 +56,26 @@
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="409dp"
-        android:layout_height="551dp"
-        android:layout_marginTop="130dp"
+        android:layout_width="407dp"
+        android:layout_height="372dp"
+        android:layout_marginTop="230dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <LinearLayout
 
             android:id="@+id/linear"
-            android:layout_width="400dp"
-            android:layout_height="24dp"
-            android:layout_marginTop="230dp"
+            android:layout_width="409dp"
+            android:layout_height="370dp"
+            android:layout_marginTop="10dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/bookedit_bg">
-
-
-            <android.support.constraint.Group
-                android:id="@+id/chapgroup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-
-        </LinearLayout>
+            app:layout_constraintTop_toTopOf="@+id/bookedit_bg" />
 
     </ScrollView>
 
