@@ -14,20 +14,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
+        <activity
+            android:name=".BookSetActivity"
+            android:label="@string/title_activity_book_set"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <activity
             android:name=".BookEditActivity"
             android:label="@string/title_activity_book_edit"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan"
-            >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
+            android:windowSoftInputMode="adjustPan">
         </activity>
-
         <activity
             android:name=".ReviewActivity"
             android:label="@string/title_activity_review"
@@ -46,6 +44,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
