@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_book) {
-            Intent intent = new Intent(this, BookEditActivity.class);
+            Intent intent = new Intent(this, BookSetActivity.class);
             startActivity(intent);
 
 

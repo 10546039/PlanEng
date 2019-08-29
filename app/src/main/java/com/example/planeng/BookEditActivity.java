@@ -12,9 +12,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 public class BookEditActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -38,9 +39,6 @@ public class BookEditActivity extends AppCompatActivity
 
 
 
-
-
-
     }
 
 
@@ -56,8 +54,10 @@ public class BookEditActivity extends AppCompatActivity
 
         mLinear = findViewById(R.id.linear);
         bookList = new ArrayList<>();
+        //第幾章
         chapNum = new ArrayList<>();
-        totalChap = 10;
+        //共幾章
+        totalChap =10;
 
     }
 
@@ -93,12 +93,12 @@ public class BookEditActivity extends AppCompatActivity
 
             //給控制元件賦值
             chapter.setText(chapNum.get(i));
-            /*
-            動態給每個View設定margin,也可以在xml裡面設定,xml裡面設定後每個view之間的間距都是一樣的
-            動態設定可以給每個view之間的間距設定的不一樣 params.setMargins(int left, int top, int right, int bottom);
-             */
+           /*
+           動態給每個View設定margin,也可以在xml裡面設定,xml裡面設定後每個view之間的間距都是一樣的
+           動態設定可以給每個view之間的間距設定的不一樣 params.setMargins(int left, int top, int right, int bottom);
+            */
             //LinearLayout.LayoutParams params = new LinearLayout.LayoutParams
-             //       (LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+            //       (LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
             //view.setLayoutParams(params);
             //params.setMargins(24,0,24,0);
             //view.setTag(i);
@@ -108,6 +108,13 @@ public class BookEditActivity extends AppCompatActivity
         }
 
     }
+
+
+
+
+
+
+
 
 
 
@@ -181,3 +188,4 @@ public class BookEditActivity extends AppCompatActivity
 
 
 }
+

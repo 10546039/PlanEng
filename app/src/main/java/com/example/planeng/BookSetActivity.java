@@ -13,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.ImageButton;
@@ -24,6 +25,7 @@ import java.util.Calendar;
 
 public class BookSetActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
 
     //日期選擇
     Calendar c = Calendar.getInstance();
@@ -46,11 +48,34 @@ public class BookSetActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        //跳到BookEdit頁
+
+        final ImageButton GoBtn;
+        GoBtn  = findViewById(R.id.go_bt);
+
+        GoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent editIntent = new Intent();
+                editIntent.setClass(BookSetActivity.this,BookEditActivity.class);
+                startActivity(editIntent);
+
+
+
+
+
+
+
+            }
+        });
+
+
+
 
 
 
 //日期選擇
-        setContentView(R.layout.activity_book_set);
+
         ImageButton changeDateStart = (ImageButton) findViewById(R.id.choose_start_bt);
         DisplayStartDate = (TextView) findViewById(R.id.start_date);
         ImageButton changeDateEnd = (ImageButton) findViewById(R.id.choose_end_bt);
@@ -78,17 +103,9 @@ public class BookSetActivity extends AppCompatActivity
 
             }
         });
-
-        //跳到BookEdit頁
-        ImageButton GoBtn = (ImageButton) findViewById(R.id.go_bt);
-        GoBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(BookSetActivity.this,BookEditActivity.class);
-                startActivity(intent);
-            }
-        });
     }
+
+
 
     DatePickerDialog.OnDateSetListener d1 = new DatePickerDialog.OnDateSetListener() {
 
@@ -116,7 +133,14 @@ public class BookSetActivity extends AppCompatActivity
 
             DisplayEndDate.setText( cyear + "/" + cmonth + "/" + cday);
         }
+
+
+
+
+
     };
+
+
 
 
     @Override

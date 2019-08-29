@@ -23,25 +23,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/news_bg" />
 
-    <ImageView
-        android:id="@+id/imageView17"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="56dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/book_set_nameline" />
-
-    <TextView
+    <EditText
         android:id="@+id/textView2"
         android:layout_width="147dp"
-        android:layout_height="42dp"
+        android:layout_height="55dp"
         android:layout_marginStart="14dp"
         android:layout_marginLeft="14dp"
-        android:layout_marginTop="14dp"
-        android:autoText="false"
+        android:layout_marginTop="16dp"
         android:gravity="center_horizontal"
         android:text="編輯書名"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
@@ -71,22 +59,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/plan_set_chapt" />
 
-    <ImageButton
-        android:id="@+id/go_bt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="165dp"
-        android:layout_marginLeft="165dp"
-        android:layout_marginTop="416dp"
-        android:background="#00FFFFFF"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/plan_set_gobt" />
-
     <TextView
         android:id="@+id/start_date"
         android:layout_width="175dp"
-        android:layout_height="35dp"
+        android:layout_height="25dp"
         android:layout_marginStart="120dp"
         android:layout_marginLeft="120dp"
         android:layout_marginTop="187dp"
@@ -138,7 +114,7 @@
         app:srcCompat="@drawable/plan_set_end" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/chaptnumber"
         android:layout_width="59dp"
         android:layout_height="60dp"
         android:layout_marginStart="240dp"
@@ -153,6 +129,19 @@
         android:textSize="12pt"
         android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />v
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/go_bt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="165dp"
+        android:layout_marginLeft="165dp"
+        android:layout_marginTop="416dp"
+        android:adjustViewBounds="true"
+        android:background="#00FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/plan_set_gobt" />v
 
 </android.support.constraint.ConstraintLayout>
