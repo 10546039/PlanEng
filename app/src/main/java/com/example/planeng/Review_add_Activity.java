@@ -13,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.ImageButton;
 
 public class Review_add_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -31,6 +32,14 @@ public class Review_add_Activity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        ImageButton reviewaddPageBtn = (ImageButton)findViewById(R.id.imageButton10);
+        reviewaddPageBtn.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+
+            }
+        });
+
     }
 
     @Override

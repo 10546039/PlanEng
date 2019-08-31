@@ -43,11 +43,9 @@ public class ReviewActivity extends AppCompatActivity
         noteaddPageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //ImageView imageview= new ImageView(getApplicationContext());
-                // imageview.setImageResource(R.drawable.news_content_bg); //图片资源
-                // ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                // imageview.setLayoutParams(layoutParams);
-
+                Intent intent = new Intent();
+                intent.setClass(ReviewActivity.this , Review_add_Activity.class);
+                startActivity(intent);
 
                 ImageButton button = new ImageButton(getApplicationContext());
                 button.setImageResource(R.drawable.review_more);
