@@ -24,14 +24,16 @@
         app:srcCompat="@drawable/news_bg" />
 
     <EditText
-        android:id="@+id/textView2"
-        android:layout_width="147dp"
+        android:id="@+id/book_name"
+        android:layout_width="182dp"
         android:layout_height="55dp"
         android:layout_marginStart="14dp"
         android:layout_marginLeft="14dp"
         android:layout_marginTop="16dp"
-        android:gravity="center_horizontal"
-        android:text="編輯書名"
+        android:gravity="center_horizontal|left"
+        android:hint="編輯書名"
+        android:maxEms="8"
+        android:singleLine="true"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"

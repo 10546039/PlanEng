@@ -1,5 +1,6 @@
 package com.example.planeng;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,10 +13,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
-
-
 
 public class BookEditActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -37,15 +37,35 @@ public class BookEditActivity extends AppCompatActivity
         initView();
         initData();
 
+        Intent editIntent =getIntent();
+        Bundle bundle = editIntent.getExtras();
+        String bookname = bundle.getString("book_name",null);
+        TextView booktitle = findViewById(R.id.booktitle);
+        booktitle.setText(bookname);
+        totalChap = bundle.getInt("totalChap",0);
+        TextView totalPlanDate = findViewById(R.id.planDay);
+        Long planDay = bundle.getLong("totalPlanDate");
+        totalPlanDate.setText(planDay.toString());
+
 
 
     }
 
 
-    private int totalChap;
     private LinearLayout mLinear;
-    private List<String> bookList;//放置標題的集合
+    //放置標題的集合
     private List<String> chapNum;
+    int totalChap;
+
+    public int getTotalChap() {
+        Intent editIntent =getIntent();
+        Bundle bundle = editIntent.getExtras();
+
+        totalChap = bundle.getInt("totalChap",0);
+
+        return totalChap;
+    }
+
 
 
 
@@ -53,11 +73,9 @@ public class BookEditActivity extends AppCompatActivity
         //要新增view的容器
 
         mLinear = findViewById(R.id.linear);
-        bookList = new ArrayList<>();
-        //第幾章
         chapNum = new ArrayList<>();
-        //共幾章
-        totalChap =10;
+        getTotalChap();
+
 
     }
 
@@ -66,6 +84,11 @@ public class BookEditActivity extends AppCompatActivity
      */
 
     private void initData() {
+
+
+        getTotalChap();
+
+
         for (int i = 0; i < totalChap; i++) {
 
             chapNum.add(""+(i+1)+"");
@@ -84,6 +107,8 @@ public class BookEditActivity extends AppCompatActivity
      */
     private void addView() {
         //ivList集合有幾個元素就新增幾個
+
+        getTotalChap();
         for (int i = 0; i < totalChap; i++) {
             //首先引入要新增的View
             View view = View.inflate(this, R.layout.chap, null);
@@ -93,12 +118,12 @@ public class BookEditActivity extends AppCompatActivity
 
             //給控制元件賦值
             chapter.setText(chapNum.get(i));
-           /*
-           動態給每個View設定margin,也可以在xml裡面設定,xml裡面設定後每個view之間的間距都是一樣的
-           動態設定可以給每個view之間的間距設定的不一樣 params.setMargins(int left, int top, int right, int bottom);
-            */
+            /*
+            動態給每個View設定margin,也可以在xml裡面設定,xml裡面設定後每個view之間的間距都是一樣的
+            動態設定可以給每個view之間的間距設定的不一樣 params.setMargins(int left, int top, int right, int bottom);
+             */
             //LinearLayout.LayoutParams params = new LinearLayout.LayoutParams
-            //       (LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+             //       (LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
             //view.setLayoutParams(params);
             //params.setMargins(24,0,24,0);
             //view.setTag(i);
@@ -108,13 +133,6 @@ public class BookEditActivity extends AppCompatActivity
         }
 
     }
-
-
-
-
-
-
-
 
 
 
@@ -188,4 +206,3 @@ public class BookEditActivity extends AppCompatActivity
 
 
 }
-
