@@ -1,8 +1,8 @@
 package com.example.planeng;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,7 +13,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.EditText;
 import android.widget.ImageButton;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class Review_add_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -25,6 +33,40 @@ public class Review_add_Activity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        final EditText etReview = (EditText) findViewById(R.id.editText3);
+        final ImageButton bReview = (ImageButton) findViewById(R.id.imageButton10);
+
+        bReview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String review = etReview.getText().toString();
+
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonResponse = new JSONObject(response);
+                            boolean success = jsonResponse.getBoolean("success");
+                            if (success) {
+                                Intent intent = new Intent(Review_add_Activity.this, ReviewActivity.class);
+                                Review_add_Activity.this.startActivity(intent);
+                            } else {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(Review_add_Activity.this);
+                                builder.setMessage("Register Failed")
+                                        .setNegativeButton("Retry", null)
+                                        .create()
+                                        .show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                ReviewRequest reviewRequest = new ReviewRequest(review, responseListener);
+                RequestQueue queue = Volley.newRequestQueue(Review_add_Activity.this);
+                queue.add(reviewRequest);
+            }
+        });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -33,12 +75,6 @@ public class Review_add_Activity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        ImageButton reviewaddPageBtn = (ImageButton)findViewById(R.id.imageButton10);
-        reviewaddPageBtn.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v) {
-
-            }
-        });
 
     }
 
