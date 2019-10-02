@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".BookEditActivity"
+    tools:context=".Book.BookEditActivity"
     tools:showIn="@layout/app_bar_book_edit">
 
     <ImageView
@@ -78,7 +78,7 @@
     </ScrollView>
 
     <ImageButton
-        android:id="@+id/imageButton14"
+        android:id="@+id/saveBook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="296dp"
@@ -96,6 +96,20 @@
         android:layout_marginStart="132dp"
         android:layout_marginLeft="132dp"
         android:layout_marginTop="4dp"
+        android:text="TextView"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/planday"
+        app:layout_constraintTop_toTopOf="@+id/planday" />
+
+    <TextView
+        android:id="@+id/CountPlanDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="144dp"
+        android:layout_marginLeft="144dp"
+        android:layout_marginTop="37dp"
         android:text="TextView"
         android:textColor="@android:color/white"
         android:textSize="18sp"

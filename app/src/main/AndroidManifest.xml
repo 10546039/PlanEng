@@ -14,34 +14,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
+        <activity android:name=".Book.addBook"></activity>
         <activity android:name=".SignupActivity" />
         <activity android:name=".LoginActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
-            android:name=".BookSetActivity"
+            android:name=".Book.BookSetActivity"
             android:label="@string/title_activity_book_set"
             android:theme="@style/AppTheme.NoActionBar">
 
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <action android:name="android.intent.action.VIEW" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
 
         </activity>
-
         <activity
-            android:name=".BookEditActivity"
+            android:name=".Book.BookEditActivity"
             android:label="@string/title_activity_book_edit"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan"/>
-
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ReviewActivity"
             android:label="@string/title_activity_review"
@@ -54,7 +45,6 @@
             android:name=".PlanActivity"
             android:label="@string/title_activity_plan"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".SplashScreen"
             android:theme="@style/AppTheme.FullScreen">
@@ -65,7 +55,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

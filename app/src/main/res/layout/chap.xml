@@ -32,7 +32,7 @@
         app:srcCompat="@drawable/bookedit_chapbg" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/chapDetail"
         android:layout_width="178dp"
         android:layout_height="47dp"
         android:layout_marginStart="12dp"
@@ -54,6 +54,7 @@
         android:layout_marginRight="67dp"
         android:background="@null"
         android:hint="5"
+        android:inputType="number"
         android:maxLength="2"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="30sp"
@@ -61,9 +62,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/chapter_bg"
         app:layout_constraintEnd_toEndOf="@+id/chapter_bg"
         app:layout_constraintTop_toTopOf="@+id/chapter_bg"
-        app:layout_constraintVertical_bias="0.473"
-        android:inputType="number"
-        />
+        app:layout_constraintVertical_bias="0.473" />
 
     <TextView
         android:id="@+id/chapter"

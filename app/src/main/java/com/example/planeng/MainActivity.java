@@ -14,6 +14,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.ImageButton;
 
+import com.example.planeng.Book.BookSetActivity;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     //判斷是否登入
@@ -130,6 +132,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_review) {
 
         } else if (id == R.id.nav_plan) {
+            Intent intent = new Intent(this, PlanActivity.class);
+            startActivity(intent);
 
         }
 

@@ -1,4 +1,4 @@
-package com.example.planeng;
+package com.example.planeng.Book;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -17,6 +17,10 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.example.planeng.MainActivity;
+import com.example.planeng.PlanActivity;
+import com.example.planeng.R;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -48,10 +52,6 @@ public class BookSetActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-
-
-
-
 
 
 
@@ -118,13 +118,16 @@ public class BookSetActivity extends AppCompatActivity
                 String book_name = bookName.getText().toString();
                 Date startDate = CountDate.DateDemo(DisplayStartDate.getText().toString());
                 Date endDate = CountDate.DateDemo(DisplayEndDate.getText().toString());
-                long betweendays=(long) ((endDate.getTime()-startDate.getTime())/(1000*3600*24));
+                long betweendays=(long) ((endDate.getTime()-startDate.getTime())/(1000*3600*24)+1);
 
 
                 Bundle bundle = new Bundle();
+
                 bundle.putLong("totalPlanDate", betweendays );
                 bundle.putInt("totalChap", totalChap );
                 bundle.putString("book_name", book_name);//傳遞String
+                bundle.putString("startDate", CountDate.DateToString(startDate));
+                bundle.putString("endDate", CountDate.DateToString(endDate));
                 editIntent.putExtras(bundle);
 
                 startActivity(editIntent);
@@ -208,17 +211,23 @@ public class BookSetActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+
+
         if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_book) {
+            Intent intent = new Intent(this, BookSetActivity.class);
+            startActivity(intent);
 
-        } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_tools) {
+        } else if (id == R.id.nav_note) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_review) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_plan) {
+            Intent intent = new Intent(this, PlanActivity.class);
+            startActivity(intent);
 
         }
 
