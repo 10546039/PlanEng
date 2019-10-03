@@ -74,7 +74,6 @@ public class BookEditActivity extends AppCompatActivity
                 //章節數
                 //章節名稱
                 chapName =new ArrayList<>();
-
                 for (int i = 0; i < totalChap; i++) {
                     EditText chap = findViewById(textid.get(i));
                     String Schap =chap.getText().toString();
