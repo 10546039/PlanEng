@@ -11,10 +11,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.planeng.MainActivity;
 import com.example.planeng.PlanActivity;
@@ -62,8 +64,30 @@ public class BookEditActivity extends AppCompatActivity
         endDate = CountDate.DateDemo(tEndDate);
 
         ImageButton saveBook = findViewById(R.id.saveBook);
-        //saveBook.setOnClickListener(new saveBookOnClickListener());
+        saveBook.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //書名
+                //開始日期
+                //結束日期
+                //倒數日期
+                //章節數
+                //章節名稱
+                chapName =new ArrayList<>();
 
+                for (int i = 0; i < totalChap; i++) {
+                    EditText chap = findViewById(textid.get(i));
+                    String Schap =chap.getText().toString();
+                    chapName.add(Schap);
+                }
+
+
+                getStartDate();
+
+                Toast.makeText(BookEditActivity.this,""+chapName.get(0)+"",Toast.LENGTH_LONG).show();
+
+            }
+        });
 
 
 
@@ -76,7 +100,8 @@ public class BookEditActivity extends AppCompatActivity
     private LinearLayout mLinear;
     //放置標題的集合
     private List<String> chapNum;
-
+    List<String> chapName;
+    List<Integer> textid;
     int avDay;
     String SavDay;
     int totalChap;
@@ -123,6 +148,7 @@ public class BookEditActivity extends AppCompatActivity
         //要新增view的容器
         mLinear = findViewById(R.id.linear);
         chapNum = new ArrayList<>();
+        textid =new ArrayList<>();
         getAvChapday();
         getTotalChap();
     }
@@ -132,19 +158,15 @@ public class BookEditActivity extends AppCompatActivity
      */
 
     private void initData() {
-
         getTotalChap();
         getAvChapday();
-
         for (int i = 0; i < totalChap; i++) {
-
             chapNum.add(""+(i+1)+"");
-
+            textid.add(i);
         }
 
         //資料拿到之後去根據資料去動態新增View
         addView();
-
     }
 
 
@@ -152,8 +174,6 @@ public class BookEditActivity extends AppCompatActivity
      * 動態新增的具體實現
      */
     EditText chName;
-    private  List<Integer> textid;
-
 
     private void addView() {
         //ivList集合有幾個元素就新增幾個
@@ -168,9 +188,14 @@ public class BookEditActivity extends AppCompatActivity
             EditText chDay=view.findViewById(R.id.ch_day);
             chDay.setText(SavDay);
             TextView chapter =  view.findViewById(R.id.chapter);
+
             chName= view.findViewById(R.id.chapDetail);
+            chName.setId(textid.get(i));
+
+
 
             //給控制元件賦值
+            //取得章節
             chapter.setText(chapNum.get(i));
 
 
@@ -187,34 +212,16 @@ public class BookEditActivity extends AppCompatActivity
         }
 
     }
-/*
-    private void addChapName(){
-        View view = View.inflate(this, R.layout.chap, null);
-        EditText chName= view.findViewById(R.id.chapDetail);
-        chapName.add(chName.getText().toString());
-    }
-
-    ImageButton saveBook = findViewById(R.id.saveBook);
 
 
-*/
-/*
-     List<String> chapName;
-
-    private class saveBookOnClickListener implements View.OnClickListener {
-        public void onClick(View view){
 
 
-            chapName.add(chName.getText().toString());
-            getStartDate();
-
-            Toast.makeText(BookEditActivity.this,chapName.get(1),Toast.LENGTH_LONG).show();
-
-        }
-    }
 
 
-*/
+
+
+
+
 
 
 
