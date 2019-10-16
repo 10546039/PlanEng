@@ -1,11 +1,14 @@
 package com.example.planeng.Book;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -18,13 +21,25 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.planeng.MainActivity;
 import com.example.planeng.PlanActivity;
 import com.example.planeng.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BookEditActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -50,15 +65,24 @@ public class BookEditActivity extends AppCompatActivity
         Intent editIntent =getIntent();
         Bundle bundle = editIntent.getExtras();
         String bookname = bundle.getString("book_name",null);
-        TextView booktitle = findViewById(R.id.booktitle);
+        booktitle = findViewById(R.id.booktitle);
         booktitle.setText(bookname);
         totalChap = bundle.getInt("totalChap",1);
-        TextView totalPlanDate = findViewById(R.id.planDay);
+        final TextView totalPlanDate = findViewById(R.id.planDay);
         planDay = bundle.getLong("totalPlanDate");
         totalPlanDate.setText(planDay.toString());
-        //EditText chDay = findViewById(R.id.ch_day);
-        //chDay.setHint(Integer.toString(getAvChapday()));
-        String tStartDate = bundle.getString("startDate",null);
+        CountTotalDay = findViewById(R.id.CountPlanDay);
+        Integer countTotal = 0;
+        for (int i = 0; i < totalChap; i++) {
+            EditText EchapDay = findViewById(chapPlanDayid.get(i));
+            String Schapday = EchapDay.getText().toString();
+            countTotal = countTotal + Integer.parseInt(Schapday);
+        }
+        CountTotalDay.setText(countTotal.toString());
+        t.start();
+
+
+        final String tStartDate = bundle.getString("startDate",null);
         startDate = CountDate.DateDemo(tStartDate);
         String tEndDate = bundle.getString("endDate",null);
         endDate = CountDate.DateDemo(tEndDate);
@@ -68,22 +92,40 @@ public class BookEditActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 //書名
-                //開始日期
-                //結束日期
+                booktitle.getText();
+                //書籍開始日期 startDate
+                //書籍結束日期 startDate+CountTotalDay
                 //倒數日期
-                //章節數
+                totalPlanDate.getText();
+                //章節數 totalChap
                 //章節名稱
                 chapName =new ArrayList<>();
                 for (int i = 0; i < totalChap; i++) {
                     EditText chap = findViewById(textid.get(i));
                     String Schap =chap.getText().toString();
-                    chapName.add(Schap);
+                    chapName.add("第"+(i+1)+"章 "+Schap);
+                }
+
+                //讀書計畫日期
+                //各章天數
+                getStartDate();
+                int IcountTotal=Integer.parseInt(CountTotalDay.getText().toString());
+                int IplanTotal=Integer.parseInt(totalPlanDate.getText().toString());
+                if (IcountTotal<IplanTotal){
+                    showDialog(changeEndDay);
+                }else if (IcountTotal>IplanTotal){
+                    showDialog(changeEndDay);
+                }else{
+                    showDialog(check);
+
+                    //Toast.makeText(BookEditActivity.this,""+day2+"",Toast.LENGTH_LONG).show();
+
                 }
 
 
-                getStartDate();
 
-                Toast.makeText(BookEditActivity.this,""+chapName.get(0)+"",Toast.LENGTH_LONG).show();
+
+                //Toast.makeText(BookEditActivity.this,""+chapName.get(0)+"",Toast.LENGTH_LONG).show();
 
             }
         });
@@ -92,8 +134,8 @@ public class BookEditActivity extends AppCompatActivity
 
     }
 
-
-
+    TextView booktitle;
+    TextView CountTotalDay;
     Date startDate;
     Date endDate;
     private LinearLayout mLinear;
@@ -101,12 +143,13 @@ public class BookEditActivity extends AppCompatActivity
     private List<String> chapNum;
     List<String> chapName;
     List<Integer> textid;
+    List<Integer> chapPlanDayid;
     int avDay;
     String SavDay;
     int totalChap;
     Long planDay;
-
-
+    String insertUrl = "https://108401.000webhostapp.com/addBook.php";
+    RequestQueue requestQueue;
 
 
     public Long getPlanDay() {
@@ -115,14 +158,12 @@ public class BookEditActivity extends AppCompatActivity
         planDay = bundle.getLong("totalPlanDate");
         return planDay;
     }
-
     public int getTotalChap() {
         Intent editIntent =getIntent();
         Bundle bundle = editIntent.getExtras();
         totalChap = bundle.getInt("totalChap",0);
         return totalChap;
     }
-
     public int getAvChapday() {
         int AvChapday=(int)Math.floor( getPlanDay()/getTotalChap());
         return AvChapday;
@@ -130,6 +171,7 @@ public class BookEditActivity extends AppCompatActivity
 
     String tEndDate;
     String tStartDate;
+
     public Date getStartDate() {
         Intent editIntent =getIntent();
         Bundle bundle = editIntent.getExtras();
@@ -137,8 +179,16 @@ public class BookEditActivity extends AppCompatActivity
         startDate = CountDate.DateDemo(tStartDate);
         tEndDate = bundle.getString("endDate",null);
         endDate = CountDate.DateDemo(tEndDate);
-
         return startDate;
+    }
+    public Date getEndDate() {
+        Intent editIntent =getIntent();
+        Bundle bundle = editIntent.getExtras();
+        tStartDate = bundle.getString("startDate",null);
+        startDate = CountDate.DateDemo(tStartDate);
+        tEndDate = bundle.getString("endDate",null);
+        endDate = CountDate.DateDemo(tEndDate);
+        return endDate;
     }
 
 
@@ -148,6 +198,7 @@ public class BookEditActivity extends AppCompatActivity
         mLinear = findViewById(R.id.linear);
         chapNum = new ArrayList<>();
         textid =new ArrayList<>();
+        chapPlanDayid = new ArrayList<>();
         getAvChapday();
         getTotalChap();
     }
@@ -173,7 +224,7 @@ public class BookEditActivity extends AppCompatActivity
      * 動態新增的具體實現
      */
     EditText chName;
-
+    EditText chDay;
     private void addView() {
         //ivList集合有幾個元素就新增幾個
 
@@ -184,14 +235,16 @@ public class BookEditActivity extends AppCompatActivity
             //首先引入要新增的View
             View view = View.inflate(this, R.layout.chap, null);
             //找到裡面需要動態改變的控制元件
-            EditText chDay=view.findViewById(R.id.ch_day);
+            chDay=view.findViewById(R.id.ch_day);
             chDay.setText(SavDay);
+
+            chDay.setId(i+200);
+            chapPlanDayid.add(chDay.getId());
+
             TextView chapter =  view.findViewById(R.id.chapter);
 
             chName= view.findViewById(R.id.chapDetail);
             chName.setId(textid.get(i));
-
-
 
             //給控制元件賦值
             //取得章節
@@ -211,6 +264,281 @@ public class BookEditActivity extends AppCompatActivity
         }
 
     }
+
+
+    String SchapDay;
+    //已安排天數即時更新
+    Thread t = new Thread() {
+        @Override
+        public void run() {
+            try {
+                while (!isInterrupted()) {
+                    Thread.sleep(100);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            // update TextView here!
+                            Integer countTotal = 0;
+                            for (int i = 0; i < totalChap; i++) {
+
+                                EditText EchapDay = findViewById(chapPlanDayid.get(i));
+
+                                if (EchapDay.getText().toString().equals("")){
+                                    SchapDay="0";
+                                    //EchapDay.setText("0");
+                                }else {
+                                    SchapDay=EchapDay.getText().toString();
+                                }
+                                countTotal = countTotal + Integer.parseInt(SchapDay);
+                            }
+                            CountTotalDay.setText(countTotal.toString());
+                        }
+                    });
+                }
+            } catch (InterruptedException e) {
+            }
+        }
+    };
+
+
+
+    //儲存書籍確認訊息
+
+    final int check = 1000;
+    final int changeEndDay = 2000;
+    @Override
+    protected Dialog onCreateDialog(int id)  //初始化對話方塊，透過 showDialog(ID) 觸發
+    {
+        Dialog dialog = null;
+        chapName =new ArrayList<>();
+        for (int i = 0; i < totalChap; i++) {
+            EditText chap = findViewById(textid.get(i));
+            String Schap =chap.getText().toString();
+            chapName.add("第"+(i+1)+"章 "+Schap);
+        }
+
+
+        switch(id) //判斷所傳入的ID，啟動相應的對話方塊
+        {
+            case check:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                getEndDate();
+                getStartDate();
+                builder.setTitle("儲存書籍") //設定標題文字
+                        .setMessage("確認加入 [ "+booktitle.getText().toString()+" ] "+System.getProperty("line.separator")
+                                    +"閱讀日期： "+tStartDate+" ~ "+tEndDate) //設定內容文字
+                        .setPositiveButton("確認", new DialogInterface.OnClickListener()
+                        { //設定確定按鈕
+                            @Override
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                // TODO Auto-generated method stub
+                             save();
+                            }
+                        })
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener()
+                        { //設定取消按鈕
+                            @Override
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                // TODO Auto-generated method stub
+                            }
+                        });
+
+                dialog = builder.create(); //建立對話方塊並存成 dialog
+                break;
+
+            case changeEndDay:
+                getEndDate();
+                getStartDate();
+                AlertDialog.Builder changeBuilder = new AlertDialog.Builder(this);
+                changeBuilder.setTitle("已安排天數 不足/超過") //設定標題文字
+                        .setMessage(
+                                "閱讀日期將修改成： "+System.getProperty("line.separator")
+                                +System.getProperty("line.separator")
+                                +"  "+tStartDate+" ~ "+tEndDate+System.getProperty("line.separator")
+                                +System.getProperty("line.separator")
+                                +"是否確認加入 [ "+booktitle.getText().toString()+" ] ？") //設定內容文字
+                        .setPositiveButton("確認", new DialogInterface.OnClickListener()
+                        { //設定確定按鈕
+                            @Override
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                // TODO Auto-generated method stub
+                                save();
+
+
+                            }
+                        })
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener()
+                        { //設定取消按鈕
+                            @Override
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                // TODO Auto-generated method stub
+                            }
+                        });
+
+                dialog = changeBuilder.create(); //建立對話方塊並存成 dialog
+                break;
+
+            default:
+                break;
+        }
+        return dialog;
+    }
+
+    List<Integer> IeachCahp;
+
+    String bookname = "111";
+    String date = "1/1";
+    String chap = "8888888";
+
+    // what happens when the user clicks the insert button
+    public void send(){
+        StringRequest request = new StringRequest(Request.Method.POST, insertUrl, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+            }
+        }, new Response.ErrorListener() { // expand the bracket before the end of the code and add the listener
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){ // we open and close brackets here as well
+
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parameters = new HashMap<String, String>();
+                parameters.put("bookname", bookname);
+                parameters.put("date", date);
+                parameters.put("chap", chap);
+
+                return parameters;
+            }
+        };
+        requestQueue.add(request);
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
+
+        //alert the user of the insertion
+        Toast.makeText(this, "User inserted successfully", Toast.LENGTH_SHORT).show();
+    }
+
+
+
+
+
+    private void save() {
+
+        getStartDate();
+
+        //總天數
+        int IcountTotal=Integer.parseInt(CountTotalDay.getText().toString());
+        //書名
+
+        //書籍開始日期 startDate
+        Date Sstartdate = startDate;
+        //書籍結束日期 startDate+CountTotalDay
+        Date Senddate = CountDate.DatePlusInt(startDate,IcountTotal);
+        //倒數日期
+        //章節數 totalChap
+        //章節名稱
+        chapName =new ArrayList<>();
+        for (int i = 0; i < totalChap; i++) {
+            EditText chap = findViewById(textid.get(i));
+            String Schap =chap.getText().toString();
+            chapName.add("第"+(i+1)+"章 "+Schap);
+        }
+        //各章節天數
+        for (int i = 0; i < totalChap; i++) {
+            EditText EchapDay = findViewById(chapPlanDayid.get(i));
+            IeachCahp.add(Integer.parseInt(EchapDay.getText().toString()));
+        }
+
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    boolean success = jsonResponse.getBoolean("success");
+                    if (success) {
+                        Intent intent = new Intent(BookEditActivity.this, BookEditActivity.class);
+                        BookEditActivity.this.startActivity(intent);
+                    } else {
+                        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(BookEditActivity.this);
+                        builder.setMessage("Register Failed")
+                                .setNegativeButton("Retry", null)
+                                .create()
+                                .show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        addBook savebook = new addBook(bookname, date, chap, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(BookEditActivity.this);
+        queue.add(savebook);
+
+
+
+
+
+        /*
+        for (int j = 0; j < totalChap; j++) {
+
+                for (int k = 0; k < IeachCahp.get(j); k++) {
+                    String bookname = booktitle.getText().toString();
+                    String date = CountDate.DateToString(CountDate.DatePlusInt(Sstartdate,k));
+                    String chap = chapName.get(j);
+                    Response.Listener<String> responseListener = new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                JSONObject jsonResponse = new JSONObject(response);
+                                boolean success = jsonResponse.getBoolean("success");
+                                if (success) {
+                                    Intent intent = new Intent(BookEditActivity.this, BookEditActivity.class);
+                                    BookEditActivity.this.startActivity(intent);
+                                } else {
+                                    android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(BookEditActivity.this);
+                                    builder.setMessage("Register Failed")
+                                            .setNegativeButton("Retry", null)
+                                            .create()
+                                            .show();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    };
+
+
+                    addBook save = new addBook(bookname, date, chap, responseListener);
+                    RequestQueue queue = Volley.newRequestQueue(BookEditActivity.this);
+                    queue.add(save);
+
+
+                }
+            }
+            */
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
 
 
 

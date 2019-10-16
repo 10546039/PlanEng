@@ -8,15 +8,15 @@ import java.util.Map;
 
 
 public class addBook extends StringRequest {
-    private static final String REGISTER_REQUEST_URL = "http://108401.000webhostapp.com/Register.php";
+    private static final String SAVEBOOK_REQUEST_URL = "https://108401.000webhostapp.com/addBook.php";
     private Map<String, String> params;
 
-    public addBook(String name, String password,String email, Response.Listener<String> listener) {
-        super(Method.POST, REGISTER_REQUEST_URL, listener, null);
+    public addBook(String bookname, String date,String chap, Response.Listener<String> listener) {
+        super(Method.POST, SAVEBOOK_REQUEST_URL, listener, null);
         params = new HashMap<>();
-        params.put("name", name);
-        params.put("password", password);
-        params.put("email", email);
+        params.put("bookname", bookname);
+        params.put("date", date);
+        params.put("chap", chap);
 
     }
 
