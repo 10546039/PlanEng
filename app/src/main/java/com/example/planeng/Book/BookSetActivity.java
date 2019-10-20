@@ -131,6 +131,12 @@ public class BookSetActivity extends AppCompatActivity
                 editIntent.putExtras(bundle);
 
                 startActivity(editIntent);
+                BookSetActivity.this.finish();
+
+
+
+
+
             }
         });
 
@@ -170,6 +176,13 @@ public class BookSetActivity extends AppCompatActivity
 
 
 
+    private void refresh() {
+    	/*finish();
+    	Intent intent = new Intent(RefreshActivityTest.this, RefreshActivityTest.class);
+    	startActivity(intent);*/
+
+        onCreate(null);
+    }
 
     @Override
     public void onBackPressed() {
