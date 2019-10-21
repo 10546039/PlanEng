@@ -312,7 +312,9 @@ public class BookEditActivity extends AppCompatActivity
                             public void onClick(DialogInterface dialog, int which)
                             {
                                 // TODO Auto-generated method stub
+                                booklist();
                                 send();
+
                             }
                         })
                         .setNegativeButton("取消", new DialogInterface.OnClickListener()
@@ -359,8 +361,9 @@ public class BookEditActivity extends AppCompatActivity
                             public void onClick(DialogInterface dialog, int which)
                             {
                                 // TODO Auto-generated method stub
-
+                                booklist();
                                 send();
+
 
                             }
                         })
@@ -384,12 +387,81 @@ public class BookEditActivity extends AppCompatActivity
 
 
 
+    private void booklist() {
+        //m_id
+        //bookname
+        //startdate
+        //enddate
+        //totalChap
+        //chapname
 
+
+        for (int j = 0; j < totalChap; j++)
+        {
+
+            getStartDate();
+            chapName = new ArrayList<>();
+            for (int i = 0; i < totalChap; i++) {
+                EditText chap = findViewById(textid.get(i));
+                String Schap = chap.getText().toString();
+                chapName.add("第" + (i + 1) + "章 " + Schap);
+            }
+
+
+
+            String m_id = "6";
+            String bookname = booktitle.getText().toString();
+            String startdate = CountDate.DateToString(startDate);
+            String enddate = CountDate.DateToString(CountDate.DatePlusInt(startDate,countTotal-1));
+            String chapNo = String.valueOf(totalChap);
+            String chapname = chapName.get(j);
+
+
+
+            Response.Listener<String> responseListener2 = new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response1) {
+                    try {
+                        JSONObject jsonResponse2 = new JSONObject(response1);
+                        boolean success = jsonResponse2.getBoolean("success");
+                        if (success) {
+
+                            //Intent intent2 = new Intent(BookEditActivity.this, BookSetActivity.class);
+                            //BookEditActivity.this.startActivity(intent2);
+
+
+
+                        } else {
+                            android.app.AlertDialog.Builder builder1 = new android.app.AlertDialog.Builder(BookEditActivity.this);
+                            builder1.setMessage("Register Failed")
+                                    .setNegativeButton("Retry", null)
+                                    .create()
+                                    .show();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+
+            addBooklist addList = new addBooklist(m_id, bookname, startdate, enddate,chapNo,chapname, responseListener2);
+            RequestQueue queue2 = Volley.newRequestQueue(BookEditActivity.this);
+            queue2.add(addList);
+
+
+
+        }
+
+
+
+    }
 
 
 
 
 private void send() {
+
+
 
     Date day = CountDate.DateM(startDate);
     for (int j = 0; j < totalChap; j++)
@@ -400,6 +472,7 @@ private void send() {
             EditText EchapDay = findViewById(chapPlanDayid.get(i));
             IeachChap.add(Integer.parseInt(EchapDay.getText().toString()));
         }
+
 
 
         for (int k = 0; k < IeachChap.get(j); k++) {
