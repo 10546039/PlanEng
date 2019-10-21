@@ -19,7 +19,7 @@ public class CountDate {
         return date;
     }
     public static String DateToString(Date a) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         String date = sdf.format(a);
         return date;
     }
@@ -41,7 +41,7 @@ public class CountDate {
     public static Date DatePlusInt(Date a,Integer i) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(a);
-        cal.add(Calendar.DATE, i);
+        cal.add(Calendar.DAY_OF_MONTH, i);
         Date date = cal.getTime();
         return date;
     }
