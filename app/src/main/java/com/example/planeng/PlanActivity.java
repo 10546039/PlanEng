@@ -1,5 +1,6 @@
 package com.example.planeng;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -14,7 +15,14 @@ import android.widget.CalendarView;
 import android.widget.CalendarView.OnDateChangeListener;
 import android.widget.TextView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 import com.example.planeng.Book.BookSetActivity;
+import com.example.planeng.Book.CountDate;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Calendar;
 
@@ -46,6 +54,7 @@ public class PlanActivity extends AppCompatActivity
         int month  = TodayDate.get(Calendar.MONTH) + 1;
         date.setText(new StringBuilder().
                 append(month).append(" / ").append(dayOfMonth));
+        dbDate = CountDate.DateToString(TodayDate.getTime());
 
 
         calendar.setOnDateChangeListener(new OnDateChangeListener() {
@@ -60,16 +69,67 @@ public class PlanActivity extends AppCompatActivity
 
                 date.setText(new StringBuilder().
                         append(month+1).append(" / ").append(dayOfMonth));
-
+                dbDate= year+"/"+month+"/"+dayOfMonth;
                 //StringBuilder可以將字串連續的加入
 
             }
         });
 
+        TextView task = findViewById(R.id.task);
+        task.setText("► TOEIC多益新制全真試題\n" +
+                "     -第1章 多益考試介紹");
+
 
 
 
     }
+
+    String dbDate;
+
+    private void getTask() {
+
+        String bookname;
+        String chap;
+
+
+
+        // Response received from the server
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse1 = new JSONObject(response);
+                    boolean success = jsonResponse1.getBoolean("success");
+
+                    if (success) {
+                        String bookname = jsonResponse1.getString("bookname");
+                        String chap = jsonResponse1.getString("chap");
+
+                        Intent intent = new Intent(PlanActivity.this, MainActivity.class);
+                        intent.putExtra("bookname" , bookname);
+                        intent.putExtra("chap", chap);
+                        PlanActivity.this.startActivity(intent);
+                    } else {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(PlanActivity.this);
+                        builder.setMessage("獲取讀書計畫失敗")
+                                .setNegativeButton("Retry", null)
+                                .create()
+                                .show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        getTask get = new getTask(dbDate, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(PlanActivity.this);
+        queue.add(get);
+    }
+
+
+
 
     @Override
     public void onBackPressed() {
