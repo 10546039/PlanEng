@@ -1,10 +1,7 @@
 package com.example.planeng;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,20 +12,28 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+
+import android.widget.EditText;
 import android.widget.TextView;
 
-public class ReviewActivity extends AppCompatActivity
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class NoteActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private LinearLayout parentLinearLayout;
+    int i = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_review);
+        setContentView(R.layout.activity_note);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -37,18 +42,53 @@ public class ReviewActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-
-        ImageButton noteaddPageBtn = (ImageButton)findViewById(R.id.imageButton13);
+        ImageButton noteBtn = (ImageButton)findViewById(R.id.imageButton11);
         parentLinearLayout = (LinearLayout)findViewById(R.id.parentLinearLayout);
-        noteaddPageBtn.setOnClickListener(new View.OnClickListener() {
+
+        noteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(ReviewActivity.this , Review_add_Activity.class);
+                intent.setClass(NoteActivity.this , Note_add_Activity.class);
                 startActivity(intent);
             }
         });
+        initView();
+        Intent editIntent =getIntent();
+        Bundle bundle = editIntent.getExtras();
+        String notename = bundle.getString("noteName",null);
+        addView();
+
+
     }
+    private LinearLayout mLinear;
+    List<Integer> textid;
+    private void initView() {
+        //要新增view的容器
+        mLinear = findViewById(R.id.parentLinearLayout);
+        textid =new ArrayList<>();
+    }
+
+    TextView nt;
+    String notename;
+    private void addView() {
+        //ivList集合有幾個元素就新增幾個
+        View view = View.inflate(this, R.layout.notedp, null);
+        nt=view.findViewById(R.id.notetitle);
+        nt.setId(i);
+        nt.setText(notename);
+        mLinear.addView(view);
+
+    }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -65,7 +105,7 @@ public class ReviewActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.review, menu);
+        getMenuInflater().inflate(R.menu.note, menu);
         return true;
     }
 
@@ -108,4 +148,5 @@ public class ReviewActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }

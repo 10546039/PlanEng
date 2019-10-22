@@ -1,10 +1,7 @@
 package com.example.planeng;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,20 +12,20 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class ReviewActivity extends AppCompatActivity
+public class Note_add_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private LinearLayout parentLinearLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_review);
+        setContentView(R.layout.activity_note_add_);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -37,18 +34,38 @@ public class ReviewActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
+        final ImageButton GoBtn;
 
-        ImageButton noteaddPageBtn = (ImageButton)findViewById(R.id.imageButton13);
-        parentLinearLayout = (LinearLayout)findViewById(R.id.parentLinearLayout);
-        noteaddPageBtn.setOnClickListener(new View.OnClickListener() {
+
+
+        GoBtn  = findViewById(R.id.savebuttom);
+
+        GoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(ReviewActivity.this , Review_add_Activity.class);
-                startActivity(intent);
+                Intent editIntent = new Intent();
+                editIntent.setClass(Note_add_Activity.this,NoteActivity.class);
+                //new一個Bundle物件，並將要傳遞的資料傳入
+                EditText noteName = (EditText)findViewById(R.id.notetitle);
+                String notetitle = noteName.getText().toString();
+
+
+
+                Bundle bundle = new Bundle();
+
+                bundle.putString("noteName", notetitle);//傳遞String
+                editIntent.putExtras(bundle);
+
+                startActivity(editIntent);
             }
         });
+
     }
+
+
+
+
+
 
 
 
@@ -65,7 +82,7 @@ public class ReviewActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.review, menu);
+        getMenuInflater().inflate(R.menu.note_add_, menu);
         return true;
     }
 
@@ -108,4 +125,6 @@ public class ReviewActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    TextView notetitle;
+    EditText note;
 }

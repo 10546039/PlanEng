@@ -32,13 +32,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton9"
+        app:layout_constraintTop_toBottomOf="@+id/savebuttom"
         app:srcCompat="@drawable/note_in" />
 
     <ImageButton
-        android:id="@+id/imageButton9"
+        android:id="@+id/savebuttom"
         android:layout_width="89dp"
-        android:layout_height="36dp"
+        android:layout_height="26dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="140dp"
@@ -52,23 +52,19 @@
         app:srcCompat="@drawable/note_save" />
 
     <EditText
-        android:id="@+id/editText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:id="@+id/notetitle"
+        android:layout_width="409dp"
+        android:layout_height="56dp"
         android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        android:text="編輯標題"
+        android:inputType="textPersonName"
+        android:text="Name"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/note"
         android:layout_width="281dp"
         android:layout_height="394dp"
         android:layout_marginStart="8dp"
@@ -78,8 +74,8 @@
         android:layout_marginBottom="20dp"
         android:ems="10"
         android:gravity="start|top"
+        android:hint="輸入內容"
         android:inputType="textMultiLine"
-        android:text="輸入內容"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
