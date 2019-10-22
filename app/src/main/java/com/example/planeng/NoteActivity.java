@@ -1,13 +1,7 @@
 package com.example.planeng;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.media.Image;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -18,24 +12,19 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class NoteActivity extends AppCompatActivity
-
         implements NavigationView.OnNavigationItemSelectedListener {
     private LinearLayout parentLinearLayout;
-    private EditText textView1;
-    private EditText textView2;
-    int x = 1;
     int i = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,34 +42,10 @@ public class NoteActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        ImageButton noteWBtn = (ImageButton)findViewById(R.id.imageButton7);
-        ImageButton noteaddPageBtn = (ImageButton)findViewById(R.id.imageButton11);
+        ImageButton noteBtn = (ImageButton)findViewById(R.id.imageButton11);
         parentLinearLayout = (LinearLayout)findViewById(R.id.parentLinearLayout);
-        noteaddPageBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //ImageView imageview= new ImageView(getApplicationContext());
-                // imageview.setImageResource(R.drawable.news_content_bg); //图片资源
-                // ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                // imageview.setLayoutParams(layoutParams);
 
-                ImageButton button = new ImageButton(getApplicationContext());
-                button.setImageResource(R.drawable.note_more);
-                button.setId(x);
-                x = x+1;
-                button.setBackgroundColor(Color.parseColor("#00FFFFFF"));
-                ViewGroup.LayoutParams layoutBB = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-                button.setLayoutParams(layoutBB);
-               // parentLinearLayout.addView(imageview);
-                button.setOnClickListener(this);
-                parentLinearLayout.addView(button);
-
-
-            }
-        });
-        ImageButton button = findViewById(x);
-        noteWBtn.setOnClickListener(new View.OnClickListener() {
+        noteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
@@ -88,9 +53,44 @@ public class NoteActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
+        initView();
+        Intent editIntent =getIntent();
+        Bundle bundle = editIntent.getExtras();
+        String notename = bundle.getString("noteName",null);
+        addView();
 
 
     }
+    private LinearLayout mLinear;
+    List<Integer> textid;
+    private void initView() {
+        //要新增view的容器
+        mLinear = findViewById(R.id.parentLinearLayout);
+        textid =new ArrayList<>();
+    }
+
+    TextView nt;
+    String notename;
+    private void addView() {
+        //ivList集合有幾個元素就新增幾個
+        View view = View.inflate(this, R.layout.notedp, null);
+        nt=view.findViewById(R.id.notetitle);
+        nt.setId(i);
+        nt.setText(notename);
+        mLinear.addView(view);
+
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     @Override
     public void onBackPressed() {

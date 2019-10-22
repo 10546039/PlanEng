@@ -2,8 +2,6 @@ package com.example.planeng;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,8 +12,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
+import android.widget.TextView;
 
 public class Note_add_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -35,23 +34,40 @@ public class Note_add_Activity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        //LinearLayout ll = (LinearLayout)findViewById(R.id.linearLayout);
-        //ImageButton noteaddBtn = (ImageButton)findViewById(R.id.imageButton9);
-        //noteaddBtn.setOnClickListener(new View.OnClickListener() {
-           // @Override
-           // public void onClick(View v) {
-              //  Intent intent = new Intent();
-              //  intent.setClass(Note_add_Activity.this , NoteActivity.class);
-              //  startActivity(intent);
-//                NoteActivity.linearLayout.addView(tv);
-         //   }
+        final ImageButton GoBtn;
 
 
 
+        GoBtn  = findViewById(R.id.savebuttom);
 
-        //});
+        GoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent editIntent = new Intent();
+                editIntent.setClass(Note_add_Activity.this,NoteActivity.class);
+                //new一個Bundle物件，並將要傳遞的資料傳入
+                EditText noteName = (EditText)findViewById(R.id.notetitle);
+                String notetitle = noteName.getText().toString();
+
+
+
+                Bundle bundle = new Bundle();
+
+                bundle.putString("noteName", notetitle);//傳遞String
+                editIntent.putExtras(bundle);
+
+                startActivity(editIntent);
+            }
+        });
 
     }
+
+
+
+
+
+
+
 
     @Override
     public void onBackPressed() {
@@ -109,4 +125,6 @@ public class Note_add_Activity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    TextView notetitle;
+    EditText note;
 }

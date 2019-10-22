@@ -37,7 +37,7 @@ public class ReviewActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        ImageButton reWBtn = (ImageButton)findViewById(R.id.imageButton12);
+
         ImageButton noteaddPageBtn = (ImageButton)findViewById(R.id.imageButton13);
         parentLinearLayout = (LinearLayout)findViewById(R.id.parentLinearLayout);
         noteaddPageBtn.setOnClickListener(new View.OnClickListener() {
@@ -46,27 +46,11 @@ public class ReviewActivity extends AppCompatActivity
                 Intent intent = new Intent();
                 intent.setClass(ReviewActivity.this , Review_add_Activity.class);
                 startActivity(intent);
-
-                ImageButton button = new ImageButton(getApplicationContext());
-                button.setImageResource(R.drawable.review_more);
-                button.setBackgroundColor(Color.parseColor("#00FFFFFF"));
-                ViewGroup.LayoutParams layoutBB = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-                button.setLayoutParams(layoutBB);
-                // parentLinearLayout.addView(imageview);
-                parentLinearLayout.addView(button);
             }
         });
-        reWBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(ReviewActivity.this , Review_add_Activity.class);
-                startActivity(intent);
+    }
 
-            }
-        });
-            }
+
 
     @Override
     public void onBackPressed() {

@@ -36,37 +36,6 @@ public class Review_add_Activity extends AppCompatActivity
         final EditText etReview = (EditText) findViewById(R.id.editText3);
         final ImageButton bReview = (ImageButton) findViewById(R.id.imageButton10);
 
-        bReview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final String review = etReview.getText().toString();
-
-                Response.Listener<String> responseListener = new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonResponse = new JSONObject(response);
-                            boolean success = jsonResponse.getBoolean("success");
-                            if (success) {
-                                Intent intent = new Intent(Review_add_Activity.this, ReviewActivity.class);
-                                Review_add_Activity.this.startActivity(intent);
-                            } else {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(Review_add_Activity.this);
-                                builder.setMessage("Register Failed")
-                                        .setNegativeButton("Retry", null)
-                                        .create()
-                                        .show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                };
-                ReviewRequest reviewRequest = new ReviewRequest(review, responseListener);
-                RequestQueue queue = Volley.newRequestQueue(Review_add_Activity.this);
-                queue.add(reviewRequest);
-            }
-        });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
