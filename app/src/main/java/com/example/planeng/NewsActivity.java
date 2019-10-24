@@ -199,10 +199,11 @@ public class NewsActivity extends AppCompatActivity
                 String date = jsonChildNode.optString("i_date");
                 content.add(jsonChildNode.optString("i_content"));
                 Title.add(jsonChildNode.optString("i_title"));
-                String outPut = title + "-" + date ;
+                String outPut =title+"                             "+date;
 
 
                 informationList.add(createInformation("informations", outPut));
+
 
             }
         } catch (JSONException e) {
@@ -211,8 +212,8 @@ public class NewsActivity extends AppCompatActivity
         }
 
         final SimpleAdapter test = new SimpleAdapter(this, informationList,
-                android.R.layout.simple_list_item_1,
-                new String[] { "informations" }, new int[] { android.R.id.text1 });
+                R.layout.listitem2,
+                new String[] { "informations"}, new int[] { android.R.id.text1});
 
         listView.setAdapter(test);
         listView = (ListView) findViewById(R.id.listView1);

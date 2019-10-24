@@ -58,10 +58,9 @@
 
 
         android:cacheColorHint="#00000000"
-        android:divider="@drawable/news_list_divider_bg"
-        android:dividerHeight="40dp"
 
-        android:background="#ffffff"
+        android:dividerHeight="20dp"
+
 
         android:state_window_focused="false"
         app:layout_constraintEnd_toEndOf="parent"

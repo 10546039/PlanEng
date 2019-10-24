@@ -117,5 +117,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/main_news_title" />
 
+    <ListView
+        android:id="@+id/listView10"
+        android:layout_width="275dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="122dp"
+        android:layout_marginLeft="122dp"
+        android:layout_marginTop="105dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="48px"/>
+
 
 </android.support.constraint.ConstraintLayout>
