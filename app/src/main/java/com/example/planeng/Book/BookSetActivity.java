@@ -52,7 +52,7 @@ public class BookSetActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-
+        setTitle("新增書籍");
 
 
 //日期選擇
