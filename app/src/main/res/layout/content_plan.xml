@@ -45,7 +45,9 @@
         android:textSize="38sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/calendar" />
+        app:layout_constraintTop_toTopOf="@+id/calendar"
+        android:scrollbars="vertical"
+        android:fadeScrollbars="false"/>
 
     <ImageButton
         android:id="@+id/plan_edit_bt"
@@ -61,11 +63,11 @@
 
     <TextView
         android:id="@+id/task"
-        android:layout_width="221dp"
-        android:layout_height="133dp"
+        android:layout_width="222dp"
+        android:layout_height="154dp"
         android:layout_marginStart="144dp"
         android:layout_marginLeft="144dp"
-        android:layout_marginTop="390dp"
+        android:layout_marginTop="384dp"
         android:text="task"
         android:textSize="18sp"
         android:textStyle="bold"
