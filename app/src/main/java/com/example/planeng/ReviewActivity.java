@@ -19,12 +19,21 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReviewActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private LinearLayout parentLinearLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //adddddddddddddd
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -48,7 +57,59 @@ public class ReviewActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
+        initView();
+
+        addView();
     }
+
+
+
+    private LinearLayout mLinear;
+    private List<String> textid;
+    private void initView() {
+        //要新增view的容器
+        mLinear = findViewById(R.id.parentLinearLayout);
+        textid =new ArrayList<>();
+
+    }
+
+
+    TextView rt;
+    ImageButton reviewbt;
+
+    private void addView() {
+        //ivList集合有幾個元素就新增幾個
+
+        for(int i=0;i<9;i++) {
+            View view = View.inflate(this, R.layout.reviewdp, null);
+            rt = view.findViewById(R.id.reveiwID);
+            reviewbt = view.findViewById(R.id.morerbt);
+            textid.add("第" + i + "個");
+            rt.setText(textid.get(i));
+            final int finalI = i;//由於OnClick裡面拿不到i,所以需要重新賦值給一個final物件
+            reviewbt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(ReviewActivity.this, "點選了"+textid.get(finalI), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent();
+                    intent.setClass(ReviewActivity.this ,Review_add_Activity.class);
+                    startActivity(intent);
+                }
+            });
+
+            mLinear.addView(view);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 

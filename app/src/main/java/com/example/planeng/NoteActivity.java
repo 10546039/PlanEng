@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,6 @@ import java.util.List;
 public class NoteActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private LinearLayout parentLinearLayout;
-    int i = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,31 +54,46 @@ public class NoteActivity extends AppCompatActivity
             }
         });
         initView();
-        Intent editIntent =getIntent();
-        Bundle bundle = editIntent.getExtras();
-        String notename = bundle.getString("noteName",null);
+
         addView();
 
 
     }
     private LinearLayout mLinear;
-    List<Integer> textid;
+    private List<String> textid;
     private void initView() {
         //要新增view的容器
         mLinear = findViewById(R.id.parentLinearLayout);
         textid =new ArrayList<>();
+
     }
 
+
     TextView nt;
-    String notename;
+    ImageButton notebt;
+
     private void addView() {
         //ivList集合有幾個元素就新增幾個
-        View view = View.inflate(this, R.layout.notedp, null);
-        nt=view.findViewById(R.id.notetitle);
-        nt.setId(i);
-        nt.setText(notename);
-        mLinear.addView(view);
 
+        for(int i=0;i<9;i++) {
+            View view = View.inflate(this, R.layout.notedp, null);
+            nt = view.findViewById(R.id.notetitle);
+            notebt = view.findViewById(R.id.morebt);
+            textid.add("第" + i + "個");
+            nt.setText(textid.get(i));
+            final int finalI = i;//由於OnClick裡面拿不到i,所以需要重新賦值給一個final物件
+            notebt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(NoteActivity.this, "點選了"+textid.get(finalI), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent();
+                    intent.setClass(NoteActivity.this , Note_add_Activity.class);
+                    startActivity(intent);
+                }
+          });
+
+            mLinear.addView(view);
+        }
     }
 
 
