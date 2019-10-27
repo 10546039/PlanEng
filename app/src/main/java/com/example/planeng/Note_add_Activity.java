@@ -1,5 +1,8 @@
 package com.example.planeng;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,13 +15,24 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class Note_add_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    EditText notetitle;
+    EditText etNote;
+    ImageButton bNote;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,31 +48,119 @@ public class Note_add_Activity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        final ImageButton GoBtn;
+        etNote = findViewById(R.id.etnote);
+        notetitle = findViewById(R.id.notetitle);
 
 
 
-        GoBtn  = findViewById(R.id.savebuttom);
 
-        GoBtn.setOnClickListener(new View.OnClickListener() {
+        ImageButton saveBook = findViewById(R.id.bnote);
+        saveBook.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent editIntent = new Intent();
-                editIntent.setClass(Note_add_Activity.this,NoteActivity.class);
-                //new一個Bundle物件，並將要傳遞的資料傳入
-                EditText noteName = (EditText)findViewById(R.id.notetitle);
-                String notetitle = noteName.getText().toString();
-
-
-
-                Bundle bundle = new Bundle();
-
-                bundle.putString("noteName", notetitle);//傳遞String
-                editIntent.putExtras(bundle);
-
-                startActivity(editIntent);
+                final EditText title = findViewById(R.id.notetitle);
+                final EditText data = findViewById(R.id.etnote);
+                if (data.equals("")){
+                    showDialog(datacheck);
+                }else if(title.equals("")) {
+                    showDialog(datacheck);
+                }else{
+                    showDialog(check);
+                }
             }
         });
+
+    }
+    final int check = 1000;
+    final int datacheck = 2000;
+    @Override
+    protected Dialog onCreateDialog(int id)  //初始化對話方塊，透過 showDialog(ID) 觸發
+    {
+        Dialog dialog = null;
+
+        switch(id) //判斷所傳入的ID，啟動相應的對話方塊
+        {
+            case check:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("儲存筆記") //設定標題文字
+                        .setMessage("確認加入 [ "+notetitle.getText().toString()+" ] ")//設定內容文字
+                        .setPositiveButton("確認", new DialogInterface.OnClickListener()
+                        { //設定確定按鈕
+                            @Override
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                // TODO Auto-generated method stub
+
+                                send();
+
+                            }
+                        })
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener()
+                        { //設定取消按鈕
+                            @Override
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                // TODO Auto-generated method stub
+                            }
+                        });
+
+                dialog = builder.create(); //建立對話方塊並存成 dialog
+                break;
+
+            case datacheck:
+                AlertDialog.Builder changeBuilder = new AlertDialog.Builder(this);
+                dialog = changeBuilder.create(); //建立對話方塊並存成 dialog
+                break;
+
+            default:
+                break;
+        }
+        return dialog;
+    }
+
+    private void send() {
+        String n_id = "22";
+        String n_title =notetitle.getText().toString();
+        String n_data =etNote.getText().toString();
+
+        Response.Listener<String> responseListener1 = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    boolean success = jsonResponse.getBoolean("success");
+                    if (success) {
+
+                        Intent intent1 = new Intent(Note_add_Activity.this, NoteActivity.class);
+                        Note_add_Activity.this.startActivity(intent1);
+                    } else {
+                        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(Note_add_Activity.this);
+                        builder.setMessage("Register Failed")
+                                .setNegativeButton("Retry", null)
+                                .create()
+                                .show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        Noteadd save = new Noteadd(n_id,n_title,n_data, responseListener1);
+        RequestQueue queue1 = Volley.newRequestQueue(Note_add_Activity.this);
+        queue1.add(save);
+
+
+
+
+
+
+
+        Intent intent = new Intent(this, Note_add_Activity.class);
+        startActivity(intent);
+        Note_add_Activity.this.finish();
+        Toast.makeText(Note_add_Activity.this,"新增成功！", Toast.LENGTH_LONG).show();
+
 
     }
 
@@ -125,6 +227,5 @@ public class Note_add_Activity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    TextView notetitle;
-    EditText note;
+
 }

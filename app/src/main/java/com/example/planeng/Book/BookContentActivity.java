@@ -1,9 +1,10 @@
 package com.example.planeng;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
@@ -13,6 +14,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -28,22 +31,20 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Review_add_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    EditText etReview;
+    ImageButton bReview;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_add_);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        final EditText etReview = (EditText) findViewById(R.id.editText3);
-        final ImageButton bReview = (ImageButton) findViewById(R.id.imageButton10);
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -53,80 +54,117 @@ public class Review_add_Activity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-    }
+        etReview = findViewById(R.id.reviewdata);
 
 
 
 
-
-
-    String r_id = "111";
-    String review = "888888888";
-
-    String insertUrl = "https://108401.000webhostapp.com/Review.php";
-    RequestQueue requestQueue;
-
-
-    public void send(){
-        StringRequest request = new StringRequest(Request.Method.POST, insertUrl, new Response.Listener<String>() {
+        ImageButton saveBook = findViewById(R.id.savereview);
+        saveBook.setOnClickListener(new Button.OnClickListener() {
             @Override
-            public void onResponse(String response) {
-
-            }
-        }, new Response.ErrorListener() { // expand the bracket before the end of the code and add the listener
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }){ // we open and close brackets here as well
-
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> parameters = new HashMap<String, String>();
-                parameters.put("r_id", r_id);
-                parameters.put("review", review);
-
-
-                return parameters;
-            }
-        };
-        requestQueue.add(request);
-        requestQueue = Volley.newRequestQueue(getApplicationContext());
-
-        //alert the user of the insertion
-        Toast.makeText(this, "User inserted successfully", Toast.LENGTH_SHORT).show();
-    }
-    private void save() {
-
-
-        Response.Listener<String> responseListener = new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonResponse = new JSONObject(response);
-                    boolean success = jsonResponse.getBoolean("success");
-                    if (success) {
-                        Intent intent = new Intent(Review_add_Activity.this, Review_add_Activity.class);
-                        Review_add_Activity.this.startActivity(intent);
-                    } else {
-                        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(Review_add_Activity.this);
-                        builder.setMessage("Register Failed")
-                                .setNegativeButton("Retry", null)
-                                .create()
-                                .show();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+            public void onClick(View v) {
+                final EditText data = findViewById(R.id.reviewdata);
+                if (data.equals("")){
+                    showDialog(datacheck);
+                }else{
+                    showDialog(check);
                 }
             }
-        };
+        });
 
-        Reviewadd savebook = new Reviewadd(r_id, review, responseListener);
-        RequestQueue queue = Volley.newRequestQueue(Review_add_Activity.this);
-        queue.add(savebook);
+
+    }
+    final int check = 1000;
+    final int datacheck = 2000;
+    @Override
+    protected Dialog onCreateDialog(int id)  //初始化對話方塊，透過 showDialog(ID) 觸發
+    {
+        Dialog dialog = null;
+
+        switch(id) //判斷所傳入的ID，啟動相應的對話方塊
+        {
+            case check:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("儲存心得") //設定標題文字
+                        .setMessage("確認發表") //設定內容文字
+                        .setPositiveButton("確認", new DialogInterface.OnClickListener()
+                        { //設定確定按鈕
+                            @Override
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                // TODO Auto-generated method stub
+
+                                send();
+
+                            }
+                        })
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener()
+                        { //設定取消按鈕
+                            @Override
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                // TODO Auto-generated method stub
+                            }
+                        });
+
+                dialog = builder.create(); //建立對話方塊並存成 dialog
+                break;
+
+            case datacheck:
+                AlertDialog.Builder changeBuilder = new AlertDialog.Builder(this);
+                dialog = changeBuilder.create(); //建立對話方塊並存成 dialog
+                break;
+
+            default:
+                break;
+        }
+        return dialog;
     }
 
+    private void send() {
+        String r_id = "22";
+        String review =etReview.getText().toString();
+
+                Response.Listener<String> responseListener1 = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonResponse = new JSONObject(response);
+                            boolean success = jsonResponse.getBoolean("success");
+                            if (success) {
+
+                                Intent intent1 = new Intent(Review_add_Activity.this, ReviewActivity.class);
+                                Review_add_Activity.this.startActivity(intent1);
+                            } else {
+                                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(Review_add_Activity.this);
+                                builder.setMessage("Register Failed")
+                                        .setNegativeButton("Retry", null)
+                                        .create()
+                                        .show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+
+                Reviewadd save = new Reviewadd(r_id, review, responseListener1);
+                RequestQueue queue1 = Volley.newRequestQueue(Review_add_Activity.this);
+                queue1.add(save);
+
+
+
+
+
+
+
+        Intent intent = new Intent(this, Review_add_Activity.class);
+        startActivity(intent);
+        Review_add_Activity.this.finish();
+        Toast.makeText(Review_add_Activity.this,"新增成功！", Toast.LENGTH_LONG).show();
+
+
+    }
 
 
 
