@@ -71,7 +71,7 @@ public class BookEditActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-
+        setTitle("新增書籍");
         initView();
         initData();
 
@@ -413,7 +413,7 @@ public class BookEditActivity extends AppCompatActivity
             String bookname = booktitle.getText().toString();
             String startdate = CountDate.DateToString(startDate);
             String enddate = CountDate.DateToString(CountDate.DatePlusInt(startDate,countTotal-1));
-            String chapNo = String.valueOf(totalChap);
+            String totalchap = String.valueOf(totalChap);
             String chapname = chapName.get(j);
 
 
@@ -444,7 +444,7 @@ public class BookEditActivity extends AppCompatActivity
                 }
             };
 
-            addBooklist addList = new addBooklist(m_id, bookname, startdate, enddate,chapNo,chapname, responseListener2);
+            addBooklist addList = new addBooklist(m_id, bookname, startdate, enddate,totalchap,chapname, responseListener2);
             RequestQueue queue2 = Volley.newRequestQueue(BookEditActivity.this);
             queue2.add(addList);
 
