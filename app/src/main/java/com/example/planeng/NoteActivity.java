@@ -1,7 +1,8 @@
-package com.example.planeng.Book;
+package com.example.planeng;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
@@ -11,43 +12,28 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.planeng.MainActivity;
-import com.example.planeng.NewsActivity;
-import com.example.planeng.R;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class BookListActivity extends AppCompatActivity
+public class NoteActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-    private LinearLayout LLinear;
-    List<String> chapNameList;//放置標題的集合
-    List<String> chapFrontList;//放內容的集合
-    String[] iv = {"apple","banana","melon"};
-
-
-
+    private LinearLayout parentLinearLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //adddddddddddddd
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_book_list);
+        setContentView(R.layout.activity_note);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -56,80 +42,23 @@ public class BookListActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-<<<<<<<< HEAD:app/src/main/java/com/example/planeng/Book/BookListActivity.java
-        initView();
-        initData();
-
-        ImageButton addBook_bt = (ImageButton)findViewById(R.id.addbook_bt);
-        addBook_bt.setOnClickListener(new View.OnClickListener() {
-========
-
-        ImageButton noteaddPageBtn = (ImageButton)findViewById(R.id.imageButton13);
+        ImageButton noteBtn = (ImageButton)findViewById(R.id.imageButton11);
         parentLinearLayout = (LinearLayout)findViewById(R.id.parentLinearLayout);
-        noteaddPageBtn.setOnClickListener(new View.OnClickListener() {
->>>>>>>> origin/105460522:app/src/main/java/com/example/planeng/ReviewActivity.java
+
+        noteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(BookListActivity.this , BookSetActivity.class);
+                intent.setClass(NoteActivity.this , Note_add_Activity.class);
                 startActivity(intent);
             }
         });
-<<<<<<<< HEAD:app/src/main/java/com/example/planeng/Book/BookListActivity.java
-    }
-
-
-    private void initView() {
-        //要新增view的容器
-        LLinear = findViewById(R.id.ListLinear);
-        chapNameList = new ArrayList<>();
-        chapFrontList = new ArrayList<>();
-
-    }
-    /**
-     * 處理資料,可以是伺服器請求過來的,也可以是本地的
-     */
-    private void initData() {
-        for (int i = 0; i < iv.length; i++) {
-            chapFrontList.add(iv[i]);
-            chapNameList.add("第" + (i+1) + "本");
-        }
-        //資料拿到之後去根據資料去動態新增View
-        addView();
-    }
-
-    /**
-     * 動態新增的具體實現
-     */
-
-    TextView bookName;
-    TextView chapFront;
-
-    private void addView() {
-        //ivList集合有幾個元素就新增幾個
-        for (int i = 0; i < chapFrontList.size(); i++) {
-            //首先引入要新增的View
-            View Listview = View.inflate(this, R.layout.book, null);
-            //找到裡面需要動態改變的控制元件
-            bookName = Listview.findViewById(R.id.bookName);
-            chapFront = Listview.findViewById(R.id.chapFront);
-            //給控制元件賦值
-            bookName.setText(chapNameList.get(i));
-            chapFront.setText(chapFrontList.get(i));
-
-
-            //把所有動態建立的view都新增到容器裡面
-            LLinear.addView(Listview);
-        }
-
-========
         initView();
 
         addView();
+
+
     }
-
-
-
     private LinearLayout mLinear;
     private List<String> textid;
     private void initView() {
@@ -140,38 +69,35 @@ public class BookListActivity extends AppCompatActivity
     }
 
 
-    TextView rt;
-    ImageButton reviewbt;
+    TextView nt;
+    ImageButton notebt;
 
     private void addView() {
         //ivList集合有幾個元素就新增幾個
 
         for(int i=0;i<9;i++) {
-            View view = View.inflate(this, R.layout.reviewdp, null);
-            rt = view.findViewById(R.id.reveiwID);
-            reviewbt = view.findViewById(R.id.morerbt);
+            View view = View.inflate(this, R.layout.notedp, null);
+            nt = view.findViewById(R.id.notetitle);
+            notebt = view.findViewById(R.id.morebt);
             textid.add("第" + i + "個");
-            rt.setText(textid.get(i));
+            nt.setText(textid.get(i));
             final int finalI = i;//由於OnClick裡面拿不到i,所以需要重新賦值給一個final物件
-            reviewbt.setOnClickListener(new View.OnClickListener() {
+            notebt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(ReviewActivity.this, "點選了"+textid.get(finalI), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NoteActivity.this, "點選了"+textid.get(finalI), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent();
-                    intent.setClass(ReviewActivity.this ,Review_add_Activity.class);
+                    intent.setClass(NoteActivity.this , Note_add_Activity.class);
                     startActivity(intent);
                 }
-            });
+          });
 
             mLinear.addView(view);
         }
->>>>>>>> origin/105460522:app/src/main/java/com/example/planeng/ReviewActivity.java
     }
 
 
 
-<<<<<<<< HEAD:app/src/main/java/com/example/planeng/Book/BookListActivity.java
-========
 
 
 
@@ -180,8 +106,6 @@ public class BookListActivity extends AppCompatActivity
 
 
 
-
->>>>>>>> origin/105460522:app/src/main/java/com/example/planeng/ReviewActivity.java
 
     @Override
     public void onBackPressed() {
@@ -196,7 +120,7 @@ public class BookListActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.book_list, menu);
+        getMenuInflater().inflate(R.menu.note, menu);
         return true;
     }
 
@@ -239,4 +163,5 @@ public class BookListActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }
