@@ -4,6 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.planeng.Book.BookEditActivity;
+import com.example.planeng.Book.BookListActivity;
+import com.example.planeng.Book.BookSetActivity;
+
 
 public class SplashScreen extends AppCompatActivity {
 
