@@ -63,15 +63,7 @@
             android:id="@+id/parentLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <ImageButton
-                android:id="@+id/imageButton12"
-                android:layout_width="match_parent"
-                android:layout_height="110dp"
-                android:background="@android:color/transparent"
-                app:srcCompat="@drawable/review_more" />
-        </LinearLayout>
+            android:orientation="vertical"/>
     </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

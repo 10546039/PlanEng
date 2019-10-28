@@ -46,6 +46,18 @@
             android:label="NewsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".NoteActivity"
+            android:label="NoteActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Note_add_Activity"
+            android:label="Note_add_Activity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Review_add_Activity"
+            android:label="Review_add_Activity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".PlanActivity"
             android:label="@string/title_activity_plan"
             android:theme="@style/AppTheme.NoActionBar" />
