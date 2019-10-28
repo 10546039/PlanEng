@@ -1,5 +1,6 @@
 package com.example.planeng;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -8,22 +9,37 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.CalendarView;
 import android.widget.CalendarView.OnDateChangeListener;
 import android.widget.TextView;
 
-import com.example.planeng.Book.BookSetActivity;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+import com.example.planeng.Book.BookListActivity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class PlanActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     TextView date;
     CalendarView calendar;
-    int month,dayOfMonth;
+
+    String dbDate;
+
+    String bookname;
+    String chap;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,36 +54,157 @@ public class PlanActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-
+        setTitle("讀書計畫");
         date = findViewById(R.id.selected_date);
         calendar = findViewById(R.id.calendar);
-        Calendar TodayDate = Calendar.getInstance();    //透過Calendar取的資料
+        calendar.getDate();
+        Calendar TodayDate = Calendar.getInstance();
+        int year = TodayDate.get(Calendar.YEAR); //透過Calendar取的資料
         int dayOfMonth = TodayDate.get(Calendar.DATE);       //一開啟軟體即取得年的數值
-        int month  = TodayDate.get(Calendar.MONTH) + 1;
+        int month  = TodayDate.get(Calendar.MONTH)+1 ;
         date.setText(new StringBuilder().
                 append(month).append(" / ").append(dayOfMonth));
 
+        dbDate=year+"/"+month+"/"+dayOfMonth;
+
+        TextView task = findViewById(R.id.task);
+        task.setMovementMethod(ScrollingMovementMethod.getInstance());
+        task.setText(
+                "");
+        getTask();
+
+
 
         calendar.setOnDateChangeListener(new OnDateChangeListener() {
+
 
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month,
                                             int dayOfMonth) {
                 // TODO Auto-generated method stub
 
-                month = month;
-                dayOfMonth = dayOfMonth;
+                TextView task = findViewById(R.id.task);
+                task.setMovementMethod(ScrollingMovementMethod.getInstance());
+                task.setText("");
+                s="";
 
                 date.setText(new StringBuilder().
                         append(month+1).append(" / ").append(dayOfMonth));
+                dbDate=year+"/"+(month+1)+"/"+dayOfMonth;
+                getTask();
 
-                //StringBuilder可以將字串連續的加入
+                /*
+                TextView task = findViewById(R.id.task);
+                task.setText(
+                        "");
+                */
 
             }
         });
 
+        t.start();
+
+
 
     }
+
+
+
+
+
+
+    Thread t = new Thread() {
+        @Override
+        public void run() {
+            try {
+                while (!isInterrupted()) {
+                    Thread.sleep(10);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            // update TextView here!
+
+
+                        }
+                    });
+                }
+            } catch (InterruptedException e) {
+            }
+        }
+    };
+
+
+
+    String s;
+
+    public void getTask() {
+
+
+        // Response received from the server
+        Response.Listener<String> responseListener1 = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse1 = new JSONObject(response);
+                    boolean success = jsonResponse1.getBoolean("success");
+
+                    if (success) {
+                        List<String> Abook=new ArrayList<>();
+                        List<String> Achap=new ArrayList<>();
+                        TextView task = findViewById(R.id.task);
+                        task.setMovementMethod(ScrollingMovementMethod.getInstance());
+                        task.setText("");
+                        String s="";
+                        int j=Integer.parseInt(jsonResponse1.getString("i"));
+
+                        for (int i = 0; i < j; i++) {
+
+                            Abook.add(jsonResponse1.getString("bookname["+i+"]"));
+                            Achap.add(jsonResponse1.getString("chap["+i+"]"));
+
+                        }
+                        for (int i = 0; i < j; i++) {
+                            s=s+"► "+Abook.get(i)+
+                                    " -\n"+"    "+Achap.get(i)+"\n";
+
+                        }
+
+                        task.setText(s);
+
+
+
+                    } else {
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(PlanActivity.this);
+                        builder.setMessage("獲取讀書計畫失敗")
+                                .setNegativeButton("Retry", null)
+                                .create()
+                                .show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        String m_id ="6";
+
+        //Toast.makeText(PlanActivity.this,dbDate, Toast.LENGTH_SHORT).show();
+
+        getTask get = new getTask(m_id,dbDate, responseListener1);
+        RequestQueue queue1 = Volley.newRequestQueue(PlanActivity.this);
+        queue1.add(get);
+
+
+
+
+    }
+
+
+
+
+
+
 
     @Override
     public void onBackPressed() {
@@ -113,7 +250,7 @@ public class PlanActivity extends AppCompatActivity
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_book) {
-            Intent intent = new Intent(this, BookSetActivity.class);
+            Intent intent = new Intent(this, BookListActivity.class);
             startActivity(intent);
 
 

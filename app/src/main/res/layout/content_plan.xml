@@ -11,8 +11,9 @@
 
     <ImageView
         android:id="@+id/imageView6"
-        android:layout_width="459dp"
-        android:layout_height="753dp"
+        android:layout_width="474dp"
+        android:layout_height="736dp"
+        android:layout_marginTop="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,29 +23,31 @@
 
     <CalendarView
         android:id="@+id/calendar"
-        android:layout_width="411dp"
-        android:layout_height="297dp"
+        android:layout_width="410dp"
+        android:layout_height="295dp"
+        android:layout_below="@+id/selected_date"
+        android:layout_alignLeft="@+id/selected_date"
         android:background="#FFFFFF"
         android:showWeekNumber="true"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_alignLeft="@+id/selected_date"
-        android:layout_below="@+id/selected_date"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/selected_date"
-        android:layout_width="100dp"
-        android:layout_height="123dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="424dp"
+        android:layout_width="175dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="145dp"
+        android:layout_marginLeft="145dp"
+        android:layout_marginTop="323dp"
+        android:gravity="left"
         android:hint="Date"
         android:textColor="@android:color/white"
-        android:textSize="34sp"
+        android:textSize="38sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/calendar" />
+        app:layout_constraintTop_toTopOf="@+id/calendar"
+        android:scrollbars="vertical"
+        android:fadeScrollbars="false"/>
 
     <ImageButton
         android:id="@+id/plan_edit_bt"
@@ -57,5 +60,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/plan_edit_bt" />
+
+    <TextView
+        android:id="@+id/task"
+        android:layout_width="222dp"
+        android:layout_height="154dp"
+        android:layout_marginStart="144dp"
+        android:layout_marginLeft="144dp"
+        android:layout_marginTop="384dp"
+        android:text="task"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/calendar" />
 
 </android.support.constraint.ConstraintLayout>

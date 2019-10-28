@@ -1,7 +1,6 @@
 package com.example.planeng;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,20 +14,19 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.ImageView;
 
-public class ReviewActivity extends AppCompatActivity
+public class Note_add_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private LinearLayout parentLinearLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_review);
+        setContentView(R.layout.activity_note_add_);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -37,37 +35,23 @@ public class ReviewActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        ImageButton reWBtn = (ImageButton)findViewById(R.id.imageButton13);
-        ImageButton noteaddPageBtn = (ImageButton)findViewById(R.id.imageButton13);
-        parentLinearLayout = (LinearLayout)findViewById(R.id.parentLinearLayout);
-        noteaddPageBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //ImageView imageview= new ImageView(getApplicationContext());
-                // imageview.setImageResource(R.drawable.news_content_bg); //图片资源
-                // ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                // imageview.setLayoutParams(layoutParams);
+        //LinearLayout ll = (LinearLayout)findViewById(R.id.linearLayout);
+        //ImageButton noteaddBtn = (ImageButton)findViewById(R.id.imageButton9);
+        //noteaddBtn.setOnClickListener(new View.OnClickListener() {
+           // @Override
+           // public void onClick(View v) {
+              //  Intent intent = new Intent();
+              //  intent.setClass(Note_add_Activity.this , NoteActivity.class);
+              //  startActivity(intent);
+//                NoteActivity.linearLayout.addView(tv);
+         //   }
 
 
-                ImageButton button = new ImageButton(getApplicationContext());
-                button.setImageResource(R.drawable.review_more);
-                button.setBackgroundColor(Color.parseColor("#00FFFFFF"));
-                ViewGroup.LayoutParams layoutBB = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-                button.setLayoutParams(layoutBB);
-                // parentLinearLayout.addView(imageview);
-                parentLinearLayout.addView(button);
-            }
-        });
-        reWBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(ReviewActivity.this , Review_add_Activity.class);
-                startActivity(intent);
-            }
-        });
-            }
+
+        //});
+
+    }
 
     @Override
     public void onBackPressed() {
@@ -82,7 +66,7 @@ public class ReviewActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.review, menu);
+        getMenuInflater().inflate(R.menu.note_add_, menu);
         return true;
     }
 

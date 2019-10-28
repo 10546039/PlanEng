@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.planeng">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"
-        tools:ignore="ProtectedPermissions" />
 
     <application
         android:allowBackup="true"
@@ -17,7 +14,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
+        <activity
+            android:name=".Book.BookContentActivity"
+            android:label="@string/title_activity_book_content"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Book.BookListActivity"
+            android:label="@string/title_activity_book_list"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".LoginActivity" />
         <activity
@@ -27,17 +31,12 @@
         <activity
             android:name=".Book.BookSetActivity"
             android:label="@string/title_activity_book_set"
-            android:theme="@style/AppTheme.NoActionBar">
-
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Book.BookEditActivity"
             android:label="@string/title_activity_book_edit"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
-
-
         <activity
             android:name=".NewsContentActivity"
             android:label="News"
@@ -50,6 +49,18 @@
         <activity
             android:name=".NewsActivity"
             android:label="NewsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NoteActivity"
+            android:label="NoteActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Note_add_Activity"
+            android:label="Note_add_Activity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Review_add_Activity"
+            android:label="Review_add_Activity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".PlanActivity"
