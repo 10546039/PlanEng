@@ -21,8 +21,4 @@
     <string name="title_activity_plan">PlanActivity</string>
     <string name="title_activity_review">ReviewActivity</string>
     <string name="hello_world" />
-    <string name="title_activity_note_add_">Note_add_Activity</string>
-    <string name="title_activity_review_add_">Review_add_Activity</string>
-    <string name="title_activity_note">NoteActivity</string>
-    <string name="title_activity_test">testActivity</string>
 </resources>

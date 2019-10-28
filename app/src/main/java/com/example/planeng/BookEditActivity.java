@@ -1,24 +1,27 @@
 package com.example.planeng;
 
 import android.os.Bundle;
-
-import android.support.v4.view.GravityCompat;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.LinearLayout;
 
-public class NewsActivity extends AppCompatActivity
+import java.util.ArrayList;
+import java.util.List;
+
+public class BookEditActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_news);
+        setContentView(R.layout.content_book_edit);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -28,7 +31,36 @@ public class NewsActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        LinearLayout mLinear = findViewById(R.id.linear);
+
+
     }
+
+    LinearLayout mLinear = findViewById(R.id.linear);
+    private List bookList;
+
+    private void initView() {
+        //要新增view的容器
+        mLinear = (LinearLayout) findViewById(R.id.linear);
+        bookList = new ArrayList<>();
+
+    }
+    private void initData() {
+
+        //addView();
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     @Override
     public void onBackPressed() {
@@ -68,7 +100,6 @@ public class NewsActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-
         if (id == R.id.nav_home) {
             // Handle the camera action
         } else if (id == R.id.nav_book) {
@@ -80,9 +111,19 @@ public class NewsActivity extends AppCompatActivity
         } else if (id == R.id.nav_plan) {
 
         }
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+
+
+
+
+
+
+
+
+
 }
