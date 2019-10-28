@@ -92,7 +92,7 @@ public class BookListActivity extends AppCompatActivity
         //ivList集合有幾個元素就新增幾個
         for (int i = 0; i < chapFrontList.size(); i++) {
             //首先引入要新增的View
-            View Listview = View.inflate(this, R.layout.book2, null);
+            View Listview = View.inflate(this, R.layout.book, null);
             //找到裡面需要動態改變的控制元件
             bookName = Listview.findViewById(R.id.bookName);
             chapFront = Listview.findViewById(R.id.chapFront);
