@@ -19,7 +19,7 @@ import android.widget.TextView;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
-import com.example.planeng.Book.BookSetActivity;
+import com.example.planeng.Book.BookListActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -250,7 +250,7 @@ public class PlanActivity extends AppCompatActivity
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_book) {
-            Intent intent = new Intent(this, BookSetActivity.class);
+            Intent intent = new Intent(this, BookListActivity.class);
             startActivity(intent);
 
 
