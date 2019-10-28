@@ -112,6 +112,15 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
+        ImageButton notePageBtn = (ImageButton)findViewById(R.id.b2);
+        notePageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this , NoteActivity.class);
+                startActivity(intent);
+            }
+        });
 
         ImageButton newsPageBtn = (ImageButton)findViewById(R.id.b3);
         newsPageBtn.setOnClickListener(new View.OnClickListener() {
@@ -183,9 +192,11 @@ public class MainActivity extends AppCompatActivity
 
 
         } else if (id == R.id.nav_note) {
-
+            Intent intent = new Intent(this, NoteActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_review) {
-
+            Intent intent = new Intent(this, ReviewActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_plan) {
             Intent intent = new Intent(this, PlanActivity.class);
             startActivity(intent);
