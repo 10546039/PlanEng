@@ -1,27 +1,25 @@
-package com.example.planeng;
+package com.example.planeng.Book;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.view.MenuItem;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
 
-public class ReviewActivity extends AppCompatActivity
+import com.example.planeng.R;
+
+public class BookContentActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private LinearLayout parentLinearLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_review);
+        setContentView(R.layout.activity_book_content);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -31,33 +29,7 @@ public class ReviewActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-
-        ImageButton reWBtn = (ImageButton)findViewById(R.id.imageButton12);
-        ImageButton noteaddPageBtn = (ImageButton)findViewById(R.id.imageButton13);
-        parentLinearLayout = (LinearLayout)findViewById(R.id.parentLinearLayout);
-
-
-        noteaddPageBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //ImageView imageview= new ImageView(getApplicationContext());
-                // imageview.setImageResource(R.drawable.news_content_bg); //图片资源
-                // ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                // imageview.setLayoutParams(layoutParams);
-
-
-                ImageButton button = new ImageButton(getApplicationContext());
-                button.setImageResource(R.drawable.review_more);
-                button.setBackgroundColor(Color.parseColor("#00FFFFFF"));
-                ViewGroup.LayoutParams layoutBB = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-                button.setLayoutParams(layoutBB);
-                // parentLinearLayout.addView(imageview);
-                parentLinearLayout.addView(button);
-            }
-        });
-
-            }
+    }
 
     @Override
     public void onBackPressed() {
@@ -72,7 +44,7 @@ public class ReviewActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.review, menu);
+        getMenuInflater().inflate(R.menu.book_content, menu);
         return true;
     }
 
@@ -99,13 +71,15 @@ public class ReviewActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             // Handle the camera action
-        } else if (id == R.id.nav_book) {
+        } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_note) {
+        } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_review) {
+        } else if (id == R.id.nav_tools) {
 
-        } else if (id == R.id.nav_plan) {
+        } else if (id == R.id.nav_share) {
+
+        } else if (id == R.id.nav_send) {
 
         }
 

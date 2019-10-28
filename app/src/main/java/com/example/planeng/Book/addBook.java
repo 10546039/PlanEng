@@ -18,7 +18,6 @@ public class addBook extends StringRequest {
         params.put("bookname", bookname);
         params.put("date", date);
         params.put("chap", chap);
-
     }
 
     @Override

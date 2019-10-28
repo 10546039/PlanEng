@@ -94,7 +94,6 @@ public class PlanActivity extends AppCompatActivity
                 getTask();
 
                 /*
-
                 TextView task = findViewById(R.id.task);
                 task.setText(
                         "");
@@ -158,19 +157,19 @@ public class PlanActivity extends AppCompatActivity
                         String s="";
                         int j=Integer.parseInt(jsonResponse1.getString("i"));
 
-                            for (int i = 0; i < j; i++) {
+                        for (int i = 0; i < j; i++) {
 
-                                Abook.add(jsonResponse1.getString("bookname["+i+"]"));
-                                Achap.add(jsonResponse1.getString("chap["+i+"]"));
+                            Abook.add(jsonResponse1.getString("bookname["+i+"]"));
+                            Achap.add(jsonResponse1.getString("chap["+i+"]"));
 
-                            }
-                            for (int i = 0; i < j; i++) {
-                                s=s+"► "+Abook.get(i)+
-                                        " -\n"+"    "+Achap.get(i)+"\n";
+                        }
+                        for (int i = 0; i < j; i++) {
+                            s=s+"► "+Abook.get(i)+
+                                    " -\n"+"    "+Achap.get(i)+"\n";
 
-                            }
+                        }
 
-                            task.setText(s);
+                        task.setText(s);
 
 
 
@@ -270,4 +269,3 @@ public class PlanActivity extends AppCompatActivity
         return true;
     }
 }
-

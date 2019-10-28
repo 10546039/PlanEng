@@ -23,4 +23,6 @@
     <string name="hello_world" />
     <string name="title_activity_book_edit">BookEditActivity</string>
     <string name="title_activity_book_set">BookSetActivity</string>
+    <string name="title_activity_book_list">BookListActivity</string>
+    <string name="title_activity_book_content">BookContentActivity</string>
 </resources>
