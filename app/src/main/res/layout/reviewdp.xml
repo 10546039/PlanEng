@@ -34,13 +34,16 @@
         android:id="@+id/reveiwID"
         android:layout_width="143dp"
         android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="35dp"
         android:text="reveiwID"
         android:textSize="36sp"
         app:layout_constraintBottom_toBottomOf="@+id/nchapter_bg2"
         app:layout_constraintStart_toEndOf="@+id/imageView13"
-        app:layout_constraintTop_toTopOf="@+id/nchapter_bg2" />
+        app:layout_constraintTop_toTopOf="@+id/nchapter_bg2"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
         android:id="@+id/morerbt"
@@ -50,12 +53,13 @@
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:background="#00FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/nchapter_bg2"
         app:layout_constraintEnd_toEndOf="@+id/nchapter_bg2"
-        app:layout_constraintHorizontal_bias="0.238"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/reveiwID"
         app:layout_constraintTop_toTopOf="@+id/nchapter_bg2"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.983"
         app:srcCompat="@drawable/noteadd2" />
 
     <ImageView
@@ -67,6 +71,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/nchapter_bg2"
         app:layout_constraintStart_toStartOf="@+id/nchapter_bg2"
         app:layout_constraintTop_toTopOf="@+id/reveiwID"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/review_userpic1" />
 
 
