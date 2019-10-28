@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/imageView18"
-        android:layout_width="778dp"
-        android:layout_height="754dp"
+        android:layout_width="762dp"
+        android:layout_height="728dp"
         android:layout_marginTop="53dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,17 +55,17 @@
         app:layout_constraintVertical_bias="0.959"
         app:srcCompat="@drawable/note_in" />
 
-    <ImageView
-        android:id="@+id/imageView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="166dp"
+        android:layout_height="50dp"
         android:layout_marginTop="16dp"
-        android:background="#00FFFFFF"
+        android:text="心得分享"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.028"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/review_title" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/reviewdata"

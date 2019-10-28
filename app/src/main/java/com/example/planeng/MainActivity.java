@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(MainActivity.this , NoteActivity.class);
+                intent.setClass(MainActivity.this , Note_add_Activity.class);
                 startActivity(intent);
             }
         });
