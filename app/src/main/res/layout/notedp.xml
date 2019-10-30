@@ -40,13 +40,13 @@
         android:layout_height="65dp"
         android:layout_marginStart="185dp"
         android:layout_marginLeft="185dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="256dp"
         android:layout_marginRight="256dp"
         android:text="notetitle"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="@+id/nchapter_bg"
-        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="@+id/nchapter_bg"
         app:layout_constraintTop_toTopOf="parent" />
 
