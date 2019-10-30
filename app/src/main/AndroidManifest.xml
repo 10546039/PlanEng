@@ -14,10 +14,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
+        <uses-library android:name="org.apache.http.legacy" android:required="false" />
+
+        <activity
+            android:name=".Review_add_Activity"
+            android:label="Review_add_Activity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".Book.BookContentActivity"
             android:label="@string/title_activity_book_content"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Book.BookListActivity"
             android:label="@string/title_activity_book_list"
@@ -40,11 +47,14 @@
         <activity
             android:name=".NewsContentActivity"
             android:label="News"
-            android:theme="@style/AppTheme.FullScreen"
-            ></activity>
+            android:theme="@style/AppTheme.FullScreen" />
         <activity
             android:name=".ReviewActivity"
             android:label="@string/title_activity_review"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NoteActivity"
+            android:label="NoteActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".NewsActivity"
@@ -64,6 +74,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

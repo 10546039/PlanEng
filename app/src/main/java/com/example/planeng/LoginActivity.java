@@ -54,10 +54,13 @@ public class LoginActivity extends AppCompatActivity {
                                 String name = jsonResponse.getString("name");
                                 String email = jsonResponse.getString("email");
 
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+
+                                Intent intent = new Intent();
+                                intent.setClass(LoginActivity.this, MainActivity.class);
                                 intent.putExtra("name", name);
                                 intent.putExtra("email", email);
-                                LoginActivity.this.startActivity(intent);
+                                finish();
+
                             } else {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                                 builder.setMessage("登入失敗，輸入的帳號或密碼錯誤")

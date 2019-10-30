@@ -1,8 +1,10 @@
 package com.example.planeng;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
@@ -18,7 +20,11 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 import com.example.planeng.Book.BookSetActivity;
+import com.example.planeng.Book.CountDate;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -34,6 +40,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -112,6 +119,15 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
+        ImageButton notePageBtn = (ImageButton)findViewById(R.id.b2);
+        notePageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this , NoteActivity.class);
+                startActivity(intent);
+            }
+        });
 
         ImageButton newsPageBtn = (ImageButton)findViewById(R.id.b3);
         newsPageBtn.setOnClickListener(new View.OnClickListener() {
@@ -132,9 +148,85 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
+        getTask();
+
+
+
+
+
+
 
 
     }
+
+
+    public void getTask() {
+        Calendar mCal = Calendar.getInstance();
+
+        String dbDate= CountDate.DateToString(CountDate.DateDemo(CountDate.DateToString(mCal.getTime())));
+
+
+        // Response received from the server
+        Response.Listener<String> responseListener1 = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse1 = new JSONObject(response);
+                    boolean success = jsonResponse1.getBoolean("success");
+
+                    if (success) {
+                        List<String> Abook=new ArrayList<>();
+                        List<String> Achap=new ArrayList<>();
+                        TextView task = findViewById(R.id.todayTask);
+                        task.setMovementMethod(ScrollingMovementMethod.getInstance());
+                        task.setText("");
+                        String s="";
+                        int j=Integer.parseInt(jsonResponse1.getString("i"));
+
+                        for (int i = 0; i < j; i++) {
+
+                            Abook.add(jsonResponse1.getString("bookname["+i+"]"));
+                            Achap.add(jsonResponse1.getString("chap["+i+"]"));
+
+                        }
+                        for (int i = 0; i < j; i++) {
+                            s=s+"► "+Abook.get(i)+
+                                    " -\n"+"    "+Achap.get(i)+"\n";
+
+                        }
+
+                        task.setText(s);
+
+
+
+                    } else {
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                        builder.setMessage("獲取讀書計畫失敗")
+                                .setNegativeButton("Retry", null)
+                                .create()
+                                .show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        String m_id ="6";
+
+        //Toast.makeText(PlanActivity.this,dbDate, Toast.LENGTH_SHORT).show();
+
+        getTask get = new getTask(m_id,dbDate, responseListener1);
+        RequestQueue queue1 = Volley.newRequestQueue(MainActivity.this);
+        queue1.add(get);
+
+
+
+
+    }
+
+
 
     @Override
     public void onBackPressed() {
@@ -183,9 +275,11 @@ public class MainActivity extends AppCompatActivity
 
 
         } else if (id == R.id.nav_note) {
-
+            Intent intent = new Intent(this, NoteActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_review) {
-
+            Intent intent = new Intent(this, ReviewActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_plan) {
             Intent intent = new Intent(this, PlanActivity.class);
             startActivity(intent);
@@ -276,9 +370,9 @@ public class MainActivity extends AppCompatActivity
         }
 
         final SimpleAdapter test = new SimpleAdapter(this, informationList,
-               R.layout.listitem1,
+                R.layout.listitem1,
                 new String[] { "informations" }, new int[] { android.R.id.text1 }
-                );
+        );
 
         listView.setAdapter(test);
         listView = (ListView) findViewById(R.id.listView10);
@@ -310,4 +404,13 @@ public class MainActivity extends AppCompatActivity
         intent.putExtra("Listviewclickvalue2", Templistview2);
         startActivity(intent);
     }
+
+
+
+
+
+
+
+
+
 }
