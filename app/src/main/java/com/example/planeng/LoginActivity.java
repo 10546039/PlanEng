@@ -7,10 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.example.planeng.Book.BookEditActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,12 +55,17 @@ public class LoginActivity extends AppCompatActivity {
                             if (success) {
                                 String name = jsonResponse.getString("name");
                                 String email = jsonResponse.getString("email");
+                                String m_id = jsonResponse.getString("m_id");
 
 
                                 Intent intent = new Intent();
                                 intent.setClass(LoginActivity.this, MainActivity.class);
                                 intent.putExtra("name", name);
                                 intent.putExtra("email", email);
+                                intent.putExtra("m_id", m_id);
+                                startActivity(intent);
+                                //Toast.makeText(LoginActivity.this,m_id, Toast.LENGTH_LONG).show();
+
                                 finish();
 
                             } else {

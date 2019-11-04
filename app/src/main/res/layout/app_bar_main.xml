@@ -123,7 +123,7 @@
         android:layout_marginStart="156dp"
         android:layout_marginLeft="156dp"
         android:layout_marginTop="294dp"
-        android:text="555555"
+        android:text="休息! 今天沒有讀書計畫～"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/imageView25"

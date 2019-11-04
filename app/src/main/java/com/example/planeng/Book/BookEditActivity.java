@@ -25,8 +25,10 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.example.planeng.MainActivity;
+import com.example.planeng.NoteActivity;
 import com.example.planeng.PlanActivity;
 import com.example.planeng.R;
+import com.example.planeng.ReviewActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -57,6 +59,7 @@ public class BookEditActivity extends AppCompatActivity
     int totalChap;
     Long planDay;
     List<Integer> IeachChap;
+    String m_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +80,8 @@ public class BookEditActivity extends AppCompatActivity
 
         Intent editIntent =getIntent();
         Bundle bundle = editIntent.getExtras();
+        m_id=bundle.getString("m_id",null);
+        //Toast.makeText(BookEditActivity.this,m_id, Toast.LENGTH_LONG).show();
         String bookname = bundle.getString("book_name",null);
         booktitle = findViewById(R.id.booktitle);
         booktitle.setText(bookname);
@@ -409,7 +414,7 @@ public class BookEditActivity extends AppCompatActivity
 
 
 
-            String m_id = "6";
+            //String m_id = "163";
             String bookname = booktitle.getText().toString();
             String startdate = CountDate.DateToString(startDate);
             String enddate = CountDate.DateToString(CountDate.DatePlusInt(startDate,countTotal-1));
@@ -487,7 +492,7 @@ private void send() {
 
             day = CountDate.DatePlusInt(day, 1);
 
-            String m_id = "6";
+            //String m_id = "163";
             String bookname = booktitle.getText().toString();
             String date = CountDate.DateToString(day);
             String chap = chapName.get(j);
@@ -601,18 +606,25 @@ private void send() {
 
         if (id == R.id.nav_home) {
             Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("m_id", m_id);
             startActivity(intent);
         } else if (id == R.id.nav_book) {
-            Intent intent = new Intent(this, BookSetActivity.class);
+            Intent intent = new Intent(this, BookListActivity.class);
+            intent.putExtra("m_id", m_id);
             startActivity(intent);
 
 
         } else if (id == R.id.nav_note) {
-
+            Intent intent = new Intent(this, NoteActivity.class);
+            intent.putExtra("m_id", m_id);
+            startActivity(intent);
         } else if (id == R.id.nav_review) {
-
+            Intent intent = new Intent(this, ReviewActivity.class);
+            intent.putExtra("m_id", m_id);
+            startActivity(intent);
         } else if (id == R.id.nav_plan) {
             Intent intent = new Intent(this, PlanActivity.class);
+            intent.putExtra("m_id", m_id);
             startActivity(intent);
 
         }

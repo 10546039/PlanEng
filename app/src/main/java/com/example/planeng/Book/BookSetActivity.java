@@ -17,10 +17,13 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.planeng.MainActivity;
+import com.example.planeng.NoteActivity;
 import com.example.planeng.PlanActivity;
 import com.example.planeng.R;
+import com.example.planeng.ReviewActivity;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -37,6 +40,7 @@ public class BookSetActivity extends AppCompatActivity
     TextView DisplayStartDate;
     TextView DisplayEndDate;
     int cday, cmonth, cyear;
+    String m_id;
 
 
     @Override
@@ -53,6 +57,11 @@ public class BookSetActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         setTitle("新增書籍");
+        Intent IDintent =getIntent();
+        m_id = IDintent.getStringExtra("m_id");
+        //Toast.makeText(BookSetActivity.this,m_id, Toast.LENGTH_LONG).show();
+
+
 
 
 //日期選擇
@@ -128,6 +137,7 @@ public class BookSetActivity extends AppCompatActivity
                 bundle.putString("book_name", book_name);//傳遞String
                 bundle.putString("startDate", CountDate.DateToString(startDate));
                 bundle.putString("endDate", CountDate.DateToString(endDate));
+                bundle.putString("m_id", m_id);
                 editIntent.putExtras(bundle);
 
                 startActivity(editIntent);
@@ -228,18 +238,25 @@ public class BookSetActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("m_id", m_id);
             startActivity(intent);
         } else if (id == R.id.nav_book) {
-            Intent intent = new Intent(this, BookSetActivity.class);
+            Intent intent = new Intent(this, BookListActivity.class);
+            intent.putExtra("m_id", m_id);
             startActivity(intent);
 
 
         } else if (id == R.id.nav_note) {
-
+            Intent intent = new Intent(this, NoteActivity.class);
+            intent.putExtra("m_id", m_id);
+            startActivity(intent);
         } else if (id == R.id.nav_review) {
-
+            Intent intent = new Intent(this, ReviewActivity.class);
+            intent.putExtra("m_id", m_id);
+            startActivity(intent);
         } else if (id == R.id.nav_plan) {
             Intent intent = new Intent(this, PlanActivity.class);
+            intent.putExtra("m_id", m_id);
             startActivity(intent);
 
         }

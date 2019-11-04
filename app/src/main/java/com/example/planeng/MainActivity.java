@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.example.planeng.Book.BookListActivity;
 import com.example.planeng.Book.BookSetActivity;
 import com.example.planeng.Book.CountDate;
 
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity
     private ListView listView;
     public ArrayList<String> content = new ArrayList<String>();
     public ArrayList<String> Title = new ArrayList<>();
-
+    String m_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,12 +89,15 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
+        Intent IDintent =getIntent();
+        m_id = IDintent.getStringExtra("m_id");
+
 
         listView = (ListView) findViewById(R.id.listView10);
         accessWebService();
 
         //判斷是否登入
-        if (!logon) {
+        if (m_id==null) {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
@@ -116,6 +120,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this , PlanActivity.class);
+                intent.putExtra("m_id", m_id);
                 startActivity(intent);
             }
         });
@@ -125,6 +130,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this , NoteActivity.class);
+                intent.putExtra("m_id", m_id);
                 startActivity(intent);
             }
         });
@@ -135,6 +141,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this ,NewsActivity.class);
+
                 startActivity(intent);
             }
         });
@@ -145,6 +152,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this , ReviewActivity.class);
+                intent.putExtra("m_id", m_id);
                 startActivity(intent);
             }
         });
@@ -164,6 +172,11 @@ public class MainActivity extends AppCompatActivity
         Calendar mCal = Calendar.getInstance();
 
         String dbDate= CountDate.DateToString(CountDate.DateDemo(CountDate.DateToString(mCal.getTime())));
+
+        if (m_id==null){
+            TextView task = findViewById(R.id.todayTask);
+            task.setText("尚未登入");
+        }
 
 
         // Response received from the server
@@ -213,8 +226,8 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         };
-        String m_id ="6";
 
+        //Toast.makeText(MainActivity.this,m_id, Toast.LENGTH_LONG).show();
         //Toast.makeText(PlanActivity.this,dbDate, Toast.LENGTH_SHORT).show();
 
         getTask get = new getTask(m_id,dbDate, responseListener1);
@@ -268,20 +281,25 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("m_id", m_id);
             startActivity(intent);
         } else if (id == R.id.nav_book) {
-            Intent intent = new Intent(this, BookSetActivity.class);
+            Intent intent = new Intent(this, BookListActivity.class);
+            intent.putExtra("m_id", m_id);
             startActivity(intent);
 
 
         } else if (id == R.id.nav_note) {
             Intent intent = new Intent(this, NoteActivity.class);
+            intent.putExtra("m_id", m_id);
             startActivity(intent);
         } else if (id == R.id.nav_review) {
             Intent intent = new Intent(this, ReviewActivity.class);
+            intent.putExtra("m_id", m_id);
             startActivity(intent);
         } else if (id == R.id.nav_plan) {
             Intent intent = new Intent(this, PlanActivity.class);
+            intent.putExtra("m_id", m_id);
             startActivity(intent);
 
         }

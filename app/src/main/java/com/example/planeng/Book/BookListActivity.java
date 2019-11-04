@@ -14,10 +14,13 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.planeng.MainActivity;
+import com.example.planeng.NoteActivity;
 import com.example.planeng.PlanActivity;
 import com.example.planeng.R;
+import com.example.planeng.ReviewActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +32,7 @@ public class BookListActivity extends AppCompatActivity
     List<String> chapNameList;//放置標題的集合
     List<String> chapFrontList;//放內容的集合
     String[] iv = {"apple","banana","melon","berry"};
+    String m_id;
 
 
 
@@ -45,7 +49,9 @@ public class BookListActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-
+        Intent IDintent =getIntent();
+        m_id = IDintent.getStringExtra("m_id");
+        //Toast.makeText(BookListActivity.this,m_id, Toast.LENGTH_LONG).show();
         initView();
         initData();
 
@@ -55,6 +61,7 @@ public class BookListActivity extends AppCompatActivity
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(BookListActivity.this , BookSetActivity.class);
+                intent.putExtra("m_id", m_id);
                 startActivity(intent);
             }
         });
@@ -151,22 +158,28 @@ public class BookListActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("m_id", m_id);
             startActivity(intent);
         } else if (id == R.id.nav_book) {
             Intent intent = new Intent(this, BookListActivity.class);
+            intent.putExtra("m_id", m_id);
             startActivity(intent);
 
 
         } else if (id == R.id.nav_note) {
-
+            Intent intent = new Intent(this, NoteActivity.class);
+            intent.putExtra("m_id", m_id);
+            startActivity(intent);
         } else if (id == R.id.nav_review) {
-
+            Intent intent = new Intent(this, ReviewActivity.class);
+            intent.putExtra("m_id", m_id);
+            startActivity(intent);
         } else if (id == R.id.nav_plan) {
             Intent intent = new Intent(this, PlanActivity.class);
+            intent.putExtra("m_id", m_id);
             startActivity(intent);
 
         }
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
