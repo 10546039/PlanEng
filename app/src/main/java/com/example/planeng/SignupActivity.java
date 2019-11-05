@@ -7,10 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.example.planeng.Book.BookEditActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,8 +43,13 @@ public class SignupActivity extends AppCompatActivity {
                             JSONObject jsonResponse = new JSONObject(response);
                             boolean success = jsonResponse.getBoolean("success");
                             if (success) {
-                                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
-                                SignupActivity.this.startActivity(intent);
+                                //Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+                                //SignupActivity.this.startActivity(intent);
+
+                                SignupActivity.this.finish();
+                                Toast.makeText(SignupActivity.this,"註冊成功！", Toast.LENGTH_LONG).show();
+
+
                             } else {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
                                 builder.setMessage("Register Failed")

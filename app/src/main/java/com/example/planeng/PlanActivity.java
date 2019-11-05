@@ -15,11 +15,13 @@ import android.view.MenuItem;
 import android.widget.CalendarView;
 import android.widget.CalendarView.OnDateChangeListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
-import com.example.planeng.Book.BookSetActivity;
+import com.example.planeng.Book.BookListActivity;
+import com.example.planeng.Book.CountDate;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,6 +40,7 @@ public class PlanActivity extends AppCompatActivity
 
     String bookname;
     String chap;
+    String m_id;
 
 
 
@@ -55,6 +58,10 @@ public class PlanActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         setTitle("讀書計畫");
+        Intent IDintent =getIntent();
+        m_id = IDintent.getStringExtra("m_id");
+        //Toast.makeText(PlanActivity.this,m_id, Toast.LENGTH_LONG).show();
+
         date = findViewById(R.id.selected_date);
         calendar = findViewById(R.id.calendar);
         calendar.getDate();
@@ -66,6 +73,7 @@ public class PlanActivity extends AppCompatActivity
                 append(month).append(" / ").append(dayOfMonth));
 
         dbDate=year+"/"+month+"/"+dayOfMonth;
+        dbDate= CountDate.DateToString(CountDate.DateDemo(dbDate));
 
         TextView task = findViewById(R.id.task);
         task.setMovementMethod(ScrollingMovementMethod.getInstance());
@@ -91,6 +99,7 @@ public class PlanActivity extends AppCompatActivity
                 date.setText(new StringBuilder().
                         append(month+1).append(" / ").append(dayOfMonth));
                 dbDate=year+"/"+(month+1)+"/"+dayOfMonth;
+                dbDate= CountDate.DateToString(CountDate.DateDemo(dbDate));
                 getTask();
 
                 /*
@@ -187,7 +196,7 @@ public class PlanActivity extends AppCompatActivity
                 }
             }
         };
-        String m_id ="6";
+        //String m_id ="163";
 
         //Toast.makeText(PlanActivity.this,dbDate, Toast.LENGTH_SHORT).show();
 
@@ -248,18 +257,25 @@ public class PlanActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("m_id", m_id);
             startActivity(intent);
         } else if (id == R.id.nav_book) {
-            Intent intent = new Intent(this, BookSetActivity.class);
+            Intent intent = new Intent(this, BookListActivity.class);
+            intent.putExtra("m_id", m_id);
             startActivity(intent);
 
 
         } else if (id == R.id.nav_note) {
-
+            Intent intent = new Intent(this, NoteActivity.class);
+            intent.putExtra("m_id", m_id);
+            startActivity(intent);
         } else if (id == R.id.nav_review) {
-
+            Intent intent = new Intent(this, ReviewActivity.class);
+            intent.putExtra("m_id", m_id);
+            startActivity(intent);
         } else if (id == R.id.nav_plan) {
             Intent intent = new Intent(this, PlanActivity.class);
+            intent.putExtra("m_id", m_id);
             startActivity(intent);
 
         }
