@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity
     private ListView listView;
     public ArrayList<String> content = new ArrayList<String>();
     public ArrayList<String> Title = new ArrayList<>();
+    public ArrayList<String> Date = new ArrayList<>();
     String m_id;
 
     @Override
@@ -373,9 +374,9 @@ public class MainActivity extends AppCompatActivity
             for (int i = 0; i < jsonMainNode.length(); i++) {
                 JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
                 String title = jsonChildNode.optString("i_title");
-                String date = jsonChildNode.optString("i_date");
                 content.add(jsonChildNode.optString("i_content"));
                 Title.add(jsonChildNode.optString("i_title"));
+                Date.add(jsonChildNode.optString("SUBSTR(i_date,1,10)"));
                 String outPut = title ;
 
 
@@ -415,11 +416,14 @@ public class MainActivity extends AppCompatActivity
 
         Log.d("content", content.get(position));
         Log.d("Title",Title.get(position));
+        Log.d("Date",Date.get(position));
         String Templistview = content.get(position).toString();
         String Templistview2 = Title.get(position).toString();
+        String Templistview3 = Date.get(position).toString();
         Intent intent = new Intent(this, NewsContentActivity.class);
         intent.putExtra("Listviewclickvalue", Templistview);
         intent.putExtra("Listviewclickvalue2", Templistview2);
+        intent.putExtra("Listviewclickvalue3", Templistview3);
         startActivity(intent);
     }
 

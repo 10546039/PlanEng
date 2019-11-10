@@ -54,15 +54,23 @@ public class NewsActivity extends AppCompatActivity
 
     private String jsonResult;
     private String url = "http://108401.000webhostapp.com/information_details.php";
+    private String url1="http://108401.000webhostapp.com/information_details_toeic.php";
+    private String url2="http://108401.000webhostapp.com/information_details_ielts.php";
+    private String url3="http://108401.000webhostapp.com/information_details_toefl.php";
+
     private ListView listView;
     public ArrayList<String> content = new ArrayList<String>();
     public ArrayList<String> Title = new ArrayList<>();
-
+    public ArrayList<String> Date = new ArrayList<>();
+    private ImageButton btn1;
+    private ImageButton btn2;
+    private ImageButton btn3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
+        setTitle("");
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -76,6 +84,17 @@ public class NewsActivity extends AppCompatActivity
 
         listView = (ListView) findViewById(R.id.listView1);
         accessWebService();
+        btn1 = (ImageButton) findViewById(R.id.imageButton10);
+        btn2 = (ImageButton) findViewById(R.id.imageButton11);
+        btn3 = (ImageButton) findViewById(R.id.imageButton12);
+
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+            }
+        });
 
 
     }
@@ -188,7 +207,6 @@ public class NewsActivity extends AppCompatActivity
     // build hash set for list view
     public void ListDrwaer() {
         final List<Map<String, String>> informationList = new ArrayList<Map<String, String>>();
-
         try {
             JSONObject jsonResponse = new JSONObject(jsonResult);
             JSONArray jsonMainNode = jsonResponse.optJSONArray("information");
@@ -196,10 +214,11 @@ public class NewsActivity extends AppCompatActivity
             for (int i = 0; i < jsonMainNode.length(); i++) {
                 JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
                 String title = jsonChildNode.optString("i_title");
-                String date = jsonChildNode.optString("i_date");
                 content.add(jsonChildNode.optString("i_content"));
                 Title.add(jsonChildNode.optString("i_title"));
-                String outPut =title+"                             "+date;
+                Date.add(jsonChildNode.optString("SUBSTR(i_date,1,10)"));
+
+                String outPut =title;
 
 
                 informationList.add(createInformation("informations", outPut));
@@ -238,11 +257,14 @@ public class NewsActivity extends AppCompatActivity
 
         Log.d("content", content.get(position));
         Log.d("Title",Title.get(position));
+        Log.d("date",Date.get(position));
         String Templistview = content.get(position).toString();
         String Templistview2 = Title.get(position).toString();
+        String Templistview3 = Date.get(position).toString();
         Intent intent = new Intent(this, NewsContentActivity.class);
         intent.putExtra("Listviewclickvalue", Templistview);
         intent.putExtra("Listviewclickvalue2", Templistview2);
+        intent.putExtra("Listviewclickvalue3", Templistview3);
         startActivity(intent);
     }
 
