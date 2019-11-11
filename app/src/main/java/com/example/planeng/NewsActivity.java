@@ -83,7 +83,7 @@ public class NewsActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         listView = (ListView) findViewById(R.id.listView1);
-        accessWebService();
+        accessWebService(url);
         btn1 = (ImageButton) findViewById(R.id.imageButton10);
         btn2 = (ImageButton) findViewById(R.id.imageButton11);
         btn3 = (ImageButton) findViewById(R.id.imageButton12);
@@ -91,7 +91,20 @@ public class NewsActivity extends AppCompatActivity
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                accessWebService(url1);
+            }
+        });
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                accessWebService(url2);
 
+            }
+        });
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                accessWebService(url3);
 
             }
         });
@@ -198,7 +211,7 @@ public class NewsActivity extends AppCompatActivity
         }
     }// end async task
 
-    public void accessWebService() {
+    public void accessWebService(String url) {
         JsonReadTask task = new JsonReadTask();
         // passes values for the urls string array
         task.execute(new String[] { url });
@@ -210,9 +223,12 @@ public class NewsActivity extends AppCompatActivity
         try {
             JSONObject jsonResponse = new JSONObject(jsonResult);
             JSONArray jsonMainNode = jsonResponse.optJSONArray("information");
-
+            content.clear();
+            Title.clear();
+            Date.clear();
             for (int i = 0; i < jsonMainNode.length(); i++) {
                 JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
+
                 String title = jsonChildNode.optString("i_title");
                 content.add(jsonChildNode.optString("i_content"));
                 Title.add(jsonChildNode.optString("i_title"));

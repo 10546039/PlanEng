@@ -22,7 +22,7 @@
     android:textStyle="bold"
     android:layout_gravity="center_vertical"
     android:layout_marginTop="0dp"
-    android:layout_marginLeft="400dp"
+    android:layout_marginLeft="0dp"
     android:background="@drawable/note_more"
     android:gravity="center_vertical"
     android:paddingStart="?android:attr/listPreferredItemPaddingStart"

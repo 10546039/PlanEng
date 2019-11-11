@@ -39,9 +39,6 @@ public class NewsContentActivity extends AppCompatActivity
         String Tempholder=getIntent().getStringExtra("Listviewclickvalue");
         tv1.setText(Tempholder);
 
-        TextView tv2=(TextView)findViewById(R.id.txttitle);
-        String Tempholder2=getIntent().getStringExtra("Listviewclickvalue2");
-        tv2.setText(Tempholder2);
 
         TextView tv3=(TextView)findViewById(R.id.txttime);
         String Tempholder3=getIntent().getStringExtra("Listviewclickvalue3");

@@ -78,13 +78,13 @@
 
     <ListView
         android:id="@+id/listView1"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_width="315dp"
+        android:layout_height="435dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="154dp"
         android:layout_marginStart="42dp"
         android:layout_marginLeft="42dp"
+        android:layout_marginTop="154dp"
         android:background="#00FFFFFF"
         android:divider="@drawable/news_list_divider_bg"
         android:dividerHeight="20dp"
@@ -94,7 +94,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
 
-        app:srcCompat="@drawable/news_content_bg"
-        />
+        app:srcCompat="@drawable/news_content_bg" />
 
 </android.support.constraint.ConstraintLayout>
