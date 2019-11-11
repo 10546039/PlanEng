@@ -1,12 +1,11 @@
 package com.example.planeng.Book;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
+import android.text.method.ScrollingMovementMethod;
 import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -14,33 +13,31 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.planeng.R;
+import com.example.planeng.getContent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
-import com.example.planeng.R;
 
 public class BookContentActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    EditText etReview;
-    ImageButton bReview;
+
+
+    String m_id;
+    String Booktitle;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,135 +52,82 @@ public class BookContentActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
+        Intent bookIntent =getIntent();
+        Bundle bundle = bookIntent.getExtras();
+        m_id=bundle.getString("m_id",null);
 
-        etReview = findViewById(R.id.reviewdata);
-
-
-
-
-        ImageButton saveBook = findViewById(R.id.savereview);
-        saveBook.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final EditText data = findViewById(R.id.reviewdata);
-                if (data.equals("")){
-                    showDialog(datacheck);
-                }else{
-                    showDialog(check);
-                }
-            }
-        });
+        Booktitle = bundle.getString("booktitle",null);
+        TextView BookTitle = findViewById(R.id.BookTitle);
+        BookTitle.setText(Booktitle);
+        getContent();
 
 
     }
-    final int check = 1000;
-    final int datacheck = 2000;
-    @Override
-    protected Dialog onCreateDialog(int id)  //初始化對話方塊，透過 showDialog(ID) 觸發
-    {
-        Dialog dialog = null;
 
-        switch(id) //判斷所傳入的ID，啟動相應的對話方塊
-        {
-            case check:
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("儲存心得") //設定標題文字
-                        .setMessage("確認發表") //設定內容文字
-                        .setPositiveButton("確認", new DialogInterface.OnClickListener()
-                        { //設定確定按鈕
-                            @Override
-                            public void onClick(DialogInterface dialog, int which)
-                            {
-                                // TODO Auto-generated method stub
+    public List<String> chapDetail=new ArrayList<>();
 
-                                send();
+        public void getContent() {
+
+
+            // Response received from the server
+            Response.Listener<String> responseListener3 = new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONObject jsonResponse3 = new JSONObject(response);
+                        boolean success1 = jsonResponse3.getBoolean("success");
+
+                        if (success1) {
+
+                            TextView Contenttask = findViewById(R.id.ChapDetail);
+                            Contenttask.setMovementMethod(ScrollingMovementMethod.getInstance());
+                            Contenttask.setText("");
+                            String s="";
+                            int j=Integer.parseInt(jsonResponse3.getString("i"));
+
+                            for (int i = 0; i < j; i++) {
+
+                                chapDetail.add(jsonResponse3.getString("chapName["+i+"]"));
+                                //Toast.makeText(BookContentActivity.this,chapDetail.get(0), Toast.LENGTH_SHORT).show();
+                                //chapDetail.add("abc");
 
                             }
-                        })
-                        .setNegativeButton("取消", new DialogInterface.OnClickListener()
-                        { //設定取消按鈕
-                            @Override
-                            public void onClick(DialogInterface dialog, int which)
-                            {
-                                // TODO Auto-generated method stub
+                            for (int i = 0; i < j; i++) {
+                                s=s+chapDetail.get(i)+
+                                        " -\n";
+
                             }
-                        });
 
-                dialog = builder.create(); //建立對話方塊並存成 dialog
-                break;
+                            Contenttask.setText(s);
 
-            case datacheck:
-                AlertDialog.Builder changeBuilder = new AlertDialog.Builder(this);
-                dialog = changeBuilder.create(); //建立對話方塊並存成 dialog
-                break;
 
-            default:
-                break;
-        }
-        return dialog;
-    }
 
-    private void send() {
-        String r_id = "22";
-        String review =etReview.getText().toString();
+                        } else {
 
-                Response.Listener<String> responseListener1 = new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonResponse = new JSONObject(response);
-                            boolean success = jsonResponse.getBoolean("success");
-                            if (success) {
-
-                                Intent intent1 = new Intent(Review_add_Activity.this, ReviewActivity.class);
-                                Review_add_Activity.this.startActivity(intent1);
-                            } else {
-                                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(Review_add_Activity.this);
-                                builder.setMessage("Register Failed")
-                                        .setNegativeButton("Retry", null)
-                                        .create()
-                                        .show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                            AlertDialog.Builder builder = new AlertDialog.Builder(BookContentActivity.this);
+                            builder.setMessage("獲取讀書計畫失敗")
+                                    .setNegativeButton("Retry", null)
+                                    .create()
+                                    .show();
                         }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                };
+                }
+            };
+            String m_id ="6";
 
-                Reviewadd save = new Reviewadd(r_id, review, responseListener1);
-                RequestQueue queue1 = Volley.newRequestQueue(Review_add_Activity.this);
-                queue1.add(save);
+            //Toast.makeText(PlanActivity.this,dbDate, Toast.LENGTH_SHORT).show();
 
-
-
-
-
-
-
-        Intent intent = new Intent(this, Review_add_Activity.class);
-        startActivity(intent);
-        Review_add_Activity.this.finish();
-        Toast.makeText(Review_add_Activity.this,"新增成功！", Toast.LENGTH_LONG).show();
-
-
-    }
+            getContent get = new getContent(m_id,Booktitle, responseListener3);
+            RequestQueue queue1 = Volley.newRequestQueue(BookContentActivity.this);
+            queue1.add(get);
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+        }
 
 
     @Override
@@ -242,5 +186,4 @@ public class BookContentActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 }

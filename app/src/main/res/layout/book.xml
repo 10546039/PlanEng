@@ -13,9 +13,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <android.support.constraint.Group
-            android:id="@+id/group2"
+            android:id="@+id/group3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
     </LinearLayout>
 
     <ImageView
@@ -27,7 +28,7 @@
         app:srcCompat="@drawable/book_list_bookbg" />
 
     <ImageButton
-        android:id="@+id/imageButton14"
+        android:id="@+id/MoreBt"
         android:layout_width="63dp"
         android:layout_height="24dp"
         android:layout_marginStart="310dp"
@@ -39,29 +40,33 @@
         app:srcCompat="@drawable/news_more_bt" />
 
     <TextView
-        android:id="@+id/bookName"
+        android:id="@+id/listBookName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="75dp"
         android:layout_marginLeft="75dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="19dp"
         android:text="TextView"
-        android:textSize="18sp"
+        android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/chapFront"
-        android:layout_width="253dp"
-        android:layout_height="47dp"
+        android:id="@+id/listBookTime"
+        android:layout_width="221dp"
+        android:layout_height="32dp"
         android:layout_marginStart="75dp"
         android:layout_marginLeft="75dp"
-        android:layout_marginTop="38dp"
+        android:layout_marginTop="55dp"
         android:text="TextView"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.constraint.Group
+        android:id="@+id/group2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </android.support.constraint.ConstraintLayout>
