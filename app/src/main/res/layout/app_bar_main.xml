@@ -153,12 +153,13 @@
 
     <ListView
         android:id="@+id/listView10"
-        android:layout_width="209dp"
-        android:layout_height="69dp"
-        android:layout_marginStart="196dp"
-        android:layout_marginLeft="196dp"
-        android:layout_marginTop="168dp"
+        android:layout_width="203dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="192dp"
+        android:layout_marginLeft="192dp"
+        android:layout_marginTop="180dp"
         android:textSize="36px"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
