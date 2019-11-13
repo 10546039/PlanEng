@@ -6,7 +6,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"
+    <uses-permission
+        android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
 
     <application
@@ -17,8 +18,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".Note_content_Activity"
+            android:label="@string/title_activity_note_content_"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Review_out_Activity"
+            android:label="@string/title_activity_review_out_"
+            android:theme="@style/AppTheme.NoActionBar" />
 
-        <uses-library android:name="org.apache.http.legacy" android:required="false" />
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
 
         <activity
             android:name=".Book.BookContentActivity"
@@ -37,17 +48,12 @@
         <activity
             android:name=".Book.BookSetActivity"
             android:label="@string/title_activity_book_set"
-            android:theme="@style/AppTheme.NoActionBar">
-
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Book.BookEditActivity"
             android:label="@string/title_activity_book_edit"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
-
-
         <activity
             android:name=".ReviewActivity"
             android:label="@string/title_activity_review"

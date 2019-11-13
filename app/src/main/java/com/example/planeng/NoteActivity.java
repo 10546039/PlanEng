@@ -87,7 +87,7 @@ public class NoteActivity extends AppCompatActivity
                 public void onClick(View view) {
                     Toast.makeText(NoteActivity.this, "點選了"+textid.get(finalI), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent();
-                    intent.setClass(NoteActivity.this , Note_add_Activity.class);
+                    intent.setClass(NoteActivity.this , Note_content_Activity.class);
                     startActivity(intent);
                 }
           });

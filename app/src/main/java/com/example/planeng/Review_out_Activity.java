@@ -1,11 +1,10 @@
 package com.example.planeng;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
@@ -15,27 +14,34 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.ViewGroup;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-public class ReviewActivity extends AppCompatActivity
+public class Review_out_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private LinearLayout parentLinearLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //adddddddddddddd
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_review);
+        setContentView(R.layout.activity_review_out_);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -47,59 +53,22 @@ public class ReviewActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        ImageButton noteaddPageBtn = (ImageButton)findViewById(R.id.imageButton13);
-        parentLinearLayout = (LinearLayout)findViewById(R.id.parentLinearLayout);
-        noteaddPageBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(ReviewActivity.this , Review_add_Activity.class);
-                startActivity(intent);
-            }
-        });
-        initView();
 
-        addView();
+
+
+
+
+
+
+
     }
 
 
 
-    private LinearLayout mLinear;
-    private List<String> textid;
-    private void initView() {
-        //要新增view的容器
-        mLinear = findViewById(R.id.parentLinearLayout);
-        textid =new ArrayList<>();
-
-    }
 
 
-    TextView rt;
-    ImageButton reviewbt;
 
-    private void addView() {
-        //ivList集合有幾個元素就新增幾個
 
-        for(int i=0;i<9;i++) {
-            View view = View.inflate(this, R.layout.reviewdp, null);
-            rt = view.findViewById(R.id.reveiwID);
-            reviewbt = view.findViewById(R.id.morerbt);
-            textid.add("第" + i + "個");
-            rt.setText(textid.get(i));
-            final int finalI = i;//由於OnClick裡面拿不到i,所以需要重新賦值給一個final物件
-            reviewbt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(ReviewActivity.this, "點選了"+textid.get(finalI), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent();
-                    intent.setClass(ReviewActivity.this ,Review_out_Activity.class);
-                    startActivity(intent);
-                }
-            });
-
-            mLinear.addView(view);
-        }
-    }
 
 
 
@@ -126,7 +95,7 @@ public class ReviewActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.review, menu);
+        getMenuInflater().inflate(R.menu.review_out_, menu);
         return true;
     }
 
@@ -169,4 +138,5 @@ public class ReviewActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }
