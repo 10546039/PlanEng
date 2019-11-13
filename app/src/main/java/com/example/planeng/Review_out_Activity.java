@@ -1,12 +1,11 @@
 package com.example.planeng;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
+import android.text.method.ScrollingMovementMethod;
 import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -14,30 +13,22 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.Toast;
+import android.widget.TextView;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 public class Review_out_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    String m_id;
+    String r_data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,15 +44,49 @@ public class Review_out_Activity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
+        Intent bookIntent =getIntent();
+        Bundle bundle = bookIntent.getExtras();
+        m_id=bundle.getString("m_id",null);
+
+        r_data = bundle.getString("r_data",null);
+        TextView title = findViewById(R.id.rview);
+        title.setText(r_data);
+        getContent();
 
 
+    }
+
+    public List<String> chapDetail=new ArrayList<>();
+
+    public void getContent() {
 
 
+        // Response received from the server
+        Response.Listener<String> responseListener3 = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+            }
+        };
+        String m_id ="6";
+
+        //Toast.makeText(PlanActivity.this,dbDate, Toast.LENGTH_SHORT).show();
+
+        getCreview get = new getCreview(m_id,r_data, responseListener3);
+        RequestQueue queue1 = Volley.newRequestQueue(Review_out_Activity.this);
+        queue1.add(get);
 
 
 
 
     }
+
+
+
+
+
+
+
+
 
 
 

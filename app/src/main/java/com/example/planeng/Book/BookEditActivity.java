@@ -528,10 +528,6 @@ private void send() {
             RequestQueue queue1 = Volley.newRequestQueue(BookEditActivity.this);
             queue1.add(save);
 
-
-
-
-
         }
     }
     Intent intent = new Intent(this, BookSetActivity.class);

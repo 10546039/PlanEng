@@ -18,7 +18,6 @@ import android.view.Menu;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -119,7 +118,7 @@ public class Note_add_Activity extends AppCompatActivity
     }
 
     private void send() {
-        String n_id = "22";
+        String m_id = "6";
         String n_title =notetitle.getText().toString();
         String n_data =etNote.getText().toString();
 
@@ -146,7 +145,7 @@ public class Note_add_Activity extends AppCompatActivity
             }
         };
 
-        Noteadd save = new Noteadd(n_id,n_title,n_data, responseListener1);
+        Noteadd save = new Noteadd(m_id,n_title,n_data, responseListener1);
         RequestQueue queue1 = Volley.newRequestQueue(Note_add_Activity.this);
         queue1.add(save);
 

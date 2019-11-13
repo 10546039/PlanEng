@@ -122,8 +122,8 @@ public class Review_add_Activity extends AppCompatActivity
     }
 
     private void send() {
-        String r_id = "22";
-        String review =etReview.getText().toString();
+        String m_id = "6";
+        String r_data =etReview.getText().toString();
 
         Response.Listener<String> responseListener1 = new Response.Listener<String>() {
             @Override
@@ -148,7 +148,7 @@ public class Review_add_Activity extends AppCompatActivity
             }
         };
 
-        Reviewadd save = new Reviewadd(r_id, review, responseListener1);
+        Reviewadd save = new Reviewadd(m_id, r_data, responseListener1);
         RequestQueue queue1 = Volley.newRequestQueue(Review_add_Activity.this);
         queue1.add(save);
 

@@ -1,10 +1,11 @@
 package com.example.planeng;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -24,15 +25,19 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.example.planeng.Book.BookContentActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Note_content_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    EditText notetitle;
-    EditText etNote;
-    ImageButton bNote;
+
+    String m_id;
+    String n_title;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,8 +53,82 @@ public class Note_content_Activity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        etNote = findViewById(R.id.etnote);
-        notetitle = findViewById(R.id.notetitle);
+
+
+
+    Intent bookIntent =getIntent();
+    Bundle bundle = bookIntent.getExtras();
+    m_id=bundle.getString("m_id",null);
+
+    n_title = bundle.getString("n_title",null);
+    TextView title = findViewById(R.id.notetitle);
+    title.setText(n_title);
+    getContent();
+
+
+}
+
+    public List<String> chapDetail=new ArrayList<>();
+
+    public void getContent() {
+
+
+        // Response received from the server
+        Response.Listener<String> responseListener3 = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse3 = new JSONObject(response);
+                    boolean success1 = jsonResponse3.getBoolean("success");
+
+                    if (success1) {
+
+                        TextView Contenttask = findViewById(R.id.etnote);
+                        Contenttask.setMovementMethod(ScrollingMovementMethod.getInstance());
+                        Contenttask.setText("");
+                        String s="";
+                        int j=Integer.parseInt(jsonResponse3.getString("i"));
+
+                        for (int i = 0; i < j; i++) {
+
+                            chapDetail.add(jsonResponse3.getString("n_data["+i+"]"));
+                            //Toast.makeText(BookContentActivity.this,chapDetail.get(0), Toast.LENGTH_SHORT).show();
+                            //chapDetail.add("abc");
+
+                        }
+                        for (int i = 0; i < j; i++) {
+                            s=s+chapDetail.get(i)+
+                                    " -\n";
+
+                        }
+
+                        Contenttask.setText(s);
+
+
+
+                    } else {
+
+                        android.support.v7.app.AlertDialog.Builder builder = new AlertDialog.Builder(Note_content_Activity.this);
+                        builder.setMessage("獲取讀書計畫失敗")
+                                .setNegativeButton("Retry", null)
+                                .create()
+                                .show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        String m_id ="6";
+
+        //Toast.makeText(PlanActivity.this,dbDate, Toast.LENGTH_SHORT).show();
+
+        getCnote get = new getCnote(m_id,n_title, responseListener3);
+        RequestQueue queue1 = Volley.newRequestQueue(Note_content_Activity.this);
+        queue1.add(get);
+
+
 
 
     }
