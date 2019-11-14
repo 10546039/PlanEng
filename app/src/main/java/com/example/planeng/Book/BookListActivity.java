@@ -136,7 +136,7 @@ public class BookListActivity extends AppCompatActivity
                 addView();
             }
         };
-        String m_id ="6";
+        //String m_id ="6";
 
 
 
