@@ -82,7 +82,7 @@
         android:layout_height="435dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="42dp"
+        android:layout_marginStart="48dp"
         android:layout_marginLeft="42dp"
         android:layout_marginTop="154dp"
         android:background="#00FFFFFF"
