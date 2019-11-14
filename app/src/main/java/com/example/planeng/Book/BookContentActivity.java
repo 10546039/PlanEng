@@ -2,21 +2,41 @@ package com.example.planeng.Book;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
+import android.text.method.ScrollingMovementMethod;
+import android.view.MenuItem;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.planeng.MainActivity;
-import com.example.planeng.PlanActivity;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 import com.example.planeng.R;
+import com.example.planeng.getContent;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class BookContentActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+
+    String m_id;
+    String Booktitle;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +51,84 @@ public class BookContentActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        Intent bookIntent =getIntent();
+        Bundle bundle = bookIntent.getExtras();
+        m_id=bundle.getString("m_id",null);
+
+        Booktitle = bundle.getString("booktitle",null);
+        TextView BookTitle = findViewById(R.id.BookTitle);
+        BookTitle.setText(Booktitle);
+        getContent();
+
+
     }
+
+    public List<String> chapDetail=new ArrayList<>();
+
+        public void getContent() {
+
+
+            // Response received from the server
+            Response.Listener<String> responseListener3 = new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONObject jsonResponse3 = new JSONObject(response);
+                        boolean success1 = jsonResponse3.getBoolean("success");
+
+                        if (success1) {
+
+                            TextView Contenttask = findViewById(R.id.ChapDetail);
+                            Contenttask.setMovementMethod(ScrollingMovementMethod.getInstance());
+                            Contenttask.setText("");
+                            String s="";
+                            int j=Integer.parseInt(jsonResponse3.getString("i"));
+
+                            for (int i = 0; i < j; i++) {
+
+                                chapDetail.add(jsonResponse3.getString("chapName["+i+"]"));
+                                //Toast.makeText(BookContentActivity.this,chapDetail.get(0), Toast.LENGTH_SHORT).show();
+                                //chapDetail.add("abc");
+
+                            }
+                            for (int i = 0; i < j; i++) {
+                                s=s+chapDetail.get(i)+
+                                        " -\n";
+
+                            }
+
+                            Contenttask.setText(s);
+
+
+
+                        } else {
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(BookContentActivity.this);
+                            builder.setMessage("獲取讀書計畫失敗")
+                                    .setNegativeButton("Retry", null)
+                                    .create()
+                                    .show();
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+            String m_id ="6";
+
+            //Toast.makeText(PlanActivity.this,dbDate, Toast.LENGTH_SHORT).show();
+
+            getContent get = new getContent(m_id,Booktitle, responseListener3);
+            RequestQueue queue1 = Volley.newRequestQueue(BookContentActivity.this);
+            queue1.add(get);
+
+
+
+
+        }
+
 
     @Override
     public void onBackPressed() {
@@ -71,23 +168,17 @@ public class BookContentActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-
-
         if (id == R.id.nav_home) {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_book) {
-            Intent intent = new Intent(this, BookListActivity.class);
-            startActivity(intent);
+            // Handle the camera action
+        } else if (id == R.id.nav_gallery) {
 
+        } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_note) {
+        } else if (id == R.id.nav_tools) {
 
-        } else if (id == R.id.nav_review) {
+        } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_plan) {
-            Intent intent = new Intent(this, PlanActivity.class);
-            startActivity(intent);
+        } else if (id == R.id.nav_send) {
 
         }
 
