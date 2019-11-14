@@ -120,7 +120,7 @@ public class Note_content_Activity extends AppCompatActivity
                 }
             }
         };
-        String m_id ="6";
+        //String m_id ="6";
 
         //Toast.makeText(PlanActivity.this,dbDate, Toast.LENGTH_SHORT).show();
 

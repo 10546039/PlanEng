@@ -31,6 +31,7 @@ public class Note_add_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     EditText notetitle;
     EditText etNote;
+    String m_id;
     ImageButton bNote;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +39,8 @@ public class Note_add_Activity extends AppCompatActivity
         setContentView(R.layout.activity_note_add_);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        
+        Intent IDintent =getIntent();
+        m_id = IDintent.getStringExtra("m_id");
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -118,7 +120,7 @@ public class Note_add_Activity extends AppCompatActivity
     }
 
     private void send() {
-        String m_id = "6";
+
         String n_title =notetitle.getText().toString();
         String n_data =etNote.getText().toString();
 
@@ -155,7 +157,8 @@ public class Note_add_Activity extends AppCompatActivity
 
 
 
-        Intent intent = new Intent(this, Note_add_Activity.class);
+        Intent intent = new Intent(this, NoteActivity.class);
+        intent.putExtra("m_id",m_id);
         startActivity(intent);
         Note_add_Activity.this.finish();
         Toast.makeText(Note_add_Activity.this,"新增成功！", Toast.LENGTH_LONG).show();

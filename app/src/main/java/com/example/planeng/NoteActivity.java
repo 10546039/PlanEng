@@ -63,6 +63,7 @@ public class NoteActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
+
                 intent.setClass(NoteActivity.this , Note_add_Activity.class);
                 intent.putExtra("m_id", m_id);
                 startActivity(intent);
@@ -113,7 +114,7 @@ public class NoteActivity extends AppCompatActivity
                 addView();
             }
         };
-        String m_id ="6";
+        //String m_id ="6";
         getNote get = new getNote( m_id , responseListener1);
         RequestQueue queue1 = Volley.newRequestQueue(NoteActivity.this);
         queue1.add(get);
@@ -142,6 +143,7 @@ public class NoteActivity extends AppCompatActivity
                 @Override
                 public void onClick(View v) {
                     Intent bookIntent = new Intent();
+                    bookIntent.putExtra("m_id", m_id);
                     bookIntent.setClass(NoteActivity.this,Note_content_Activity.class);
                     //new一個Bundle物件，並將要傳遞的資料傳入
 

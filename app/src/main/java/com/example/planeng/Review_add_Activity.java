@@ -39,12 +39,15 @@ public class Review_add_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     EditText etReview;
     ImageButton bReview;
+    String m_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_add_);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Intent IDintent =getIntent();
+        m_id = IDintent.getStringExtra("m_id");
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -122,7 +125,7 @@ public class Review_add_Activity extends AppCompatActivity
     }
 
     private void send() {
-        String m_id = "6";
+
         String r_data =etReview.getText().toString();
 
         Response.Listener<String> responseListener1 = new Response.Listener<String>() {
@@ -158,7 +161,8 @@ public class Review_add_Activity extends AppCompatActivity
 
 
 
-        Intent intent = new Intent(this, Review_add_Activity.class);
+        Intent intent = new Intent(this, ReviewActivity.class);
+        intent.putExtra("m_id",m_id);
         startActivity(intent);
         Review_add_Activity.this.finish();
         Toast.makeText(Review_add_Activity.this,"新增成功！", Toast.LENGTH_LONG).show();
