@@ -27,6 +27,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.planeng.Book.BookListActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -227,16 +228,27 @@ public class Review_add_Activity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("m_id", m_id);
+            startActivity(intent);
+        } else if (id == R.id.nav_book) {
+            Intent intent = new Intent(this, BookListActivity.class);
+            intent.putExtra("m_id", m_id);
+            startActivity(intent);
 
-        } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_tools) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_note) {
+            Intent intent = new Intent(this, NoteActivity.class);
+            intent.putExtra("m_id", m_id);
+            startActivity(intent);
+        } else if (id == R.id.nav_review) {
+            Intent intent = new Intent(this, ReviewActivity.class);
+            intent.putExtra("m_id", m_id);
+            startActivity(intent);
+        } else if (id == R.id.nav_plan) {
+            Intent intent = new Intent(this, PlanActivity.class);
+            intent.putExtra("m_id", m_id);
+            startActivity(intent);
 
         }
 
