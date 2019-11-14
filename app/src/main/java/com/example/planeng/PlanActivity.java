@@ -12,8 +12,10 @@ import android.support.v7.widget.Toolbar;
 import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.CalendarView;
 import android.widget.CalendarView.OnDateChangeListener;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
@@ -60,7 +62,17 @@ public class PlanActivity extends AppCompatActivity
         Intent IDintent =getIntent();
         m_id = IDintent.getStringExtra("m_id");
         //Toast.makeText(PlanActivity.this,m_id, Toast.LENGTH_LONG).show();
+        ImageButton booklistbtn = findViewById(R.id.plan_edit_bt);
+        booklistbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                Intent intent = new Intent(PlanActivity.this, BookListActivity.class);
+                intent.putExtra("m_id", m_id);
+                startActivity(intent);
+
+            }
+        });
         date = findViewById(R.id.selected_date);
         calendar = findViewById(R.id.calendar);
         calendar.getDate();
