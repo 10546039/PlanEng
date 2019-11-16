@@ -26,4 +26,6 @@
     <string name="title_activity_book_list">BookListActivity</string>
     <string name="title_activity_book_content">BookContentActivity</string>
     <string name="title_activity_review_add_">Review_add_Activity</string>
+    <string name="title_activity_review_out_">Review_out_Activity</string>
+    <string name="title_activity_note_content_">Note_content_Activity</string>
 </resources>

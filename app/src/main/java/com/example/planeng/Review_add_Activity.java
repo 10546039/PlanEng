@@ -27,6 +27,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.planeng.Book.BookListActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,12 +40,15 @@ public class Review_add_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     EditText etReview;
     ImageButton bReview;
+    String m_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_add_);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Intent IDintent =getIntent();
+        m_id = IDintent.getStringExtra("m_id");
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -122,8 +126,8 @@ public class Review_add_Activity extends AppCompatActivity
     }
 
     private void send() {
-        String r_id = "22";
-        String review =etReview.getText().toString();
+
+        String r_data =etReview.getText().toString();
 
         Response.Listener<String> responseListener1 = new Response.Listener<String>() {
             @Override
@@ -148,7 +152,7 @@ public class Review_add_Activity extends AppCompatActivity
             }
         };
 
-        Reviewadd save = new Reviewadd(r_id, review, responseListener1);
+        Reviewadd save = new Reviewadd(m_id, r_data, responseListener1);
         RequestQueue queue1 = Volley.newRequestQueue(Review_add_Activity.this);
         queue1.add(save);
 
@@ -158,7 +162,8 @@ public class Review_add_Activity extends AppCompatActivity
 
 
 
-        Intent intent = new Intent(this, Review_add_Activity.class);
+        Intent intent = new Intent(this, ReviewActivity.class);
+        intent.putExtra("m_id",m_id);
         startActivity(intent);
         Review_add_Activity.this.finish();
         Toast.makeText(Review_add_Activity.this,"新增成功！", Toast.LENGTH_LONG).show();
@@ -223,16 +228,27 @@ public class Review_add_Activity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("m_id", m_id);
+            startActivity(intent);
+        } else if (id == R.id.nav_book) {
+            Intent intent = new Intent(this, BookListActivity.class);
+            intent.putExtra("m_id", m_id);
+            startActivity(intent);
 
-        } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_tools) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_note) {
+            Intent intent = new Intent(this, NoteActivity.class);
+            intent.putExtra("m_id", m_id);
+            startActivity(intent);
+        } else if (id == R.id.nav_review) {
+            Intent intent = new Intent(this, ReviewActivity.class);
+            intent.putExtra("m_id", m_id);
+            startActivity(intent);
+        } else if (id == R.id.nav_plan) {
+            Intent intent = new Intent(this, PlanActivity.class);
+            intent.putExtra("m_id", m_id);
+            startActivity(intent);
 
         }
 
