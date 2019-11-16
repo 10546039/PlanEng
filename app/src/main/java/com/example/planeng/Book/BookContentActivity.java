@@ -19,7 +19,11 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.example.planeng.MainActivity;
+import com.example.planeng.NoteActivity;
+import com.example.planeng.PlanActivity;
 import com.example.planeng.R;
+import com.example.planeng.ReviewActivity;
 import com.example.planeng.getContent;
 
 import org.json.JSONException;
@@ -46,6 +50,7 @@ public class BookContentActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        setTitle("參考書詳細資訊");
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -116,7 +121,7 @@ public class BookContentActivity extends AppCompatActivity
                     }
                 }
             };
-            String m_id ="6";
+            //String m_id ="6";
 
             //Toast.makeText(PlanActivity.this,dbDate, Toast.LENGTH_SHORT).show();
 
@@ -168,17 +173,30 @@ public class BookContentActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+
+
         if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("m_id", m_id);
+            startActivity(intent);
+        } else if (id == R.id.nav_book) {
+            Intent intent = new Intent(this, BookListActivity.class);
+            intent.putExtra("m_id", m_id);
+            startActivity(intent);
 
-        } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_tools) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_note) {
+            Intent intent = new Intent(this, NoteActivity.class);
+            intent.putExtra("m_id", m_id);
+            startActivity(intent);
+        } else if (id == R.id.nav_review) {
+            Intent intent = new Intent(this, ReviewActivity.class);
+            intent.putExtra("m_id", m_id);
+            startActivity(intent);
+        } else if (id == R.id.nav_plan) {
+            Intent intent = new Intent(this, PlanActivity.class);
+            intent.putExtra("m_id", m_id);
+            startActivity(intent);
 
         }
 

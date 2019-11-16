@@ -44,6 +44,7 @@ public class Note_add_Activity extends AppCompatActivity
         m_id = IDintent.getStringExtra("m_id");
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        setTitle("新增筆記");
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);

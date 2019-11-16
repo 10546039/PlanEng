@@ -16,8 +16,12 @@ import android.view.Menu;
 
 import android.widget.TextView;
 
+import com.example.planeng.Book.BookListActivity;
+
 public class NewsContentActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    String m_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,8 @@ public class NewsContentActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        Intent IDintent =getIntent();
+        m_id = IDintent.getStringExtra("m_id");
 
         TextView tv1=(TextView)findViewById(R.id.txtitem);
         String Tempholder=getIntent().getStringExtra("Listviewclickvalue");
@@ -86,15 +92,29 @@ public class NewsContentActivity extends AppCompatActivity
         int id = item.getItemId();
 
 
+
         if (id == R.id.nav_home) {
-            // Handle the camera action
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("m_id", m_id);
+            startActivity(intent);
         } else if (id == R.id.nav_book) {
+            Intent intent = new Intent(this, BookListActivity.class);
+            intent.putExtra("m_id", m_id);
+            startActivity(intent);
+
 
         } else if (id == R.id.nav_note) {
-
+            Intent intent = new Intent(this, NoteActivity.class);
+            intent.putExtra("m_id", m_id);
+            startActivity(intent);
         } else if (id == R.id.nav_review) {
-
+            Intent intent = new Intent(this, ReviewActivity.class);
+            intent.putExtra("m_id", m_id);
+            startActivity(intent);
         } else if (id == R.id.nav_plan) {
+            Intent intent = new Intent(this, PlanActivity.class);
+            intent.putExtra("m_id", m_id);
+            startActivity(intent);
 
         }
 

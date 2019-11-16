@@ -49,6 +49,8 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.ListView;
 
+import com.example.planeng.Book.BookListActivity;
+
 public class NewsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -65,12 +67,14 @@ public class NewsActivity extends AppCompatActivity
     private ImageButton btn1;
     private ImageButton btn2;
     private ImageButton btn3;
+    String m_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
         setTitle("");
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -81,6 +85,8 @@ public class NewsActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        Intent IDintent =getIntent();
+        m_id = IDintent.getStringExtra("m_id");
 
         listView = (ListView) findViewById(R.id.listView1);
         accessWebService(url);
@@ -151,15 +157,28 @@ public class NewsActivity extends AppCompatActivity
         int id = item.getItemId();
 
 
+
         if (id == R.id.nav_home) {
-            // Handle the camera action
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_book) {
+            Intent intent = new Intent(this, BookListActivity.class);
+            intent.putExtra("m_id", m_id);
+            startActivity(intent);
+
 
         } else if (id == R.id.nav_note) {
-
+            Intent intent = new Intent(this, NoteActivity.class);
+            intent.putExtra("m_id", m_id);
+            startActivity(intent);
         } else if (id == R.id.nav_review) {
-
+            Intent intent = new Intent(this, ReviewActivity.class);
+            intent.putExtra("m_id", m_id);
+            startActivity(intent);
         } else if (id == R.id.nav_plan) {
+            Intent intent = new Intent(this, PlanActivity.class);
+            intent.putExtra("m_id", m_id);
+            startActivity(intent);
 
         }
 
@@ -167,6 +186,7 @@ public class NewsActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
     private class JsonReadTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {

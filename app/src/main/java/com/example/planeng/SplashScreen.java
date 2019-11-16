@@ -4,9 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.planeng.Book.BookEditActivity;
-import com.example.planeng.Book.BookListActivity;
-import com.example.planeng.Book.BookSetActivity;
 
 
 public class SplashScreen extends AppCompatActivity {
@@ -23,7 +20,7 @@ public class SplashScreen extends AppCompatActivity {
     public void run() {
         try{
         Thread.sleep(2000);
-        startActivity(new Intent().setClass(SplashScreen.this,MainActivity.class));
+        startActivity(new Intent().setClass(SplashScreen.this, MainActivity.class));
         }catch (InterruptedException e){
         e.printStackTrace();
         }
