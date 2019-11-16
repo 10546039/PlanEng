@@ -507,6 +507,7 @@ private void send() {
                         if (success) {
 
                             Intent intent1 = new Intent(BookEditActivity.this, BookSetActivity.class);
+
                             BookEditActivity.this.startActivity(intent1);
 
 
@@ -531,6 +532,9 @@ private void send() {
         }
     }
     Intent intent = new Intent(this, BookSetActivity.class);
+
+    intent.putExtra("m_id", m_id);
+
     startActivity(intent);
     BookEditActivity.this.finish();
     String bookname = booktitle.getText().toString();

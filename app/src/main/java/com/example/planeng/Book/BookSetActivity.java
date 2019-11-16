@@ -59,6 +59,7 @@ public class BookSetActivity extends AppCompatActivity
         setTitle("新增書籍");
         Intent IDintent =getIntent();
         m_id = IDintent.getStringExtra("m_id");
+
         //Toast.makeText(BookSetActivity.this,m_id, Toast.LENGTH_LONG).show();
 
 

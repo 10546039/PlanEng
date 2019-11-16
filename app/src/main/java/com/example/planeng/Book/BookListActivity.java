@@ -6,33 +6,46 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 import com.example.planeng.MainActivity;
 import com.example.planeng.NoteActivity;
 import com.example.planeng.PlanActivity;
 import com.example.planeng.R;
 import com.example.planeng.ReviewActivity;
+import com.example.planeng.getBook;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class BookListActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private LinearLayout LLinear;
-    List<String> chapNameList;//放置標題的集合
-    List<String> chapFrontList;//放內容的集合
-    String[] iv = {"apple","banana","melon","berry"};
     String m_id;
+    public List<String> BookTitle;
+    public List<String> startDate;
+    public List<String> endDate;
+
+
 
 
 
@@ -51,9 +64,9 @@ public class BookListActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         Intent IDintent =getIntent();
         m_id = IDintent.getStringExtra("m_id");
-        //Toast.makeText(BookListActivity.this,m_id, Toast.LENGTH_LONG).show();
         initView();
-        initData();
+        getBook();
+        //addView();
 
         ImageButton addBook_bt = (ImageButton)findViewById(R.id.addbook_bt);
         addBook_bt.setOnClickListener(new View.OnClickListener() {
@@ -65,53 +78,128 @@ public class BookListActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
+
     }
+
+
 
 
     private void initView() {
         //要新增view的容器
         LLinear = findViewById(R.id.ListLinear);
-        chapNameList = new ArrayList<>();
-        chapFrontList = new ArrayList<>();
+        BookTitle = new ArrayList<>();
+        startDate = new ArrayList<>();
+        endDate = new ArrayList<>();
 
     }
-    /**
-     * 處理資料,可以是伺服器請求過來的,也可以是本地的
-     */
-    private void initData() {
-        for (int i = 0; i < iv.length; i++) {
-            chapFrontList.add(iv[i]);
-            chapNameList.add("第" + (i+1) + "本");
-        }
-        //資料拿到之後去根據資料去動態新增View
-        addView();
-    }
 
+
+
+    private void getBook() {
+
+        // Response received from the server
+        Response.Listener<String> responseListener1 = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse2 = new JSONObject(response);
+                    boolean success = jsonResponse2.getBoolean("success");
+
+                    if (success) {
+
+                        int j=Integer.parseInt(jsonResponse2.getString("i"));
+
+                        for (int i = 0; i < j; i++) {
+
+                            BookTitle.add(jsonResponse2.getString("booktitle["+i+"]"));
+                            startDate.add(jsonResponse2.getString("startDate["+i+"]"));
+                            endDate.add(jsonResponse2.getString("endDate["+i+"]"));
+
+                        }
+
+
+
+                    } else {
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(BookListActivity.this);
+                        builder.setMessage("獲取讀書計畫失敗")
+                                .setNegativeButton("Retry", null)
+                                .create()
+                                .show();
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                //資料拿到之後去根據資料去動態新增View
+                addView();
+            }
+        };
+        //String m_id ="6";
+
+
+
+        getBook get = new getBook(m_id, responseListener1);
+        RequestQueue queue1 = Volley.newRequestQueue(BookListActivity.this);
+        queue1.add(get);
+
+
+
+
+    }
+int k;
     /**
      * 動態新增的具體實現
      */
-
-    TextView bookName;
-    TextView chapFront;
-
     private void addView() {
+
         //ivList集合有幾個元素就新增幾個
-        for (int i = 0; i < chapFrontList.size(); i++) {
+        for (  k = 0; k < BookTitle.size(); k++) {
+            final int b=k;
             //首先引入要新增的View
             View Listview = View.inflate(this, R.layout.book, null);
             //找到裡面需要動態改變的控制元件
-            bookName = Listview.findViewById(R.id.bookName);
-            chapFront = Listview.findViewById(R.id.chapFront);
+            TextView BookTitleView = Listview.findViewById(R.id.listBookName);
+            TextView BookPeriodView = Listview.findViewById(R.id.listBookTime);
+            ImageButton MoreBt = Listview.findViewById(R.id.MoreBt);
             //給控制元件賦值
-            bookName.setText(chapNameList.get(i));
-            chapFront.setText(chapFrontList.get(i));
+            BookTitleView.setText(BookTitle.get(k));
+            BookPeriodView.setText("期間："+startDate.get(k)+"~"+endDate.get(k));
+            //傳送資料到BookContentActivity
 
+            MoreBt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent bookIntent = new Intent();
+                    bookIntent.setClass(BookListActivity.this,BookContentActivity.class);
+                    //new一個Bundle物件，並將要傳遞的資料傳入
+
+                    String StartDate = startDate.get(b);
+                    String EndDate = endDate.get(b);
+
+                    Bundle bundle = new Bundle();
+
+                    bundle.putString("booktitle", BookTitle.get(b));//傳遞String
+                    bundle.putString("startDate", StartDate);
+                    bundle.putString("endDate", EndDate);
+                    bundle.putString("m_id", m_id);
+                    bookIntent.putExtras(bundle);
+
+                    startActivity(bookIntent);
+                    BookListActivity.this.finish();
+                }
+            });
 
             //把所有動態建立的view都新增到容器裡面
             LLinear.addView(Listview);
         }
-
     }
+
+
+
+
+
 
 
 
