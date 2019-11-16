@@ -19,29 +19,12 @@
         app:layout_constraintVertical_bias="0.503"
         app:srcCompat="@drawable/signup_bg" />
 
-    <ImageView
-        android:id="@+id/signup_bg_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginLeft="54dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="54dp"
-        android:contentDescription="signup_logo"
-        app:layout_constraintBottom_toBottomOf="@+id/signup_bg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.166"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/signup_bg"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/signup_logo" />
 
     <ImageButton
         android:id="@+id/singup_add_pic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="50dp"
         android:layout_marginBottom="8dp"
         android:background="#00FFFFFF"
         android:contentDescription="@string/signup_add_pic"
@@ -49,25 +32,33 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/signup_bg_logo"
         app:layout_constraintVertical_bias="0.295"
         app:srcCompat="@drawable/login_signup" />
 
     <ImageButton
-        android:id="@+id/singup_add_pic"
+        android:id="@+id/singup_add_pic1"
         android:layout_width="148dp"
-        android:layout_height="149dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="600dp"
+        android:layout_marginBottom="180dp"
         android:background="#00FFFFFF"
         android:contentDescription="@string/signup_add_pic"
         app:layout_constraintBottom_toBottomOf="@+id/signup_bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/signup_bg_logo"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/login_logo" />
+    <ImageButton
+        android:id="@+id/singup_add_pic2"
+        android:layout_width="148dp"
+        android:layout_height="420dp"
+        android:layout_marginBottom="180dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="@string/signup_add_pic"
+        app:layout_constraintBottom_toBottomOf="@+id/signup_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/login_signup" />
 
     <ImageView
         android:id="@+id/signup_icon"
