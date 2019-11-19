@@ -12,77 +12,67 @@
 
     <ImageView
         android:id="@+id/imageView25"
-        android:layout_width="437dp"
+        android:layout_width="wrap_content"
         android:layout_height="758dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/main_bg_white" />
 
     <ImageView
         android:id="@+id/bookedit_bg"
-        android:layout_width="472dp"
-        android:layout_height="708dp"
-        android:layout_marginTop="48dp"
+        android:layout_width="508dp"
+        android:layout_height="631dp"
         android:adjustViewBounds="true"
         android:cropToPadding="true"
         android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView25"
         app:srcCompat="@drawable/bookedit_bg" />
 
     <ImageView
         android:id="@+id/imageView15"
-        android:layout_width="331dp"
-        android:layout_height="478dp"
-        android:layout_marginStart="39dp"
-        android:layout_marginLeft="39dp"
-        android:layout_marginTop="192dp"
+        android:layout_width="319dp"
+        android:layout_height="410dp"
+        android:layout_marginTop="159dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/main_bg_brown" />
 
     <ImageView
         android:id="@+id/imageView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="130dp"
+        android:layout_height="129dp"
         android:layout_marginStart="28dp"
         android:layout_marginLeft="28dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="45dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/main_percent" />
+
+    <ImageView
+        android:id="@+id/imageView24"
+        android:layout_width="76dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="57dp"
+        android:layout_marginLeft="57dp"
+        android:layout_marginTop="79dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/planeng" />
 
     <ImageButton
         android:id="@+id/b2"
         android:layout_width="145dp"
         android:layout_height="110dp"
         android:background="#00FFFFFF"
+        app:layout_constraintEnd_toStartOf="@id/guideline11"
         app:layout_constraintStart_toEndOf="@+id/b1"
         app:layout_constraintTop_toTopOf="@+id/b1"
         app:srcCompat="@drawable/main_note" />
-
-    <ImageButton
-        android:id="@+id/b1"
-        style="@style/Widget.AppCompat.ImageButton"
-        android:layout_width="145dp"
-        android:layout_height="110dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="388dp"
-        android:background="#00FFFFFF"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/main_plan" />
-
-    <ImageButton
-        android:id="@+id/b4"
-        android:layout_width="145dp"
-        android:layout_height="110dp"
-        android:layout_marginTop="4dp"
-        android:background="#00FFFFFF"
-        app:layout_constraintStart_toEndOf="@+id/b3"
-        app:layout_constraintTop_toBottomOf="@+id/b2"
-        app:srcCompat="@drawable/main_share" />
 
     <ImageButton
         android:id="@+id/b3"
@@ -93,6 +83,28 @@
         app:layout_constraintStart_toStartOf="@+id/b1"
         app:layout_constraintTop_toBottomOf="@+id/b1"
         app:srcCompat="@drawable/main_news" />
+
+    <ImageButton
+        android:id="@+id/b4"
+        android:layout_width="145dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="4dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/guideline11"
+        app:layout_constraintStart_toEndOf="@+id/b3"
+        app:layout_constraintTop_toBottomOf="@+id/b2"
+        app:srcCompat="@drawable/main_share" />
+
+    <ImageButton
+        android:id="@+id/b1"
+        style="@style/Widget.AppCompat.ImageButton"
+        android:layout_width="145dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="314dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintStart_toStartOf="@id/guideline10"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/main_plan" />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar2"
@@ -109,20 +121,20 @@
         android:id="@+id/imageView23"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="264dp"
+        android:layout_marginTop="196dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/main_mission_chek" />
 
     <TextView
         android:id="@+id/todayTask"
-        android:layout_width="203dp"
-        android:layout_height="93dp"
-        android:layout_marginStart="156dp"
-        android:layout_marginLeft="156dp"
-        android:layout_marginTop="294dp"
+        android:layout_width="202dp"
+        android:layout_height="81dp"
+        android:layout_marginStart="126dp"
+        android:layout_marginLeft="126dp"
+        android:layout_marginTop="232dp"
         android:text="休息! 今天沒有讀書計畫～"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -133,31 +145,20 @@
         android:id="@+id/imageView2"
         android:layout_width="88dp"
         android:layout_height="93dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="225dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/today" />
 
-    <ImageView
-        android:id="@+id/imageView24"
-        android:layout_width="94dp"
-        android:layout_height="95dp"
-        android:layout_marginStart="68dp"
-        android:layout_marginLeft="68dp"
-        android:layout_marginTop="105dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/planeng" />
-
     <ListView
         android:id="@+id/listView10"
-        android:layout_width="203dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="192dp"
-        android:layout_marginLeft="192dp"
-        android:layout_marginTop="180dp"
+        android:layout_width="180dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="156dp"
+        android:layout_marginLeft="156dp"
+        android:layout_marginTop="110dp"
         android:textSize="36px"
 
         app:layout_constraintStart_toStartOf="parent"
@@ -167,14 +168,28 @@
 
     <ImageView
         android:id="@+id/imageView10"
-        android:layout_width="145dp"
-        android:layout_height="23dp"
-        android:layout_marginStart="188dp"
-        android:layout_marginLeft="188dp"
-        android:layout_marginTop="136dp"
+        android:layout_width="120dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="184dp"
+        android:layout_marginLeft="184dp"
+        android:layout_marginTop="80dp"
         app:layout_constraintStart_toStartOf="@+id/toolbar2"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/news" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
 
 
 </android.support.constraint.ConstraintLayout>
