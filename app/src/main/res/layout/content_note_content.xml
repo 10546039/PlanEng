@@ -32,8 +32,8 @@
 
     <ImageView
         android:id="@+id/imageView19"
-        android:layout_width="457dp"
-        android:layout_height="475dp"
+        android:layout_width="460dp"
+        android:layout_height="380dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
@@ -45,13 +45,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/note_in" />
 
-    <TextView
-        android:id="@+id/etnote"
-        android:layout_width="300dp"
-        android:layout_height="461dp"
-        android:textSize="18sp"
+    <ScrollView
+        android:layout_width="266dp"
+        android:layout_height="373dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView19"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView19" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/etnote"
+                android:layout_width="266dp"
+                android:layout_height="match_parent"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </ScrollView>
+
 </android.support.constraint.ConstraintLayout>
