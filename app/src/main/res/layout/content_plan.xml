@@ -13,7 +13,8 @@
         android:id="@+id/imageView6"
         android:layout_width="469dp"
         android:layout_height="239dp"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.52"
@@ -26,7 +27,7 @@
         android:id="@+id/plan_edit_bt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="32dp"
         android:background="#00FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageView6"
@@ -54,13 +55,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.67" />
+        app:layout_constraintGuide_percent="0.65" />
 
     <TextView
         android:id="@+id/task"
         android:layout_width="0dp"
         android:layout_height="108dp"
-        android:layout_marginTop="8dp"
         android:text="task"
         android:textSize="18sp"
         android:textStyle="bold"
