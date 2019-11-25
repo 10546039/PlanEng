@@ -13,25 +13,25 @@
         android:id="@+id/imageView6"
         android:layout_width="469dp"
         android:layout_height="239dp"
-        android:layout_marginBottom="0dp"
-        app:layout_constraintBottom_toTopOf="@id/guideline9"
+        android:layout_marginTop="22dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/plan_bg" />
 
     <ImageButton
         android:id="@+id/plan_edit_bt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="216dp"
-        android:layout_marginLeft="216dp"
-        android:layout_marginTop="460dp"
+        android:layout_marginBottom="16dp"
         android:background="#00FFFFFF"
-        app:layout_constraintEnd_toStartOf="@id/guideline8"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageView6"
+        app:layout_constraintHorizontal_bias="0.33"
+        app:layout_constraintStart_toEndOf="@+id/imageView6"
         app:srcCompat="@drawable/plan_edit_bt" />
 
     <TextView
@@ -60,8 +60,7 @@
         android:id="@+id/task"
         android:layout_width="0dp"
         android:layout_height="108dp"
-        android:layout_marginTop="4dp"
-        android:lineSpacingExtra="8sp"
+        android:layout_marginTop="8dp"
         android:text="task"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -86,7 +85,7 @@
             android:layout_height="299dp"
             android:layout_below="@+id/selected_date"
             android:layout_alignLeft="@+id/selected_date"
-            android:layout_marginTop="-18dp"
+            android:layout_marginTop="-8dp"
             android:background="#FFFFFF"
             android:showWeekNumber="true" />
 
