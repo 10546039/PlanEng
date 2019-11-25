@@ -61,6 +61,7 @@
         android:layout_width="0dp"
         android:layout_height="108dp"
         android:layout_marginTop="4dp"
+        android:lineSpacingExtra="8sp"
         android:text="task"
         android:textSize="18sp"
         android:textStyle="bold"
