@@ -34,12 +34,12 @@
 
     <TextView
         android:id="@+id/reveiwID"
-        android:layout_width="194dp"
-        android:layout_height="36dp"
+        android:layout_width="196dp"
+        android:layout_height="37dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="35dp"
+        android:layout_marginBottom="36dp"
         android:text="reveiwIDffffffffffffffffffffffffffffffffffffff"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/nchapter_bg2"
