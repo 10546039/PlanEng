@@ -10,9 +10,10 @@
 
     <ImageView
         android:id="@+id/imageView7"
-        android:layout_width="421dp"
-        android:layout_height="698dp"
-        android:layout_marginTop="35dp"
+        android:layout_width="362dp"
+        android:layout_height="667dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/news_bg" />
@@ -21,44 +22,50 @@
         android:id="@+id/BookTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:ellipsize="end"
+        android:maxEms="5"
         android:text="bookname"
+        android:singleLine="true"
         android:textColor="#000000"
-        android:textSize="13pt"
+        android:textSize="15pt"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView27"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="33dp"
-        android:layout_marginLeft="33dp"
-        android:layout_marginTop="70dp"
+        android:layout_width="161dp"
+        android:layout_height="10dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="55dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/book_set_nameline" />
 
     <ImageView
         android:id="@+id/imageView28"
-        android:layout_width="385dp"
-        android:layout_height="454dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="134dp"
+        android:layout_width="339dp"
+        android:layout_height="403dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="110dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageView7"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/main_bg_brown" />
 
     <ScrollView
-        android:layout_width="352dp"
-        android:layout_height="410dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="154dp"
+        android:id="@+id/scrollView3"
+        android:layout_width="318dp"
+        android:layout_height="364dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="128dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -70,12 +77,23 @@
 
     <TextView
         android:id="@+id/ChapDetail"
-        android:layout_width="326dp"
-        android:layout_height="401dp"
-        android:layout_marginStart="43dp"
-        android:layout_marginLeft="43dp"
-        android:layout_marginTop="160dp"
+        android:layout_width="308dp"
+        android:layout_height="346dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="140dp"
         android:text="chapt"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/scrollView3"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
 </android.support.constraint.ConstraintLayout>

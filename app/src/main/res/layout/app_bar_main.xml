@@ -106,17 +106,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/main_plan" />
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar2"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:background="#AE4A3B"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageView
         android:id="@+id/imageView23"
         android:layout_width="wrap_content"
@@ -128,10 +117,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/main_mission_chek" />
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:background="#AE4A3B"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/todayTask"
-        android:layout_width="202dp"
-        android:layout_height="81dp"
+        android:layout_width="203dp"
+        android:layout_height="78dp"
         android:layout_marginStart="126dp"
         android:layout_marginLeft="126dp"
         android:layout_marginTop="232dp"
@@ -170,8 +170,8 @@
         android:id="@+id/imageView10"
         android:layout_width="120dp"
         android:layout_height="20dp"
-        android:layout_marginStart="184dp"
-        android:layout_marginLeft="184dp"
+        android:layout_marginStart="158dp"
+        android:layout_marginLeft="158dp"
         android:layout_marginTop="80dp"
         app:layout_constraintStart_toStartOf="@+id/toolbar2"
         app:layout_constraintTop_toTopOf="parent"
