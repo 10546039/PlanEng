@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/signup_bg"
         android:layout_width="538dp"
-        android:layout_height="734dp"
+        android:layout_height="720dp"
         android:contentDescription="signup_bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
