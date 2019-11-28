@@ -401,7 +401,7 @@ public class BookEditActivity extends AppCompatActivity
         //chapname
 
 
-        for (int j = 0; j < totalChap; j++)
+        for (int j = 0; j < totalChap;j++)
         {
 
             getStartDate();
@@ -452,6 +452,7 @@ public class BookEditActivity extends AppCompatActivity
             addBooklist addList = new addBooklist(m_id, bookname, startdate, enddate,totalchap,chapname, responseListener2);
             RequestQueue queue2 = Volley.newRequestQueue(BookEditActivity.this);
             queue2.add(addList);
+
 
 
 

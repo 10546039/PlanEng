@@ -7,9 +7,11 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="410dp"
-        android:layout_height="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="78dp"
         android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -21,37 +23,34 @@
 
     <ImageView
         android:id="@+id/chapter_bg"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="60dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/bookedit_bg"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/bookedit_bg"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linearLayout2"
         app:srcCompat="@drawable/bookedit_chapbg" />
 
     <EditText
         android:id="@+id/chapDetail"
-        android:layout_width="178dp"
-        android:layout_height="47dp"
+        android:layout_width="174dp"
+        android:layout_height="46dp"
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
+        android:background="@null"
         android:ems="10"
         android:hint=" - 輸入詳細章節內容"
         android:textColor="?attr/colorControlNormal"
         app:layout_constraintBottom_toBottomOf="@+id/chapter"
         app:layout_constraintStart_toEndOf="@+id/chapter"
-        app:layout_constraintTop_toTopOf="@+id/chapter"
-        android:background="@null"
-        />
+        app:layout_constraintTop_toTopOf="@+id/chapter" />
 
     <EditText
         android:id="@+id/ch_day"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="67dp"
-        android:layout_marginRight="67dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
         android:background="@null"
         android:hint="0"
         android:inputType="number"
@@ -61,8 +60,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/chapter_bg"
         app:layout_constraintEnd_toEndOf="@+id/chapter_bg"
-        app:layout_constraintTop_toTopOf="@+id/chapter_bg"
-        app:layout_constraintVertical_bias="0.473" />
+        app:layout_constraintTop_toTopOf="@+id/chapter_bg" />
 
     <TextView
         android:id="@+id/chapter"
@@ -76,19 +74,20 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/chapter_bg"
         app:layout_constraintStart_toEndOf="@+id/ch"
-        app:layout_constraintTop_toTopOf="@+id/chapter_bg" />
+        app:layout_constraintTop_toTopOf="@+id/chapter_bg"
+        app:layout_constraintVertical_bias="0.473" />
 
     <TextView
         android:id="@+id/ch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:text="Ch."
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/chapter_bg"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/chapter_bg"
         app:layout_constraintTop_toTopOf="@+id/chapter_bg" />
 
     <TextView
