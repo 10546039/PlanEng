@@ -2,21 +2,22 @@ package com.example.planeng;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
-
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,21 +29,23 @@ import com.example.planeng.Book.BookListActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class NoteActivity extends AppCompatActivity
+public class planreviewActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private LinearLayout LLinear;
     String m_id;
-    public List<String> n_title;
-
+    public List<String> r_type;
+    public List<String> r_test_type;
+    public List<String> r_test_score;
+    public List<String> r_data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_note);
+        setContentView(R.layout.activity_review);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -53,33 +56,49 @@ public class NoteActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
         Intent IDintent =getIntent();
         m_id = IDintent.getStringExtra("m_id");
         initView();
-        getNote();
-        //addView();
+        getBook2();
 
-        ImageButton addBook_bt = (ImageButton)findViewById(R.id.imageButton11);
-        addBook_bt.setOnClickListener(new View.OnClickListener() {
+        ImageButton addreview_bt = (ImageButton)findViewById(R.id.imageButton13);
+        addreview_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-
-                intent.setClass(NoteActivity.this , Note_add_Activity.class);
+                intent.setClass(planreviewActivity.this , Review_add_Activity.class);
                 intent.putExtra("m_id", m_id);
                 startActivity(intent);
             }
         });
-
+        ImageButton rtestbt = (ImageButton)findViewById(R.id.rtt);
+        rtestbt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(planreviewActivity.this , testreviewActivity.class);
+                intent.putExtra("m_id", m_id);
+                startActivity(intent);
+            }
+        });
     }
+
+
+
     private void initView() {
         //要新增view的容器
         LLinear = findViewById(R.id.parentLinearLayout);
-        n_title = new ArrayList<>();
-
+        r_type = new ArrayList<>();
+        r_test_type = new ArrayList<>();
+        r_test_score = new ArrayList<>();
+        r_data = new ArrayList<>();
     }
 
-    private void getNote() {
+
+
+
+    private void getBook2() {
 
         // Response received from the server
         Response.Listener<String> responseListener1 = new Response.Listener<String>() {
@@ -95,15 +114,16 @@ public class NoteActivity extends AppCompatActivity
 
                         for (int i = 0; i < j; i++) {
 
-                            n_title.add(jsonResponse2.getString("n_title["+i+"]"));
-
-
+                            r_type.add(jsonResponse2.getString("r_type["+i+"]"));
+                            r_test_type.add(jsonResponse2.getString("r_test_type["+i+"]"));
+                            r_test_score.add(jsonResponse2.getString("r_test_score["+i+"]"));
+                            r_data.add(jsonResponse2.getString("r_data["+i+"]"));
 
                         }
                     } else {
 
-                        AlertDialog.Builder builder = new AlertDialog.Builder(NoteActivity.this);
-                        builder.setMessage("獲取讀書筆記失敗")
+                        android.app.AlertDialog.Builder builder = new AlertDialog.Builder(planreviewActivity.this);
+                        builder.setMessage("獲取讀書心得失敗")
                                 .setNegativeButton("Retry", null)
                                 .create()
                                 .show();
@@ -115,9 +135,9 @@ public class NoteActivity extends AppCompatActivity
                 addView();
             }
         };
-
-        getNote get = new getNote( m_id , responseListener1);
-        RequestQueue queue1 = Volley.newRequestQueue(NoteActivity.this);
+        String m_id ="6";
+        getRplan get = new getRplan( m_id , responseListener1);
+        RequestQueue queue1 = Volley.newRequestQueue(planreviewActivity.this);
         queue1.add(get);
 
     }
@@ -128,35 +148,45 @@ public class NoteActivity extends AppCompatActivity
     private void addView() {
 
         //ivList集合有幾個元素就新增幾個
-        for (  k = 0; k < n_title.size(); k++) {
+        for (  k = 0; k < r_data.size(); k++) {
             final int b=k;
             //首先引入要新增的View
-            View Listview = View.inflate(this, R.layout.notedp, null);
+            View Listview = View.inflate(this, R.layout.reviewdp, null);
             //找到裡面需要動態改變的控制元件
-            TextView NoteTitleView = Listview.findViewById(R.id.notetitle);
-            ImageButton MoreBt = Listview.findViewById(R.id.morebt);
+            TextView reviewTitleView = Listview.findViewById(R.id.reveiwID);
+            TextView reviewTitleView1 = Listview.findViewById(R.id.type);
+            TextView reviewTitleView2 = Listview.findViewById(R.id.test);
+            TextView reviewTitleView3 = Listview.findViewById(R.id.score);
+            ImageButton MoreBt = Listview.findViewById(R.id.morerbt);
             //給控制元件賦值
-            NoteTitleView.setText(n_title.get(k));
-
+            reviewTitleView.setText(r_data.get(k));
+            reviewTitleView1.setText(r_type.get(k));
+            reviewTitleView2.setText(r_test_type.get(k));
+            reviewTitleView3.setText(r_test_score.get(k));
             //傳送資料到BookContentActivity
 
             MoreBt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent bookIntent = new Intent();
-                    bookIntent.putExtra("m_id", m_id);
-                    bookIntent.setClass(NoteActivity.this,Note_content_Activity.class);
+                    bookIntent.setClass(planreviewActivity.this,Review_out_Activity.class);
                     //new一個Bundle物件，並將要傳遞的資料傳入
 
-                    String nt = n_title.get(b);
+                    String data = r_data.get(b);
+                    String type = r_type.get(b);
+                    String ttype = r_test_type.get(b);
+                    String tscore = r_test_score.get(b);
                     Bundle bundle = new Bundle();
 
-                    bundle.putString("n_title", nt);//傳遞String
+                    bundle.putString("r_data", data);//傳遞String
+                    bundle.putString("r_type", type);
+                    bundle.putString("r_test_type", ttype);
+                    bundle.putString("r_test_score", tscore);
                     bundle.putString("m_id", m_id);
                     bookIntent.putExtras(bundle);
 
                     startActivity(bookIntent);
-                    NoteActivity.this.finish();
+                    planreviewActivity.this.finish();
                 }
             });
 
@@ -164,13 +194,6 @@ public class NoteActivity extends AppCompatActivity
             LLinear.addView(Listview);
         }
     }
-
-
-
-
-
-
-
 
 
 
@@ -188,7 +211,7 @@ public class NoteActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.note, menu);
+        getMenuInflater().inflate(R.menu.review, menu);
         return true;
     }
 
@@ -242,5 +265,4 @@ public class NoteActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 }

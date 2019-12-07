@@ -28,4 +28,6 @@
     <string name="title_activity_review_add_">Review_add_Activity</string>
     <string name="title_activity_review_out_">Review_out_Activity</string>
     <string name="title_activity_note_content_">Note_content_Activity</string>
+    <string name="title_activity_planreview">planreviewActivity</string>
+    <string name="title_activity_testreview">testreviewActivity</string>
 </resources>

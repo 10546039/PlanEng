@@ -38,15 +38,12 @@ public class ReviewActivity extends AppCompatActivity
 
     private LinearLayout LLinear;
     String m_id;
-
     public List<String> r_type;
     public List<String> r_test_type;
     public List<String> r_test_score;
     public List<String> r_data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -75,9 +72,26 @@ public class ReviewActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
-
-
-
+        ImageButton rplanbt = (ImageButton)findViewById(R.id.rpp);
+        rplanbt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(ReviewActivity.this , planreviewActivity.class);
+                intent.putExtra("m_id", m_id);
+                startActivity(intent);
+            }
+        });
+        ImageButton rtestbt = (ImageButton)findViewById(R.id.rtt);
+        rtestbt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(ReviewActivity.this , testreviewActivity.class);
+                intent.putExtra("m_id", m_id);
+                startActivity(intent);
+            }
+        });
     }
 
 
@@ -130,6 +144,49 @@ public class ReviewActivity extends AppCompatActivity
         };
         String m_id ="6";
         getReview get = new getReview( m_id , responseListener1);
+        RequestQueue queue1 = Volley.newRequestQueue(ReviewActivity.this);
+        queue1.add(get);
+
+    }
+    private void getBook2() {
+
+        // Response received from the server
+        Response.Listener<String> responseListener1 = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse2 = new JSONObject(response);
+                    boolean success = jsonResponse2.getBoolean("success");
+
+                    if (success) {
+
+                        int j=Integer.parseInt(jsonResponse2.getString("i"));
+
+                        for (int i = 0; i < j; i++) {
+
+                            r_type.add(jsonResponse2.getString("r_type["+i+"]"));
+                            r_test_type.add(jsonResponse2.getString("r_test_type["+i+"]"));
+                            r_test_score.add(jsonResponse2.getString("r_test_score["+i+"]"));
+                            r_data.add(jsonResponse2.getString("r_data["+i+"]"));
+
+                        }
+                    } else {
+
+                        android.app.AlertDialog.Builder builder = new AlertDialog.Builder(ReviewActivity.this);
+                        builder.setMessage("獲取讀書心得失敗")
+                                .setNegativeButton("Retry", null)
+                                .create()
+                                .show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                //資料拿到之後去根據資料去動態新增View
+                addView();
+            }
+        };
+        String m_id ="6";
+        getRplan get = new getRplan( m_id , responseListener1);
         RequestQueue queue1 = Volley.newRequestQueue(ReviewActivity.this);
         queue1.add(get);
 
@@ -187,14 +244,6 @@ public class ReviewActivity extends AppCompatActivity
             LLinear.addView(Listview);
         }
     }
-
-
-
-
-
-
-
-
 
 
 

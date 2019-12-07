@@ -12,16 +12,23 @@
 
     <application
         android:allowBackup="true"
-
-        android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".testreviewActivity"
+            android:label="@string/title_activity_testreview"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".planreviewActivity"
+            android:label="@string/title_activity_planreview"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".Note_content_Activity"
             android:label="@string/title_activity_note_content_"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Review_out_Activity"
             android:label="@string/title_activity_review_out_"
