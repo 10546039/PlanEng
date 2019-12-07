@@ -15,9 +15,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -39,7 +41,9 @@ import java.util.Map;
 public class Review_add_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     EditText etReview;
-    ImageButton bReview;
+    EditText etScore;
+    Spinner etType;
+    Spinner etTesttype;
     String m_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,18 +62,28 @@ public class Review_add_Activity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
+        Spinner spinner1 =(Spinner)findViewById(R.id.type);
+        final String[] r_type ={"計畫分享","考試分享"};
+        ArrayAdapter<String> rrrList = new ArrayAdapter<>(Review_add_Activity.this,
+                android.R.layout.simple_spinner_dropdown_item,r_type);spinner1.setAdapter(rrrList);
+
+        Spinner spinner2 =(Spinner)findViewById(R.id.testtype);
+        final String[] r_test_type ={"TOEIC","IELTS","TOEFL"};
+        ArrayAdapter<String> tttList = new ArrayAdapter<>(Review_add_Activity.this,
+                android.R.layout.simple_spinner_dropdown_item,r_test_type);spinner2.setAdapter(tttList);
 
         etReview = findViewById(R.id.reviewdata);
-
-
-
+        etType = findViewById(R.id.type);
+        etTesttype = findViewById(R.id.testtype);
+        etScore = findViewById(R.id.score);
 
         ImageButton saveBook = findViewById(R.id.savereview);
         saveBook.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final EditText data = findViewById(R.id.reviewdata);
-                if (data.equals("")){
+                final EditText score = findViewById(R.id.score);
+                if (data.equals("") && score.equals("")){
                     showDialog(datacheck);
                 }else{
                     showDialog(check);
@@ -129,6 +143,9 @@ public class Review_add_Activity extends AppCompatActivity
     private void send() {
 
         String r_data =etReview.getText().toString();
+        String r_type =etType.getSelectedItem().toString();
+        String r_test_type =etTesttype.getSelectedItem().toString();
+        String r_test_score =etScore.getText().toString();
 
         Response.Listener<String> responseListener1 = new Response.Listener<String>() {
             @Override
@@ -141,7 +158,7 @@ public class Review_add_Activity extends AppCompatActivity
                         Intent intent1 = new Intent(Review_add_Activity.this, ReviewActivity.class);
                         Review_add_Activity.this.startActivity(intent1);
                     } else {
-                        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(Review_add_Activity.this);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(Review_add_Activity.this);
                         builder.setMessage("Register Failed")
                                 .setNegativeButton("Retry", null)
                                 .create()
@@ -153,7 +170,7 @@ public class Review_add_Activity extends AppCompatActivity
             }
         };
 
-        Reviewadd save = new Reviewadd(m_id, r_data, responseListener1);
+        Reviewadd save = new Reviewadd(m_id, r_type,r_test_type,r_test_score,r_data, responseListener1);
         RequestQueue queue1 = Volley.newRequestQueue(Review_add_Activity.this);
         queue1.add(save);
 
