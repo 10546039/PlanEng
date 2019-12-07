@@ -39,6 +39,9 @@ public class ReviewActivity extends AppCompatActivity
     private LinearLayout LLinear;
     String m_id;
 
+    public List<String> r_type;
+    public List<String> r_test_type;
+    public List<String> r_test_score;
     public List<String> r_data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +65,8 @@ public class ReviewActivity extends AppCompatActivity
         initView();
         getBook();
 
-        ImageButton addBook_bt = (ImageButton)findViewById(R.id.imageButton13);
-        addBook_bt.setOnClickListener(new View.OnClickListener() {
+        ImageButton addreview_bt = (ImageButton)findViewById(R.id.imageButton13);
+        addreview_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
@@ -82,8 +85,10 @@ public class ReviewActivity extends AppCompatActivity
     private void initView() {
         //要新增view的容器
         LLinear = findViewById(R.id.parentLinearLayout);
+        r_type = new ArrayList<>();
+        r_test_type = new ArrayList<>();
+        r_test_score = new ArrayList<>();
         r_data = new ArrayList<>();
-
     }
 
     private void getBook() {
@@ -102,9 +107,10 @@ public class ReviewActivity extends AppCompatActivity
 
                         for (int i = 0; i < j; i++) {
 
+                            r_type.add(jsonResponse2.getString("r_type["+i+"]"));
+                            r_test_type.add(jsonResponse2.getString("r_test_type["+i+"]"));
+                            r_test_score.add(jsonResponse2.getString("r_test_score["+i+"]"));
                             r_data.add(jsonResponse2.getString("r_data["+i+"]"));
-
-
 
                         }
                     } else {
@@ -140,11 +146,16 @@ public class ReviewActivity extends AppCompatActivity
             //首先引入要新增的View
             View Listview = View.inflate(this, R.layout.reviewdp, null);
             //找到裡面需要動態改變的控制元件
-            TextView NoteTitleView = Listview.findViewById(R.id.reveiwID);
+            TextView reviewTitleView = Listview.findViewById(R.id.reveiwID);
+            TextView reviewTitleView1 = Listview.findViewById(R.id.type);
+            TextView reviewTitleView2 = Listview.findViewById(R.id.test);
+            TextView reviewTitleView3 = Listview.findViewById(R.id.score);
             ImageButton MoreBt = Listview.findViewById(R.id.morerbt);
             //給控制元件賦值
-            NoteTitleView.setText(r_data.get(k));
-
+            reviewTitleView.setText(r_data.get(k));
+            reviewTitleView1.setText(r_type.get(k));
+            reviewTitleView2.setText(r_test_type.get(k));
+            reviewTitleView3.setText(r_test_score.get(k));
             //傳送資料到BookContentActivity
 
             MoreBt.setOnClickListener(new View.OnClickListener() {
@@ -154,10 +165,16 @@ public class ReviewActivity extends AppCompatActivity
                     bookIntent.setClass(ReviewActivity.this,Review_out_Activity.class);
                     //new一個Bundle物件，並將要傳遞的資料傳入
 
-                    String nt = r_data.get(b);
+                    String data = r_data.get(b);
+                    String type = r_type.get(b);
+                    String ttype = r_test_type.get(b);
+                    String tscore = r_test_score.get(b);
                     Bundle bundle = new Bundle();
 
-                    bundle.putString("r_data", nt);//傳遞String
+                    bundle.putString("r_data", data);//傳遞String
+                    bundle.putString("r_type", type);
+                    bundle.putString("r_test_type", ttype);
+                    bundle.putString("r_test_score", tscore);
                     bundle.putString("m_id", m_id);
                     bookIntent.putExtras(bundle);
 

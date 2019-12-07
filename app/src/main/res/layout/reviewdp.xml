@@ -35,17 +35,55 @@
     <TextView
         android:id="@+id/reveiwID"
         android:layout_width="196dp"
-        android:layout_height="36dp"
+        android:layout_height="18dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="36dp"
-        android:text="reveiwIDffffffffffffffffffffffffffffffffffffff"
+        android:layout_marginTop="32dp"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/nchapter_bg2"
         app:layout_constraintStart_toEndOf="@+id/imageView13"
         app:layout_constraintTop_toTopOf="@+id/nchapter_bg2"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/reveiwID"
+        app:layout_constraintStart_toEndOf="@+id/imageView13" />
+
+    <TextView
+        android:id="@+id/test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/reveiwID"
+        app:layout_constraintStart_toEndOf="@+id/type" />
+
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/reveiwID"
+        app:layout_constraintStart_toEndOf="@+id/test" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="分"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/reveiwID"
+        app:layout_constraintStart_toEndOf="@+id/score" />
 
     <ImageView
         android:id="@+id/imageView13"

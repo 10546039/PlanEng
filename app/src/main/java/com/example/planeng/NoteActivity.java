@@ -57,7 +57,7 @@ public class NoteActivity extends AppCompatActivity
         Intent IDintent =getIntent();
         m_id = IDintent.getStringExtra("m_id");
         initView();
-        getBook();
+        getNote();
         //addView();
 
         ImageButton addBook_bt = (ImageButton)findViewById(R.id.imageButton11);
@@ -80,7 +80,7 @@ public class NoteActivity extends AppCompatActivity
 
     }
 
-    private void getBook() {
+    private void getNote() {
 
         // Response received from the server
         Response.Listener<String> responseListener1 = new Response.Listener<String>() {
