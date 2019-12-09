@@ -45,7 +45,6 @@ public class Note_content_Activity extends AppCompatActivity
         setContentView(R.layout.activity_note_content_);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         setTitle("");
@@ -100,7 +99,7 @@ public class Note_content_Activity extends AppCompatActivity
                         }
                         for (int i = 0; i < j; i++) {
                             s=s+chapDetail.get(i)+
-                                    " -\n";
+                                    " \n";
 
                         }
 
@@ -111,7 +110,7 @@ public class Note_content_Activity extends AppCompatActivity
                     } else {
 
                         android.support.v7.app.AlertDialog.Builder builder = new AlertDialog.Builder(Note_content_Activity.this);
-                        builder.setMessage("獲取讀書計畫失敗")
+                        builder.setMessage("獲取筆記失敗")
                                 .setNegativeButton("Retry", null)
                                 .create()
                                 .show();
