@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonResponse = new JSONObject(response);
-                            boolean success = jsonResponse.getBoolean("success1");
+                            boolean success = jsonResponse.getBoolean("success");
 
                             if (success) {
                                 String name = jsonResponse.getString("name");
