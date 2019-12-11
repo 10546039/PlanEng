@@ -142,7 +142,7 @@ public class ReviewActivity extends AppCompatActivity
                 addView();
             }
         };
-        String m_id ="6";
+        //String m_id ="6";
         getReview get = new getReview( m_id , responseListener1);
         RequestQueue queue1 = Volley.newRequestQueue(ReviewActivity.this);
         queue1.add(get);

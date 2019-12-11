@@ -29,10 +29,14 @@ import java.util.List;
 public class Review_out_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     String m_id;
-    String r_data;
+
     String r_type;
     String r_test_type;
+
     String r_test_score;
+    String r_data;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,17 +57,24 @@ public class Review_out_Activity extends AppCompatActivity
         Bundle bundle = bookIntent.getExtras();
         m_id=bundle.getString("m_id",null);
 
+        r_type = bundle.getString("r_type",null);
+        TextView title = findViewById(R.id.type);
+        title.setText(r_type);
+        r_test_type = bundle.getString("r_test_type",null);
+        TextView ttype = findViewById(R.id.testty);
+        ttype.setText(r_test_type);
+        r_test_score = bundle.getString("r_test_score",null);
+        TextView tsore = findViewById(R.id.score);
+        tsore.setText(r_test_score);
         r_data = bundle.getString("r_data",null);
-        TextView title = findViewById(R.id.rview);
-        title.setText(r_data);
+        TextView rdata = findViewById(R.id.review);
+        rdata.setText(r_data);
         getContent();
 
 
     }
 
     public List<String> chapDetail=new ArrayList<>();
-    public List<String> chapDetail2=new ArrayList<>();
-    public List<String> chapDetail3=new ArrayList<>();
     public void getContent() {
 
 
@@ -71,90 +82,15 @@ public class Review_out_Activity extends AppCompatActivity
         Response.Listener<String> responseListener3 = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                try {
-                    JSONObject jsonResponse3 = new JSONObject(response);
-                    boolean success1 = jsonResponse3.getBoolean("success");
-
-                    if (success1) {
-
-                        TextView Contenttask = findViewById(R.id.type);
-                        TextView Contenttask2 = findViewById(R.id.testty);
-                        TextView Contenttask3 = findViewById(R.id.score);
-                        Contenttask.setMovementMethod(ScrollingMovementMethod.getInstance());
-                        Contenttask.setText("");
-                        Contenttask2.setMovementMethod(ScrollingMovementMethod.getInstance());
-                        Contenttask2.setText("");
-                        Contenttask3.setMovementMethod(ScrollingMovementMethod.getInstance());
-                        Contenttask3.setText("");
-                        String s="";
-                        String s2="";
-                        String s3="";
-                        int j=Integer.parseInt(jsonResponse3.getString("i"));
-                        int j2=Integer.parseInt(jsonResponse3.getString("i"));
-                        int j3=Integer.parseInt(jsonResponse3.getString("i"));
-                        for (int i = 0; i < j; i++) {
-
-                            chapDetail.add(jsonResponse3.getString("r_type["+i+"]"));
-
-                            //Toast.makeText(BookContentActivity.this,chapDetail.get(0), Toast.LENGTH_SHORT).show();
-                            //chapDetail.add("abc");
-
-                        }
-                        for (int i = 0; i < j2; i++) {
 
 
-                            chapDetail2.add(jsonResponse3.getString("r_test_type["+i+"]"));
-
-                            //Toast.makeText(BookContentActivity.this,chapDetail.get(0), Toast.LENGTH_SHORT).show();
-                            //chapDetail.add("abc");
-
-                        }
-                        for (int i = 0; i < j3; i++) {
-                            chapDetail3.add(jsonResponse3.getString("r_test_score["+i+"]"));
-                            //Toast.makeText(BookContentActivity.this,chapDetail.get(0), Toast.LENGTH_SHORT).show();
-                            //chapDetail.add("abc");
-
-                        }
-                        for (int i = 0; i < j; i++) {
-                            s=s+chapDetail.get(i)+
-                                    " ";
-
-                        }
-                        for (int i = 0; i < j2; i++) {
-                            s=s+chapDetail2.get(i)+
-                                    " ";
-
-                        }
-                        for (int i = 0; i < j3; i++) {
-                            s=s+chapDetail3.get(i)+
-                                    "\n";
-
-                        }
-                        Contenttask.setText(s);
-                        Contenttask2.setText(s2);
-                        Contenttask3.setText(s3);
-
-
-
-                    } else {
-
-                        android.support.v7.app.AlertDialog.Builder builder = new AlertDialog.Builder(Review_out_Activity.this);
-                        builder.setMessage("獲取心得失敗")
-                                .setNegativeButton("Retry", null)
-                                .create()
-                                .show();
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
             }
         };
         //String m_id ="6";
 
         //Toast.makeText(PlanActivity.this,dbDate, Toast.LENGTH_SHORT).show();
 
-        getCreview get = new getCreview(m_id,r_data, responseListener3);
+        getCreview get = new getCreview(m_id,r_type,r_test_type,r_test_score,r_data, responseListener3);
         RequestQueue queue1 = Volley.newRequestQueue(Review_out_Activity.this);
         queue1.add(get);
 

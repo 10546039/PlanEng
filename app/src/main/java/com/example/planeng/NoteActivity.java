@@ -102,11 +102,7 @@ public class NoteActivity extends AppCompatActivity
                         }
                     } else {
 
-                        AlertDialog.Builder builder = new AlertDialog.Builder(NoteActivity.this);
-                        builder.setMessage("獲取讀書筆記失敗")
-                                .setNegativeButton("Retry", null)
-                                .create()
-                                .show();
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
